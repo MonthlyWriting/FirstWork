@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">MonthlyWriting</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="daily_writing">일말결산</string>
+    <string name="monthly_writing">월말결산</string>
 </resources>
