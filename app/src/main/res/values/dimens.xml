@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="daily_writing_item_frame_radius">30dp</dimen>
+</resources>

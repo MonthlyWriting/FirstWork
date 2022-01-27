@@ -1,15 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".daily.DailyWritingFragment"
     android:background="#FFFFA1">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="daily" />
+        android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/daily_writing_item_daily"
+            style="@style/daily_writing_item"
+            android:elevation="100dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/daily_writing_item_weekly"/>
+
+        <TextView
+            android:id="@+id/daily_writing_text_daily"
+            style="@style/daily_writing_text"
+            android:text="@string/what_is_your_daily"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/daily_writing_item_weekly"
+            android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/daily_writing_item_weekly"
+            style="@style/daily_writing_item"
+            android:background="@drawable/daily_writing_item_frame"
+            app:layout_constraintTop_toBottomOf="@+id/daily_writing_item_daily"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/daily_writing_item_monthly"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/daily_writing_item_monthly"
+            style="@style/daily_writing_item"
+            android:background="@drawable/daily_writing_item_frame"
+            app:layout_constraintTop_toBottomOf="@+id/daily_writing_item_weekly"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
