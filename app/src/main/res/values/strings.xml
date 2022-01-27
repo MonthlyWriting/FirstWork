@@ -5,4 +5,6 @@
 
     <string name="daily_writing">일말결산</string>
     <string name="monthly_writing">월말결산</string>
+    
+    <string name="what_is_your_daily">What is Your Daily?</string>
 </resources>
