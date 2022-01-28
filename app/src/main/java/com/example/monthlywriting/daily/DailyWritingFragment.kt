@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.monthlywriting.R
 import com.example.monthlywriting.databinding.FragmentDailyWritingBinding
 
 class DailyWritingFragment : Fragment() {
@@ -24,10 +23,45 @@ class DailyWritingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val dailyAdapter = DailyWritingItemAdapter(emptyList())
-        binding.dailyWritingItemDaily.apply{
-            adapter = dailyAdapter
-            layoutManager = LinearLayoutManager(this@DailyWritingFragment.context)
+        setTempAdapter()
+    }
+
+    fun dummyList(): List<String> {
+        return listOf()
+    }
+
+    fun setTempAdapter(){
+        if (dummyList().isEmpty()){
+            binding.dailyWritingItemDaily.visibility = View.GONE
+            binding.dailyWritingTextDaily.visibility = View.VISIBLE
+        } else {
+            val dailyAdapter = DailyWritingItemAdapter(dummyList())
+            binding.dailyWritingItemDaily.apply{
+                adapter = dailyAdapter
+                layoutManager = LinearLayoutManager(this@DailyWritingFragment.context)
+            }
+        }
+
+        if (dummyList().isEmpty()){
+            binding.dailyWritingItemWeekly.visibility = View.GONE
+            binding.dailyWritingTextWeekly.visibility = View.VISIBLE
+        } else {
+            val dailyAdapter = DailyWritingItemAdapter(dummyList())
+            binding.dailyWritingItemWeekly.apply{
+                adapter = dailyAdapter
+                layoutManager = LinearLayoutManager(this@DailyWritingFragment.context)
+            }
+        }
+
+        if (dummyList().isEmpty()){
+            binding.dailyWritingItemMonthly.visibility = View.GONE
+            binding.dailyWritingTextMonthly.visibility = View.VISIBLE
+        } else {
+            val dailyAdapter = DailyWritingItemAdapter(dummyList())
+            binding.dailyWritingItemMonthly.apply{
+                adapter = dailyAdapter
+                layoutManager = LinearLayoutManager(this@DailyWritingFragment.context)
+            }
         }
     }
 }

@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="daily_writing_item_frame_radius">30dp</dimen>
+    <dimen name="daily_writing_layout_padding">20dp</dimen>
+    <dimen name="toolbar_size">56dp</dimen>
 </resources>
