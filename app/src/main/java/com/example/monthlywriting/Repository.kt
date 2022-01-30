@@ -1,4 +1,6 @@
 package com.example.monthlywriting
 
-class Repository {
+import com.example.monthlywriting.room.DailyWritingItemDao
+
+class Repository(val dailyWritingItemDao: DailyWritingItemDao) {
 }
