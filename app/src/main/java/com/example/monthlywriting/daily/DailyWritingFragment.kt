@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.monthlywriting.MainActivity
 import com.example.monthlywriting.databinding.FragmentDailyWritingBinding
 
 class DailyWritingFragment : Fragment() {
@@ -17,6 +18,9 @@ class DailyWritingFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentDailyWritingBinding.inflate(layoutInflater)
+
+        (activity as MainActivity).setDailyWritingTitle()
+
         return binding.root
     }
 
@@ -27,7 +31,7 @@ class DailyWritingFragment : Fragment() {
     }
 
     fun dummyList(): List<String> {
-        return listOf()
+        return listOf("Item1", "Item2", "Item3", "Item4")
     }
 
     fun setTempAdapter(){

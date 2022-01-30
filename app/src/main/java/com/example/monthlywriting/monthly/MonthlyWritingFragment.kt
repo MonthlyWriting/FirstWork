@@ -5,16 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.monthlywriting.MainActivity
 import com.example.monthlywriting.R
+import com.example.monthlywriting.databinding.FragmentDailyWritingBinding
+import com.example.monthlywriting.databinding.FragmentMonthlyWritingBinding
 
 class MonthlyWritingFragment : Fragment() {
+
+    private lateinit var binding : FragmentMonthlyWritingBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_monthly_writing, container, false)
+        binding = FragmentMonthlyWritingBinding.inflate(layoutInflater)
+
+        (activity as MainActivity).setMonthlyWritingTitle()
+
+        return binding.root
     }
 
 }
