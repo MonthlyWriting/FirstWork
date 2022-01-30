@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.monthlywriting.MainActivity
 import com.example.monthlywriting.databinding.FragmentDailyWritingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DailyWritingFragment : Fragment() {
 
     private lateinit var binding: FragmentDailyWritingBinding
