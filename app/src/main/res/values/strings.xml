@@ -7,4 +7,20 @@
     <string name="monthly_writing">월말결산</string>
     
     <string name="what_is_your_daily">What is Your Daily?</string>
+    <string name="what_is_your_weekly">What is Your Weekly?</string>
+    <string name="what_is_your_monthly">What is Your Monthly?</string>
+
+    <string name="January_short">Jan</string>
+    <string name="February_short">Feb</string>
+    <string name="March_short">Mar</string>
+    <string name="April_short">Apr</string>
+    <string name="May_short">May</string>
+    <string name="June_short">Jun</string>
+    <string name="July_short">Jul</string>
+    <string name="August_short">Aug</string>
+    <string name="September_short">Sep</string>
+    <string name="October_short">Oct</string>
+    <string name="November_short">Nov</string>
+    <string name="December_short">Dec</string>
+
 </resources>

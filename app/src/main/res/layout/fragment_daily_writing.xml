@@ -3,50 +3,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".daily.DailyWritingFragment"
-    android:background="#FFFFA1">
+    android:background="@drawable/daily_background"
+    android:id="@+id/daily_fragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/daily_writing_layout_padding"
+        android:paddingEnd="@dimen/daily_writing_layout_padding"
+        android:paddingBottom="@dimen/daily_writing_layout_padding"
+        android:paddingTop="@dimen/toolbar_size"
+        android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_writing_item_daily"
             style="@style/daily_writing_item"
-            android:elevation="100dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/daily_writing_item_weekly"/>
+            android:elevation="100dp" />
 
         <TextView
             android:id="@+id/daily_writing_text_daily"
             style="@style/daily_writing_text"
             android:text="@string/what_is_your_daily"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/daily_writing_item_weekly"
             android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_writing_item_weekly"
             style="@style/daily_writing_item"
-            android:background="@drawable/daily_writing_item_frame"
-            app:layout_constraintTop_toBottomOf="@+id/daily_writing_item_daily"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/daily_writing_item_monthly"/>
+            android:background="@drawable/daily_writing_item_frame" />
+
+        <TextView
+            android:id="@+id/daily_writing_text_weekly"
+            style="@style/daily_writing_text"
+            android:text="@string/what_is_your_weekly"
+            android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_writing_item_monthly"
             style="@style/daily_writing_item"
-            android:background="@drawable/daily_writing_item_frame"
-            app:layout_constraintTop_toBottomOf="@+id/daily_writing_item_weekly"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            android:background="@drawable/daily_writing_item_frame" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/daily_writing_text_monthly"
+            style="@style/daily_writing_text"
+            android:text="@string/what_is_your_monthly"
+            android:visibility="gone"/>
+
+    </LinearLayout>
 </ScrollView>
