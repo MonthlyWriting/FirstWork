@@ -2,6 +2,7 @@ package com.example.monthlywriting
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -18,19 +19,19 @@ class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var title : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         setDisplay()
-
     }
 
     private fun setDisplay() {
+        title = binding.contentMain.toolbarTitle
 
         setSupportActionBar(binding.contentMain.toolbar)
-
         binding.contentMain.appbar.outlineProvider = null
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
@@ -53,7 +54,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setDailyWritingTitle(){
-        val title = binding.contentMain.toolbarTitle
         when(SimpleDateFormat("MM").format(Date(System.currentTimeMillis()))){
             "01" -> {title.text = resources.getString(R.string.January_short)}
             "02" -> {title.text = resources.getString(R.string.February_short)}
@@ -67,12 +67,10 @@ class MainActivity : AppCompatActivity() {
             "10" -> {title.text = resources.getString(R.string.October_short)}
             "11" -> {title.text = resources.getString(R.string.November_short)}
             "12" -> {title.text = resources.getString(R.string.December_short)}
-
         }
     }
 
     fun setMonthlyWritingTitle(){
-        val title = binding.contentMain.toolbarTitle
         title.text = "Monthly Writing"
     }
 }

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".daily.DailyWritingFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".daily.DailyWritingFragment"
     android:background="@drawable/daily_background"
     android:id="@+id/daily_fragment">
 
@@ -30,7 +31,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_writing_item_weekly"
             style="@style/daily_writing_item"
-            android:background="@drawable/daily_writing_item_frame" />
+            android:background="@drawable/daily_writing_item_frame"/>
 
         <TextView
             android:id="@+id/daily_writing_text_weekly"
@@ -48,6 +49,7 @@
             style="@style/daily_writing_text"
             android:text="@string/what_is_your_monthly"
             android:visibility="gone"/>
-
     </LinearLayout>
 </ScrollView>
+
+

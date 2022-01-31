@@ -1,14 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".daily.DailyWritingAdd">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.monthlywriting.daily.viewmodel.DailyWritingAddViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".daily.DailyWritingAdd"
+        android:background="@drawable/daily_background"
+        android:paddingTop="56dp"
+        android:paddingHorizontal="30dp"
+        android:paddingBottom="50dp">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/daily_writing_item_frame_without_padding"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintVertical_bias="1"
+                android:layout_margin="32dp"
+                android:contentDescription="@string/save_writing"
+                android:src="@drawable/ic_baseline_done_32"
+                android:id="@+id/daily_writing_save"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="20dp"
+                    android:layout_margin="10dp">
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/daily"
+                        android:buttonTint="@color/white"
+                        android:textColor="@color/white"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:id="@+id/rb_type_daily"/>
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/weekly"
+                        android:buttonTint="@color/white"
+                        android:textColor="@color/white"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:id="@+id/rb_type_weekly"/>
+
+                    <RadioButton
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/monthly"
+                        android:buttonTint="@color/white"
+                        android:textColor="@color/white"
+                        android:layout_margin="10dp"
+                        android:layout_weight="1"
+                        android:id="@+id/rb_type_monthly"/>
+                </RadioGroup>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/name_for_your_writing"
+                    android:layout_margin="20dp"
+                    android:textColor="@color/white" />
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:backgroundTint="@color/white"
+                    android:inputType="text"
+                    android:importantForAutofill="no"
+                    android:text="@={viewModel.name}"
+                    android:hint="@string/name"
+                    android:id="@+id/daily_writing_name"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/add_weekly_info">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/how_many_times_per_week"
+                        android:layout_margin="20dp"
+                        android:textColor="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:orientation="horizontal">
+
+                        <NumberPicker
+                            android:layout_width="0dp"
+                            android:layout_height="70dp"
+                            android:layout_weight="1"
+                            android:value="@={viewModel.timesAWeek}"
+                            android:id="@+id/daily_writing_week_num"
+                            android:layout_marginRight="10dp"/>
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="3"
+                            android:text="@string/times_a_week"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"/>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/add_monthly_info">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/how_many_times_in_a_month"
+                        android:layout_margin="20dp"
+                        android:textColor="@color/white"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:orientation="horizontal">
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:id="@+id/rb_month_info">
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/white"
+                                android:id="@+id/rb_month_times"
+                                android:layout_marginVertical="20dp"
+                                android:checked="true"/>
+
+                            <RadioButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:buttonTint="@color/white"
+                                android:id="@+id/rb_month_throughout"
+                                android:layout_marginVertical="20dp"/>
+                        </RadioGroup>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <NumberPicker
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="70dp"
+                                    android:layout_gravity="center"
+                                    android:value="@={viewModel.timesAMonth}"
+                                    android:id="@+id/daily_writing_month_num"/>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:text="@string/times_a_month"
+                                    android:gravity="center_vertical|start"
+                                    android:textColor="@color/white"
+                                    android:id="@+id/daily_writing_month_times_text"/>
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="@string/throughout_a_month"
+                                android:gravity="center_vertical|start"
+                                android:textColor="@color/white"
+                                android:id="@+id/daily_writing_month_throughout_text"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

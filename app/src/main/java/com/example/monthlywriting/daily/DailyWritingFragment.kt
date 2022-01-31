@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.monthlywriting.MainActivity
+import com.example.monthlywriting.R
 import com.example.monthlywriting.databinding.FragmentDailyWritingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,10 +32,43 @@ class DailyWritingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setTempAdapter()
+        setOnClick()
+    }
+
+    private fun setOnClick() {
+        binding.apply {
+            listOf(
+                dailyWritingTextDaily,
+                dailyWritingItemDaily).forEach { item ->
+                item.setOnClickListener {
+                    val action = DailyWritingFragmentDirections.openAdd("daily")
+                    it.findNavController().navigate(action)
+                }
+            }
+
+            listOf(
+                dailyWritingTextWeekly,
+                dailyWritingItemWeekly).forEach { item ->
+                item.setOnClickListener {
+                    val action = DailyWritingFragmentDirections.openAdd("weekly")
+                    it.findNavController().navigate(action)
+                }
+            }
+
+            listOf(
+                dailyWritingTextMonthly,
+                dailyWritingItemMonthly).forEach { item ->
+                item.setOnClickListener {
+                    val action = DailyWritingFragmentDirections.openAdd("monthly")
+                    it.findNavController().navigate(action)
+                }
+            }
+        }
+
     }
 
     fun dummyList(): List<String> {
-        return listOf("Item1", "Item2", "Item3", "Item4")
+        return listOf()
     }
 
     fun setTempAdapter(){
