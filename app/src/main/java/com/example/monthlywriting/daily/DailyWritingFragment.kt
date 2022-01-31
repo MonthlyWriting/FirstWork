@@ -37,7 +37,18 @@ class DailyWritingFragment : Fragment() {
 
     private fun setOnClick() {
         binding.dailyWritingTextDaily.setOnClickListener{
-            it.findNavController().navigate(R.id.nav_daily_writing_add)
+            val action = DailyWritingFragmentDirections.openAdd("daily")
+            it.findNavController().navigate(action)
+        }
+
+        binding.dailyWritingTextWeekly.setOnClickListener{
+            val action = DailyWritingFragmentDirections.openAdd("weekly")
+            it.findNavController().navigate(action)
+        }
+
+        binding.dailyWritingTextMonthly.setOnClickListener{
+            val action = DailyWritingFragmentDirections.openAdd("monthly")
+            it.findNavController().navigate(action)
         }
     }
 

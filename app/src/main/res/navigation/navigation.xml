@@ -9,7 +9,11 @@
         android:id="@+id/nav_daily_writing"
         android:name="com.example.monthlywriting.daily.DailyWritingFragment"
         android:label="fragment_daily_writing"
-        tools:layout="@layout/fragment_daily_writing" />
+        tools:layout="@layout/fragment_daily_writing" >
+        <action
+            android:id="@+id/open_add"
+            app:destination="@id/nav_daily_writing_add" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_monthly_writing"
@@ -21,6 +25,17 @@
         android:id="@+id/nav_daily_writing_add"
         android:name="com.example.monthlywriting.daily.DailyWritingAdd"
         android:label="fragment_daily_writing_add"
-        tools:layout="@layout/fragment_daily_writing_add" />
+        tools:layout="@layout/fragment_daily_writing_add" >
+        <action
+            android:id="@+id/close_add"
+            app:destination="@id/nav_daily_writing"
+            app:popUpTo="@id/navigation"
+            app:popUpToInclusive="true"/>
+        <argument
+            android:name="type"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 
 </navigation>
