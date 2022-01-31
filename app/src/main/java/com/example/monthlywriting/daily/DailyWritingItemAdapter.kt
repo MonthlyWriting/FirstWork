@@ -1,12 +1,9 @@
 package com.example.monthlywriting.daily
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.monthlywriting.databinding.DailyWritingItemBinding
-import com.example.monthlywriting.databinding.FragmentDailyWritingBinding
 
 class DailyWritingItemAdapter(private val list: List<String>) :
     RecyclerView.Adapter<DailyWritingItemAdapter.DailyWritingItemViewHolder>() {

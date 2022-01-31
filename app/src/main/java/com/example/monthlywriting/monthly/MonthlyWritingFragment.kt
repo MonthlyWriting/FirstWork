@@ -6,8 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.monthlywriting.MainActivity
-import com.example.monthlywriting.R
-import com.example.monthlywriting.databinding.FragmentDailyWritingBinding
 import com.example.monthlywriting.databinding.FragmentMonthlyWritingBinding
 
 class MonthlyWritingFragment : Fragment() {

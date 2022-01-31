@@ -9,19 +9,19 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.monthlywriting.MainActivity
-import com.example.monthlywriting.databinding.FragmentDailyWritingBinding
+import com.example.monthlywriting.databinding.FragmentDailyWritingMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DailyWritingFragment : Fragment() {
+class DailyWritingMainFragment : Fragment() {
 
-    private lateinit var binding: FragmentDailyWritingBinding
+    private lateinit var binding: FragmentDailyWritingMainBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentDailyWritingBinding.inflate(layoutInflater)
+        binding = FragmentDailyWritingMainBinding.inflate(layoutInflater)
 
         (activity as MainActivity).setDailyWritingTitle()
 
@@ -41,7 +41,7 @@ class DailyWritingFragment : Fragment() {
                 dailyWritingTextDaily,
                 dailyWritingItemDaily).forEach { item ->
                 item.setOnClickListener {
-                    val action = DailyWritingFragmentDirections.openAdd("daily")
+                    val action = DailyWritingMainFragmentDirections.openAdd("daily")
                     it.findNavController().navigate(action)
                 }
             }
@@ -50,7 +50,7 @@ class DailyWritingFragment : Fragment() {
                 dailyWritingTextWeekly,
                 dailyWritingItemWeekly).forEach { item ->
                 item.setOnClickListener {
-                    val action = DailyWritingFragmentDirections.openAdd("weekly")
+                    val action = DailyWritingMainFragmentDirections.openAdd("weekly")
                     it.findNavController().navigate(action)
                 }
             }
@@ -59,7 +59,7 @@ class DailyWritingFragment : Fragment() {
                 dailyWritingTextMonthly,
                 dailyWritingItemMonthly).forEach { item ->
                 item.setOnClickListener {
-                    val action = DailyWritingFragmentDirections.openAdd("monthly")
+                    val action = DailyWritingMainFragmentDirections.openAdd("monthly")
                     it.findNavController().navigate(action)
                 }
             }
@@ -79,7 +79,7 @@ class DailyWritingFragment : Fragment() {
             val dailyAdapter = DailyWritingItemAdapter(dummyList())
             binding.dailyWritingItemDaily.apply{
                 adapter = dailyAdapter
-                layoutManager = LinearLayoutManager(this@DailyWritingFragment.context)
+                layoutManager = LinearLayoutManager(this@DailyWritingMainFragment.context)
             }
         }
 
@@ -90,7 +90,7 @@ class DailyWritingFragment : Fragment() {
             val dailyAdapter = DailyWritingItemAdapter(dummyList())
             binding.dailyWritingItemWeekly.apply{
                 adapter = dailyAdapter
-                layoutManager = LinearLayoutManager(this@DailyWritingFragment.context)
+                layoutManager = LinearLayoutManager(this@DailyWritingMainFragment.context)
             }
         }
 
@@ -101,7 +101,7 @@ class DailyWritingFragment : Fragment() {
             val dailyAdapter = DailyWritingItemAdapter(dummyList())
             binding.dailyWritingItemMonthly.apply{
                 adapter = dailyAdapter
-                layoutManager = LinearLayoutManager(this@DailyWritingFragment.context)
+                layoutManager = LinearLayoutManager(this@DailyWritingMainFragment.context)
             }
         }
     }

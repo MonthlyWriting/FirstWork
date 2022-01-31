@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/nav_daily_writing"
-        android:name="com.example.monthlywriting.daily.DailyWritingFragment"
+        android:name="com.example.monthlywriting.daily.DailyWritingMainFragment"
         android:label="fragment_daily_writing"
-        tools:layout="@layout/fragment_daily_writing" >
+        tools:layout="@layout/fragment_daily_writing_main" >
         <action
             android:id="@+id/open_add"
             app:destination="@id/nav_daily_writing_add" />
