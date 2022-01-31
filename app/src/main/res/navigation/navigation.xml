@@ -10,9 +10,17 @@
         android:name="com.example.monthlywriting.daily.DailyWritingFragment"
         android:label="fragment_daily_writing"
         tools:layout="@layout/fragment_daily_writing" />
+
     <fragment
         android:id="@+id/nav_monthly_writing"
         android:name="com.example.monthlywriting.monthly.MonthlyWritingFragment"
         android:label="fragment_monthly_writing"
         tools:layout="@layout/fragment_monthly_writing" />
+
+    <fragment
+        android:id="@+id/nav_daily_writing_add"
+        android:name="com.example.monthlywriting.daily.DailyWritingAdd"
+        android:label="fragment_daily_writing_add"
+        tools:layout="@layout/fragment_daily_writing_add" />
+
 </navigation>

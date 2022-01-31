@@ -6,6 +6,10 @@
     <string name="daily_writing">일말결산</string>
     <string name="monthly_writing">월말결산</string>
 
+    <string name="daily">Daily</string>
+    <string name="weekly">Weekly</string>
+    <string name="monthly">Monthly</string>
+
     <string name="what_is_your_daily">What is Your Daily?</string>
     <string name="what_is_your_weekly">What is Your Weekly?</string>
     <string name="what_is_your_monthly">What is Your Monthly?</string>
@@ -22,5 +26,14 @@
     <string name="October_short">Oct</string>
     <string name="November_short">Nov</string>
     <string name="December_short">Dec</string>
+
+    <string name="name_for_your_writing">Name For Your Writing</string>
+    <string name="how_many_times_per_week">How Many Times Per Week?</string>
+    <string name="how_many_times_in_a_month">How Many Times In A Month?</string>
+    <string name="times_per_week">times per week</string>
+    <string name="times_a_month">times a month</string>
+    <string name="throughout_a_month">throughout a month</string>
+
+
 
 </resources>
