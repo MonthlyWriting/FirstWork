@@ -14,9 +14,11 @@ import androidx.navigation.fragment.navArgs
 import com.example.monthlywriting.MainActivity
 import com.example.monthlywriting.R
 import com.example.monthlywriting.daily.viewmodel.DailyWritingAddViewModel
-import com.example.monthlywriting.daily.viewmodel.DailyWritingViewModel
 import com.example.monthlywriting.databinding.FragmentDailyWritingAddBinding
+import com.example.monthlywriting.model.DailyWritingItem
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class DailyWritingAdd : Fragment() {
@@ -25,6 +27,7 @@ class DailyWritingAdd : Fragment() {
     private val viewModel : DailyWritingAddViewModel by viewModels()
 
     private val args : DailyWritingAddArgs by navArgs()
+    private lateinit var currentMonth : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,9 +46,23 @@ class DailyWritingAdd : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        when(SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis()))){
+            "01" -> {currentMonth = resources.getString(R.string.January)}
+            "02" -> {currentMonth = resources.getString(R.string.February)}
+            "03" -> {currentMonth = resources.getString(R.string.March)}
+            "04" -> {currentMonth = resources.getString(R.string.April)}
+            "05" -> {currentMonth = resources.getString(R.string.May)}
+            "06" -> {currentMonth = resources.getString(R.string.June)}
+            "07" -> {currentMonth = resources.getString(R.string.July)}
+            "08" -> {currentMonth = resources.getString(R.string.August)}
+            "09" -> {currentMonth = resources.getString(R.string.September)}
+            "10" -> {currentMonth = resources.getString(R.string.October)}
+            "11" -> {currentMonth = resources.getString(R.string.November)}
+            "12" -> {currentMonth = resources.getString(R.string.December)}
+        }
+
         binding.dailyWritingSave.setOnClickListener {
-            it.findNavController().navigate(DailyWritingAddDirections.closeAdd())
-            saveWriting()
+            saveWriting(it)
         }
     }
 
@@ -107,18 +124,33 @@ class DailyWritingAdd : Fragment() {
         }
     }
 
-    private fun saveWriting() {
-        when(args.type){
-            "daily" -> {
+    private fun saveWriting(view: View) {
+        if(viewModel.name.value != null && viewModel.name.value!!.isNotEmpty()){
+            when(args.type){
+                "daily" -> {
+                    val newItem = DailyWritingItem(
+                        id = 0,
+                        month = currentMonth,
+                        type = "daily",
+                        name = viewModel.name.value!!,
+                        days = null,
+                        times = null,
+                        dailymemo = null
+                    )
 
-            }
-            "weekly" -> {
+                    viewModel.insertNewItem(newItem)
+                }
+                "weekly" -> {
 
-            }
-            "monthly" -> {
+                }
+                "monthly" -> {
 
+                }
             }
+            Toast.makeText(this.context, "저장되었습니다.", Toast.LENGTH_SHORT).show()
+            view.findNavController().navigate(DailyWritingAddDirections.closeAdd())
+        } else{
+            Toast.makeText(this.context, "이름을 입력해 주세요.", Toast.LENGTH_SHORT).show()
         }
-        Toast.makeText(this.context, "저장되었습니다.", Toast.LENGTH_SHORT).show()
     }
 }

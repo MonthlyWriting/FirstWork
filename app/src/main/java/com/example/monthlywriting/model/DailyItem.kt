@@ -13,14 +13,14 @@ data class DailyWritingItem(
     @ColumnInfo (name = "month") var month : String,
     @ColumnInfo (name = "type") var type : String,
     @ColumnInfo (name = "name") var name : String,
-    @ColumnInfo (name = "days") var days : String?,
-    @ColumnInfo (name = "times") var times : String?,
-    @Embedded var dailymemo : DailyMemo
+    @ColumnInfo (name = "days") var days : Int?,
+    @ColumnInfo (name = "times") var times : Int?,
+    @Embedded var dailymemo : DailyMemo?
 )
 
 data class DailyMemo(
     var date : String,
     var done : Boolean,
-    var memo : String,
-    var photo : Bitmap
+    var memo : String?,
+    var photo : Bitmap?
 )

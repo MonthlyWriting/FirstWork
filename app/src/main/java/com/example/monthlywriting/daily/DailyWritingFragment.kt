@@ -1,6 +1,7 @@
 package com.example.monthlywriting.daily
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,6 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.monthlywriting.MainActivity
-import com.example.monthlywriting.R
 import com.example.monthlywriting.databinding.FragmentDailyWritingBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +20,7 @@ class DailyWritingFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDailyWritingBinding.inflate(layoutInflater)
 
         (activity as MainActivity).setDailyWritingTitle()
@@ -67,11 +67,11 @@ class DailyWritingFragment : Fragment() {
 
     }
 
-    fun dummyList(): List<String> {
+    private fun dummyList(): List<String> {
         return listOf()
     }
 
-    fun setTempAdapter(){
+    private fun setTempAdapter(){
         if (dummyList().isEmpty()){
             binding.dailyWritingItemDaily.visibility = View.GONE
             binding.dailyWritingTextDaily.visibility = View.VISIBLE
@@ -104,5 +104,10 @@ class DailyWritingFragment : Fragment() {
                 layoutManager = LinearLayoutManager(this@DailyWritingFragment.context)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Log.d("test", "destroyed")
     }
 }

@@ -27,6 +27,19 @@
     <string name="November_short">Nov</string>
     <string name="December_short">Dec</string>
 
+    <string name="January">January</string>
+    <string name="February">February</string>
+    <string name="March">March</string>
+    <string name="April">April</string>
+    <string name="May">May</string>
+    <string name="June">June</string>
+    <string name="July">July</string>
+    <string name="August">August</string>
+    <string name="September">September</string>
+    <string name="October">October</string>
+    <string name="November">November</string>
+    <string name="December">December</string>
+
     <string name="name_for_your_writing">Name For Your Writing</string>
     <string name="how_many_times_per_week">How Many Times Per Week?</string>
     <string name="how_many_times_in_a_month">How Many Times In A Month?</string>

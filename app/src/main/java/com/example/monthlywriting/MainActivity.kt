@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setDailyWritingTitle(){
-        when(SimpleDateFormat("MM").format(Date(System.currentTimeMillis()))){
+        when(SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis()))){
             "01" -> {title.text = resources.getString(R.string.January_short)}
             "02" -> {title.text = resources.getString(R.string.February_short)}
             "03" -> {title.text = resources.getString(R.string.March_short)}
