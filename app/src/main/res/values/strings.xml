@@ -30,9 +30,13 @@
     <string name="name_for_your_writing">Name For Your Writing</string>
     <string name="how_many_times_per_week">How Many Times Per Week?</string>
     <string name="how_many_times_in_a_month">How Many Times In A Month?</string>
-    <string name="times_per_week">times per week</string>
+    <string name="times_a_week">times a week</string>
     <string name="times_a_month">times a month</string>
     <string name="throughout_a_month">throughout a month</string>
+
+    <string name="save_writing">Save Writing</string>
+    <string name="name">name</string>
+    <string name="num_hint">0</string>
 
 
 

@@ -36,20 +36,35 @@ class DailyWritingFragment : Fragment() {
     }
 
     private fun setOnClick() {
-        binding.dailyWritingTextDaily.setOnClickListener{
-            val action = DailyWritingFragmentDirections.openAdd("daily")
-            it.findNavController().navigate(action)
+        binding.apply {
+            listOf(
+                dailyWritingTextDaily,
+                dailyWritingItemDaily).forEach { item ->
+                item.setOnClickListener {
+                    val action = DailyWritingFragmentDirections.openAdd("daily")
+                    it.findNavController().navigate(action)
+                }
+            }
+
+            listOf(
+                dailyWritingTextWeekly,
+                dailyWritingItemWeekly).forEach { item ->
+                item.setOnClickListener {
+                    val action = DailyWritingFragmentDirections.openAdd("weekly")
+                    it.findNavController().navigate(action)
+                }
+            }
+
+            listOf(
+                dailyWritingTextMonthly,
+                dailyWritingItemMonthly).forEach { item ->
+                item.setOnClickListener {
+                    val action = DailyWritingFragmentDirections.openAdd("monthly")
+                    it.findNavController().navigate(action)
+                }
+            }
         }
 
-        binding.dailyWritingTextWeekly.setOnClickListener{
-            val action = DailyWritingFragmentDirections.openAdd("weekly")
-            it.findNavController().navigate(action)
-        }
-
-        binding.dailyWritingTextMonthly.setOnClickListener{
-            val action = DailyWritingFragmentDirections.openAdd("monthly")
-            it.findNavController().navigate(action)
-        }
     }
 
     fun dummyList(): List<String> {
