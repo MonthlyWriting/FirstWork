@@ -19,9 +19,6 @@ class DailyWritingAddViewModel @Inject constructor(
     var timesAWeek = MutableLiveData(1)
     var timesAMonth = MutableLiveData(1)
 
-    private val _test = MutableLiveData<String>()
-    val test : LiveData<String> get() = _test
-
     fun insertNewItem(dailyWritingItem: DailyWritingItem){
         viewModelScope.launch {
             repository.insert(dailyWritingItem)

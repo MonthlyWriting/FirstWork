@@ -133,22 +133,41 @@ class DailyWritingAdd : Fragment() {
                         month = currentMonth,
                         type = "daily",
                         name = viewModel.name.value!!,
-                        days = null,
-                        times = null,
+                        weektimes = null,
+                        monthtimes = null,
                         dailymemo = null
                     )
-
                     viewModel.insertNewItem(newItem)
                 }
                 "weekly" -> {
-
+                    val newItem = DailyWritingItem(
+                        id = 0,
+                        month = currentMonth,
+                        type = "weekly",
+                        name = viewModel.name.value!!,
+                        weektimes = viewModel.timesAWeek.value,
+                        monthtimes = null,
+                        dailymemo = null
+                    )
+                    viewModel.insertNewItem(newItem)
                 }
                 "monthly" -> {
-
+                    val newItem = DailyWritingItem(
+                        id = 0,
+                        month = currentMonth,
+                        type = "monthly",
+                        name = viewModel.name.value!!,
+                        weektimes = null,
+                        monthtimes = viewModel.timesAMonth.value,
+                        dailymemo = null
+                    )
+                    viewModel.insertNewItem(newItem)
                 }
             }
+
             Toast.makeText(this.context, "저장되었습니다.", Toast.LENGTH_SHORT).show()
             view.findNavController().navigate(DailyWritingAddDirections.closeAdd())
+
         } else{
             Toast.makeText(this.context, "이름을 입력해 주세요.", Toast.LENGTH_SHORT).show()
         }

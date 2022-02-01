@@ -13,8 +13,8 @@ data class DailyWritingItem(
     @ColumnInfo (name = "month") var month : String,
     @ColumnInfo (name = "type") var type : String,
     @ColumnInfo (name = "name") var name : String,
-    @ColumnInfo (name = "days") var days : Int?,
-    @ColumnInfo (name = "times") var times : Int?,
+    @ColumnInfo (name = "weektimes") var weektimes : Int?,
+    @ColumnInfo (name = "monthtimes") var monthtimes : Int?,
     @Embedded var dailymemo : DailyMemo?
 )
 

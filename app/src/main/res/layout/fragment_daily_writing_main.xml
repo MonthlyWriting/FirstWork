@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/daily_background"
-    android:id="@+id/daily_fragment">
+    android:id="@+id/daily_fragment_scrollview">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,8 +19,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_writing_item_daily"
-            style="@style/daily_writing_item"
-            android:elevation="100dp" />
+            style="@style/daily_writing_item"/>
 
         <TextView
             android:id="@+id/daily_writing_text_daily"
@@ -30,8 +29,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_writing_item_weekly"
-            style="@style/daily_writing_item"
-            android:background="@drawable/daily_writing_item_frame"/>
+            style="@style/daily_writing_item" />
 
         <TextView
             android:id="@+id/daily_writing_text_weekly"
@@ -41,8 +39,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_writing_item_monthly"
-            style="@style/daily_writing_item"
-            android:background="@drawable/daily_writing_item_frame" />
+            style="@style/daily_writing_item" />
 
         <TextView
             android:id="@+id/daily_writing_text_monthly"
