@@ -3,4 +3,13 @@
     <dimen name="daily_writing_item_frame_radius">30dp</dimen>
     <dimen name="daily_writing_layout_padding">20dp</dimen>
     <dimen name="toolbar_size">56dp</dimen>
+
+    <dimen name="daily_writing_item_text_size">12sp</dimen>
+    <dimen name="daily_writing_item_title_size">20sp</dimen>
+
+    <dimen name="daily_writing_bottom_sheet_title">24sp</dimen>
+    
+    <dimen name="daily_check_memo_text">16sp</dimen>
+    <dimen name="daily_check_memo_monthtimes">36sp</dimen>
+
 </resources>
