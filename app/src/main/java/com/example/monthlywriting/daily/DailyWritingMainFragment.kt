@@ -1,6 +1,7 @@
 package com.example.monthlywriting.daily
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.ScrollView
 import android.widget.Toast
@@ -67,7 +68,6 @@ class DailyWritingMainFragment : Fragment() {
 
         setOnClicks()
         setObservers()
-
     }
 
     private fun scrollToTop() {

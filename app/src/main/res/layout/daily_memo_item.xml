@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_photo_library_24"
             android:layout_marginHorizontal="5dp"
-            android:id="@+id/daily_memo_photo"/>
+            android:id="@+id/daily_memo_is_photo"/>
     </LinearLayout>
 
     <TextView

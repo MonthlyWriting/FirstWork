@@ -37,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintVertical_bias="1"
                 android:layout_margin="32dp"
-                android:contentDescription="@string/save_writing"
+                android:contentDescription="@string/description_save_writing"
                 android:src="@drawable/ic_baseline_done_32"
                 android:id="@+id/daily_writing_save"/>
 

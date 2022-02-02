@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
@@ -14,16 +13,11 @@ import com.example.monthlywriting.R
 import com.example.monthlywriting.daily.viewmodel.DailyWritingBottomSheetViewModel
 import com.example.monthlywriting.databinding.FragmentDailyWritingBottomSheetBinding
 import com.example.monthlywriting.model.DailyCheckItem
-import com.example.monthlywriting.model.DailyMemo
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
-import androidx.annotation.NonNull
-import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
-
 
 @AndroidEntryPoint
 class DailyWritingBottomSheet : BottomSheetDialogFragment() {
@@ -37,9 +31,7 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_daily_writing_bottom_sheet, container, false)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this.viewLifecycleOwner
+        binding = FragmentDailyWritingBottomSheetBinding.inflate(layoutInflater)
 
         viewModel.getCurrentItem(args.id)
         setObservers()
@@ -50,11 +42,17 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.bottomSheetCloseButton.setOnClickListener {
-            NavHostFragment.findNavController(this).navigateUp()
+        binding.apply {
+            bottomSheetCloseButton.setOnClickListener {
+                NavHostFragment.findNavController(this@DailyWritingBottomSheet).navigateUp()
+            }
+
+            addDailyMemo.setOnClickListener {
+
+            }
         }
 
-        binding.bottomSheetDailyMemo.isNestedScrollingEnabled = true
+
     }
 
     private fun setObservers() {
@@ -71,12 +69,7 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
 
 
                     binding.bottomSheetDailyMemo.apply {
-                        val a = it.dailymemo
-                        for (i in 1..4){
-                            a.add(DailyMemo("2/1", false, "안녕하세요", null))
-                        }
-
-                        this.adapter = DailyMemoItemAdapter(a)
+                        this.adapter = DailyMemoItemAdapter(it.dailymemo)
                         layoutManager = LinearLayoutManager(requireContext())
                     }
                 }
@@ -93,7 +86,6 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
                     if (it.monthtimes == 0){
                         binding.bottomSheetMonthtimes.visibility = View.GONE
                     }
-
 
                 }
             }
