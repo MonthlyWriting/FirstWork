@@ -3,17 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/black_underline.xml" value="0.28125" />
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/bottom_sheet_frame.xml" value="0.28125" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/daily_writing_item.xml" value="0.38974358974358975" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/daily_writing_item_frame.xml" value="0.14375" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/daily_writing_item_frame_without_padding.xml" value="0.38974358974358975" />
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/daily_writing_item_underline.xml" value="0.2851851851851852" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/ic_baseline_playlist_add_24.xml" value="0.38974358974358975" />
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/white_underline.xml" value="0.38974358974358975" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout-v28/content_main.xml" value="0.3796875" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/activity_main.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/content_main.xml" value="0.22" />
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/daily_check_item.xml" value="0.3796875" />
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/daily_check_memo.xml" value="0.3796875" />
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/daily_memo_item.xml" value="0.3796875" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/daily_writing_item.xml" value="0.3796875" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/drawer_custom_menu.xml" value="0.3796875" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/fragment_daily_writing.xml" value="0.3796875" />
-        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/fragment_daily_writing_add.xml" value="0.22" />
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/fragment_daily_writing_add.xml" value="0.428125" />
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/fragment_daily_writing_bottom_sheet.xml" value="0.22" />
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/fragment_daily_writing_main.xml" value="0.2140625" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/fragment_monthly_writing.xml" value="0.3796875" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/layout/nav_header.xml" value="0.2140625" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/menu/drawer_menu.xml" value="0.3796875" />
