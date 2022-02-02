@@ -51,6 +51,8 @@
     <string name="name">name</string>
     <string name="num_hint">0</string>
 
+    <string name="close_bottom_sheet">Close Bottom Sheet</string>
+
 
 
 </resources>

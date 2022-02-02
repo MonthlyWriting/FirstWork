@@ -1,4 +1,4 @@
-package com.example.monthlywriting.daily
+package com.example.monthlywriting.daily.bottomsheet
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

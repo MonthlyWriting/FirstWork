@@ -46,6 +46,7 @@
             style="@style/daily_writing_text"
             android:text="@string/what_is_your_monthly"
             android:visibility="gone"/>
+
     </LinearLayout>
 </ScrollView>
 

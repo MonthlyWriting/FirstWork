@@ -10,8 +10,11 @@ interface DailyWritingItemDao {
     @Query("SELECT * FROM daily")
     fun selectAll(): List<DailyWritingItem>
 
-    @Query("SELECT * FROM daily WHERE type = :type")
-    fun selectListByType(type: String): List<DailyWritingItem>
+    @Query("SELECT * FROM daily WHERE month = :month AND type = :type ")
+    fun selectDailyList(month: String, type: String): List<DailyWritingItem>
+
+    @Query("SELECT * FROM daily WHERE id = :id ")
+    fun selectSingleItem(id: Int): DailyWritingItem
 
     @Insert
     fun insert(dailyItem: DailyWritingItem)

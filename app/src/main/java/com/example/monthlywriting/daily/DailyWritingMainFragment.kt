@@ -1,18 +1,21 @@
 package com.example.monthlywriting.daily
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.widget.ScrollView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.monthlywriting.MainActivity
+import com.example.monthlywriting.R
 import com.example.monthlywriting.daily.viewmodel.DailyWritingMainViewModel
 import com.example.monthlywriting.databinding.FragmentDailyWritingMainBinding
+import com.example.monthlywriting.model.DailyWritingItem
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.*
 
 @AndroidEntryPoint
 class DailyWritingMainFragment : Fragment() {
@@ -27,17 +30,44 @@ class DailyWritingMainFragment : Fragment() {
         binding = FragmentDailyWritingMainBinding.inflate(layoutInflater)
 
         (activity as MainActivity).setDailyWritingTitle()
+        getCurrentMonth()
         scrollToTop()
 
         return binding.root
     }
 
+    private fun getCurrentMonth() {
+        val currentMonth = when(SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis()))){
+            "01" -> resources.getString(R.string.January)
+            "02" -> resources.getString(R.string.February)
+            "03" -> resources.getString(R.string.March)
+            "04" -> resources.getString(R.string.April)
+            "05" -> resources.getString(R.string.May)
+            "06" -> resources.getString(R.string.June)
+            "07" -> resources.getString(R.string.July)
+            "08" -> resources.getString(R.string.August)
+            "09" -> resources.getString(R.string.September)
+            "10" -> resources.getString(R.string.October)
+            "11" -> resources.getString(R.string.November)
+            "12" -> resources.getString(R.string.December)
+            else -> null
+        }
+
+        if (currentMonth == null){
+            Toast.makeText(requireContext(), "현재 날짜를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
+        } else {
+            viewModel.getWritingList(currentMonth)
+        }
+
+        //추후 current month 를 app 차원에서 제공하는 방법 생각할 것
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setOnClick()
+        setOnClicks()
         setObservers()
-        viewModel.getWritingList()
+
     }
 
     private fun scrollToTop() {
@@ -46,7 +76,7 @@ class DailyWritingMainFragment : Fragment() {
         }
     }
 
-    private fun setOnClick() {
+    private fun setOnClicks() {
         binding.apply {
             dailyWritingTextDaily.setOnClickListener {
                 val action = DailyWritingMainFragmentDirections.openAdd("daily")
@@ -64,7 +94,6 @@ class DailyWritingMainFragment : Fragment() {
             }
 
             dailyWritingItemDaily.apply {
-                enableClickListener()
                 setOnClickListener {
                     val action = DailyWritingMainFragmentDirections.openAdd("daily")
                     it.findNavController().navigate(action)
@@ -72,7 +101,6 @@ class DailyWritingMainFragment : Fragment() {
             }
 
             dailyWritingItemWeekly.apply {
-                enableClickListener()
                 setOnClickListener {
                     val action = DailyWritingMainFragmentDirections.openAdd("weekly")
                     it.findNavController().navigate(action)
@@ -80,7 +108,6 @@ class DailyWritingMainFragment : Fragment() {
             }
 
             dailyWritingItemMonthly.apply {
-                enableClickListener()
                 setOnClickListener {
                     val action = DailyWritingMainFragmentDirections.openAdd("monthly")
                     it.findNavController().navigate(action)
@@ -98,7 +125,11 @@ class DailyWritingMainFragment : Fragment() {
                 binding.dailyWritingItemDaily.visibility = View.VISIBLE
                 binding.dailyWritingTextDaily.visibility = View.GONE
 
-                val adapter = DailyWritingItemAdapter(it)
+                val mutableList = it.toMutableList()
+                mutableList.add(0,(DailyWritingItem
+                    (-1, "title", "daily", resources.getString(R.string.daily), null, null, mutableListOf())))
+
+                val adapter = DailyWritingItemAdapter(mutableList, "daily")
                 binding.dailyWritingItemDaily.apply{
                     this.adapter = adapter
                     layoutManager = LinearLayoutManager(this@DailyWritingMainFragment.context)
@@ -114,7 +145,11 @@ class DailyWritingMainFragment : Fragment() {
                 binding.dailyWritingItemWeekly.visibility = View.VISIBLE
                 binding.dailyWritingTextWeekly.visibility = View.GONE
 
-                val adapter = DailyWritingItemAdapter(it)
+                val mutableList = it.toMutableList()
+                mutableList.add(0,(DailyWritingItem
+                    (-1, "title", "weekly", resources.getString(R.string.weekly), null, null, mutableListOf())))
+
+                val adapter = DailyWritingItemAdapter(mutableList, "weekly")
                 binding.dailyWritingItemWeekly.apply{
                     this.adapter = adapter
                     layoutManager = LinearLayoutManager(this@DailyWritingMainFragment.context)
@@ -130,7 +165,11 @@ class DailyWritingMainFragment : Fragment() {
                 binding.dailyWritingItemMonthly.visibility = View.VISIBLE
                 binding.dailyWritingTextMonthly.visibility = View.GONE
 
-                val adapter = DailyWritingItemAdapter(it)
+                val mutableList = it.toMutableList()
+                mutableList.add(0,(DailyWritingItem
+                    (-1, "title", "daily", resources.getString(R.string.monthly), null, null, mutableListOf())))
+
+                val adapter = DailyWritingItemAdapter(mutableList, "monthly")
                 binding.dailyWritingItemMonthly.apply{
                     this.adapter = adapter
                     layoutManager = LinearLayoutManager(this@DailyWritingMainFragment.context)
@@ -138,16 +177,4 @@ class DailyWritingMainFragment : Fragment() {
             }
         }
     }
-}
-
-@SuppressLint("ClickableViewAccessibility")
-fun RecyclerView.enableClickListener(){
-    val gesture = object : GestureDetector.SimpleOnGestureListener(){
-        override fun onSingleTapConfirmed(e: MotionEvent?): Boolean {
-            this@enableClickListener.performClick()
-            return super.onSingleTapConfirmed(e)
-        }
-    }
-    val detector = GestureDetector(this.context, gesture)
-    this.setOnTouchListener { _, event -> detector.onTouchEvent(event) }
 }

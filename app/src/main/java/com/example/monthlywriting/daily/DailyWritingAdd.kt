@@ -46,20 +46,7 @@ class DailyWritingAdd : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        when(SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis()))){
-            "01" -> {currentMonth = resources.getString(R.string.January)}
-            "02" -> {currentMonth = resources.getString(R.string.February)}
-            "03" -> {currentMonth = resources.getString(R.string.March)}
-            "04" -> {currentMonth = resources.getString(R.string.April)}
-            "05" -> {currentMonth = resources.getString(R.string.May)}
-            "06" -> {currentMonth = resources.getString(R.string.June)}
-            "07" -> {currentMonth = resources.getString(R.string.July)}
-            "08" -> {currentMonth = resources.getString(R.string.August)}
-            "09" -> {currentMonth = resources.getString(R.string.September)}
-            "10" -> {currentMonth = resources.getString(R.string.October)}
-            "11" -> {currentMonth = resources.getString(R.string.November)}
-            "12" -> {currentMonth = resources.getString(R.string.December)}
-        }
+        setTitle()
 
         binding.dailyWritingSave.setOnClickListener {
             saveWriting(it)
@@ -124,6 +111,23 @@ class DailyWritingAdd : Fragment() {
         }
     }
 
+    private fun setTitle() {
+        when(SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis()))){
+            "01" -> {currentMonth = resources.getString(R.string.January)}
+            "02" -> {currentMonth = resources.getString(R.string.February)}
+            "03" -> {currentMonth = resources.getString(R.string.March)}
+            "04" -> {currentMonth = resources.getString(R.string.April)}
+            "05" -> {currentMonth = resources.getString(R.string.May)}
+            "06" -> {currentMonth = resources.getString(R.string.June)}
+            "07" -> {currentMonth = resources.getString(R.string.July)}
+            "08" -> {currentMonth = resources.getString(R.string.August)}
+            "09" -> {currentMonth = resources.getString(R.string.September)}
+            "10" -> {currentMonth = resources.getString(R.string.October)}
+            "11" -> {currentMonth = resources.getString(R.string.November)}
+            "12" -> {currentMonth = resources.getString(R.string.December)}
+        }
+    }
+
     private fun saveWriting(view: View) {
         if(viewModel.name.value != null && viewModel.name.value!!.isNotEmpty()){
             when(args.type){
@@ -135,7 +139,7 @@ class DailyWritingAdd : Fragment() {
                         name = viewModel.name.value!!,
                         weektimes = null,
                         monthtimes = null,
-                        dailymemo = null
+                        dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)
                 }
@@ -147,19 +151,23 @@ class DailyWritingAdd : Fragment() {
                         name = viewModel.name.value!!,
                         weektimes = viewModel.timesAWeek.value,
                         monthtimes = null,
-                        dailymemo = null
+                        dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)
                 }
                 "monthly" -> {
+                    val monthTimes =
+                        if (binding.rbMonthTimes.isChecked) viewModel.timesAMonth.value
+                        else 0
+
                     val newItem = DailyWritingItem(
                         id = 0,
                         month = currentMonth,
                         type = "monthly",
                         name = viewModel.name.value!!,
                         weektimes = null,
-                        monthtimes = viewModel.timesAMonth.value,
-                        dailymemo = null
+                        monthtimes = monthTimes,
+                        dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)
                 }

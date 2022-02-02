@@ -11,8 +11,12 @@ class Repository(private val dailyWritingItemDao: DailyWritingItemDao) {
         return@withContext dailyWritingItemDao.selectAll()
     }
 
-    suspend fun getDailyList(type : String) : List<DailyWritingItem> = withContext(Dispatchers.IO) {
-        return@withContext dailyWritingItemDao.selectListByType(type)
+    suspend fun getDailyList(month: String, type : String) : List<DailyWritingItem> = withContext(Dispatchers.IO) {
+        return@withContext dailyWritingItemDao.selectDailyList(month, type)
+    }
+
+    suspend fun getSingleItem(id: Int) : DailyWritingItem = withContext(Dispatchers.IO){
+        return@withContext dailyWritingItemDao.selectSingleItem(id)
     }
 
     suspend fun insert(newItem : DailyWritingItem) = withContext(Dispatchers.IO) {

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/open_add"
             app:destination="@id/nav_daily_writing_add" />
+        <action
+            android:id="@+id/open_bottom_sheet"
+            app:destination="@id/dailyWritingBottomSheet" />
     </fragment>
 
     <fragment
@@ -37,5 +40,21 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
+
+    <dialog
+        android:id="@+id/dailyWritingBottomSheet"
+        android:name="com.example.monthlywriting.daily.bottomsheet.DailyWritingBottomSheet"
+        android:label="fragment_daily_writing_bottom_sheet"
+        tools:layout="@layout/fragment_daily_writing_bottom_sheet" >
+        <action
+            android:id="@+id/close_bottom_sheet"
+            app:destination="@id/nav_daily_writing"
+            app:popUpTo="@id/navigation"
+            app:popUpToInclusive="true"/>
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </dialog>
 
 </navigation>

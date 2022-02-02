@@ -12,6 +12,7 @@
         android:gravity="center"
         android:text="@string/what_is_your_daily"
         android:textColor="@color/white"
-        android:background="@drawable/daily_writing_item_underline"/>
+        android:textSize="@dimen/daily_writing_item_text_size"
+        android:background="@drawable/white_underline"/>
 
 </LinearLayout>
