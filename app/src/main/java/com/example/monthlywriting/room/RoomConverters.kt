@@ -5,10 +5,7 @@ import android.graphics.BitmapFactory
 import androidx.room.TypeConverter
 import com.example.monthlywriting.model.DailyMemo
 import com.google.gson.Gson
-import com.google.gson.JsonArray
-import org.json.JSONObject
 import java.io.ByteArrayOutputStream
-import kotlin.collections.emptyList as emptyList
 
 class RoomConverters {
 
@@ -18,10 +15,19 @@ class RoomConverters {
     }
 
     @TypeConverter
-    fun jsonToDailyMemo(json : String) : MutableList<DailyMemo> {
+    fun jsonToDailyMemoList(json : String) : MutableList<DailyMemo> {
         return Gson().fromJson(json, Array<DailyMemo>::class.java).toMutableList()
     }
 
+    @TypeConverter
+    fun doneListToJson(list: MutableList<Boolean>) : String? {
+        return Gson().toJson(list)
+    }
+
+    @TypeConverter
+    fun jsonToDoneList(json : String) : MutableList<Boolean> {
+        return Gson().fromJson(json, Array<Boolean>::class.java).toMutableList()
+    }
 
     @TypeConverter
     fun bitmapToByteArray(bitmap: Bitmap) : ByteArray {

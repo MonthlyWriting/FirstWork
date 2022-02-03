@@ -127,7 +127,8 @@ class DailyWritingMainFragment : Fragment() {
 
                 val mutableList = it.toMutableList()
                 mutableList.add(0,(DailyWritingItem
-                    (-1, "title", "daily", resources.getString(R.string.daily), null, null, mutableListOf())))
+                    (-1, "title", "daily", resources.getString(R.string.daily), null, null,
+                    mutableListOf() ,mutableListOf())))
 
                 val adapter = DailyWritingItemAdapter(mutableList, "daily")
                 binding.dailyWritingItemDaily.apply{
@@ -147,7 +148,8 @@ class DailyWritingMainFragment : Fragment() {
 
                 val mutableList = it.toMutableList()
                 mutableList.add(0,(DailyWritingItem
-                    (-1, "title", "weekly", resources.getString(R.string.weekly), null, null, mutableListOf())))
+                    (-1, "title", "weekly", resources.getString(R.string.weekly), null, null,
+                    mutableListOf(), mutableListOf())))
 
                 val adapter = DailyWritingItemAdapter(mutableList, "weekly")
                 binding.dailyWritingItemWeekly.apply{
@@ -167,7 +169,8 @@ class DailyWritingMainFragment : Fragment() {
 
                 val mutableList = it.toMutableList()
                 mutableList.add(0,(DailyWritingItem
-                    (-1, "title", "daily", resources.getString(R.string.monthly), null, null, mutableListOf())))
+                    (-1, "title", "daily", resources.getString(R.string.monthly), null, null, mutableListOf(),
+                    mutableListOf())))
 
                 val adapter = DailyWritingItemAdapter(mutableList, "monthly")
                 binding.dailyWritingItemMonthly.apply{

@@ -99,7 +99,7 @@
                     android:inputType="text"
                     android:importantForAutofill="no"
                     android:text="@={viewModel.name}"
-                    android:hint="@string/name"
+                    android:hint="@string/hint_name"
                     android:id="@+id/daily_writing_name"/>
 
                 <LinearLayout
@@ -127,7 +127,7 @@
                             android:layout_weight="1"
                             android:value="@={viewModel.timesAWeek}"
                             android:id="@+id/daily_writing_week_num"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginEnd="10dp"/>
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"

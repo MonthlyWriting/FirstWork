@@ -55,6 +55,19 @@
             android:name="id"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/open_add_memo"
+            app:destination="@id/dailyWritingAddMemo"/>
+    </dialog>
+
+    <dialog
+        android:id="@+id/dailyWritingAddMemo"
+        android:name="com.example.monthlywriting.daily.bottomsheet.DailyWritingAddMemo"
+        android:label="DailyWritingAddMemo">
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
     </dialog>
 
 </navigation>
