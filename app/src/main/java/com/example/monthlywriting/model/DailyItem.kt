@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.Update
 import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "daily")
@@ -15,12 +16,13 @@ data class DailyWritingItem(
     @ColumnInfo (name = "name") var name : String,
     @ColumnInfo (name = "weektimes") var weektimes : Int?,
     @ColumnInfo (name = "monthtimes") var monthtimes : Int?,
+    @ColumnInfo (name = "done") var done: MutableList<Boolean>,
     @ColumnInfo (name = "dailymemo") var dailymemo : MutableList<DailyMemo>
 )
 
 data class DailyMemo(
-    @SerializedName("date") var date : String,
-    @SerializedName("done") var done : Boolean,
-    @SerializedName("memo") var memo : String?,
-    @SerializedName("photo") var photo : Bitmap?
+    var date : String,
+    var memo : String?,
+    var photo : Bitmap?
 )
+

@@ -37,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintVertical_bias="1"
                 android:layout_margin="32dp"
-                android:contentDescription="@string/save_writing"
+                android:contentDescription="@string/description_save_writing"
                 android:src="@drawable/ic_baseline_done_32"
                 android:id="@+id/daily_writing_save"/>
 
@@ -99,7 +99,7 @@
                     android:inputType="text"
                     android:importantForAutofill="no"
                     android:text="@={viewModel.name}"
-                    android:hint="@string/name"
+                    android:hint="@string/hint_name"
                     android:id="@+id/daily_writing_name"/>
 
                 <LinearLayout
@@ -127,7 +127,7 @@
                             android:layout_weight="1"
                             android:value="@={viewModel.timesAWeek}"
                             android:id="@+id/daily_writing_week_num"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginEnd="10dp"/>
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="match_parent"

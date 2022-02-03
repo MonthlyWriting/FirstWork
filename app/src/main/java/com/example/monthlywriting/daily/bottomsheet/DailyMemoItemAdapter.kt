@@ -8,7 +8,7 @@ import com.example.monthlywriting.databinding.DailyMemoItemBinding
 import com.example.monthlywriting.model.DailyMemo
 
 class DailyMemoItemAdapter(
-    private val list : List<DailyMemo>
+    private val list : MutableList<DailyMemo>
 ) : RecyclerView.Adapter<DailyMemoItemAdapter.DailyMemoItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyMemoItemViewHolder =
@@ -33,9 +33,9 @@ class DailyMemoItemAdapter(
                 binding.dailyMemoDate.text = date
                 binding.dailyMemoContent.text = memo
                 if(photo != null) {
-                    binding.dailyMemoPhoto.visibility = View.VISIBLE
+                    binding.dailyMemoIsPhoto.visibility = View.VISIBLE
                 } else {
-                    binding.dailyMemoPhoto.visibility = View.GONE
+                    binding.dailyMemoIsPhoto.visibility = View.GONE
                 }
             }
         }

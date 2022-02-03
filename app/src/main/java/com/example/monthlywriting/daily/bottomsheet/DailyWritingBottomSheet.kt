@@ -5,8 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,22 +13,17 @@ import com.example.monthlywriting.R
 import com.example.monthlywriting.daily.viewmodel.DailyWritingBottomSheetViewModel
 import com.example.monthlywriting.databinding.FragmentDailyWritingBottomSheetBinding
 import com.example.monthlywriting.model.DailyCheckItem
-import com.example.monthlywriting.model.DailyMemo
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
-import androidx.annotation.NonNull
-import com.google.android.material.bottomsheet.BottomSheetBehavior.BottomSheetCallback
-
 
 @AndroidEntryPoint
 class DailyWritingBottomSheet : BottomSheetDialogFragment() {
 
     private lateinit var binding : FragmentDailyWritingBottomSheetBinding
-    private val viewModel : DailyWritingBottomSheetViewModel by viewModels()
+    private val viewModel : DailyWritingBottomSheetViewModel by activityViewModels()
 
     private val args : DailyWritingBottomSheetArgs by navArgs()
 
@@ -37,9 +31,7 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_daily_writing_bottom_sheet, container, false)
-        binding.viewModel = viewModel
-        binding.lifecycleOwner = this.viewLifecycleOwner
+        binding = FragmentDailyWritingBottomSheetBinding.inflate(layoutInflater)
 
         viewModel.getCurrentItem(args.id)
         setObservers()
@@ -50,57 +42,57 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.bottomSheetCloseButton.setOnClickListener {
-            NavHostFragment.findNavController(this).navigateUp()
-        }
+        binding.apply {
 
-        binding.bottomSheetDailyMemo.isNestedScrollingEnabled = true
-    }
+            bottomSheetCloseButton.setOnClickListener {
+                NavHostFragment.findNavController(this@DailyWritingBottomSheet).navigateUp()
+            }
 
-    private fun setObservers() {
-        viewModel.currentItem.observe(viewLifecycleOwner){
-            binding.bottomSheetTitle.text = it.name
-            when(it.type) {
-                "daily" -> {
-                    displayBottomSheet("daily")
-
-                    binding.bottomSheetCheckItem.apply {
-                        this.adapter = DailyCheckItemAdapter(dailyCheckList())
-                        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                    }
-
-
-                    binding.bottomSheetDailyMemo.apply {
-                        val a = it.dailymemo
-                        for (i in 1..4){
-                            a.add(DailyMemo("2/1", false, "안녕하세요", null))
-                        }
-
-                        this.adapter = DailyMemoItemAdapter(a)
-                        layoutManager = LinearLayoutManager(requireContext())
-                    }
-                }
-                "weekly" -> {
-                    displayBottomSheet("weekly")
-
-                    binding.bottomSheetCheckItem.apply {
-                        this.adapter = DailyCheckItemAdapter(dailyCheckList())
-                        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                    }
-                }
-                "monthly" -> {
-                    displayBottomSheet("monthly")
-                    if (it.monthtimes == 0){
-                        binding.bottomSheetMonthtimes.visibility = View.GONE
-                    }
-
-
-                }
+            addDailyMemo.setOnClickListener {
+                val action = DailyWritingBottomSheetDirections.openAddMemo(args.id)
+                NavHostFragment.findNavController(this@DailyWritingBottomSheet).navigate(action)
             }
         }
     }
 
-    private fun displayBottomSheet(type : String) {
+    private fun setObservers() {
+        viewModel.currentItem.observe(viewLifecycleOwner){
+
+            binding.bottomSheetTitle.text = it.name
+
+            when(it.type) {
+                "daily" -> {
+                    displayBottomSheetByType("daily")
+                    binding.bottomSheetCheckItem.apply {
+                        this.adapter = DailyCheckItemAdapter(dailyCheckList())
+                        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    }
+                }
+                "weekly" -> {
+                    displayBottomSheetByType("weekly")
+                    binding.bottomSheetCheckItem.apply {
+                        this.adapter = DailyCheckItemAdapter(dailyCheckList())
+                        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    }
+
+
+                }
+                "monthly" -> {
+                    displayBottomSheetByType("monthly")
+                    if (it.monthtimes == 0){
+                        binding.bottomSheetMonthtimes.visibility = View.GONE
+                    }
+                }
+            }
+
+            binding.bottomSheetDailyMemo.apply {
+                this.adapter = DailyMemoItemAdapter(it.dailymemo)
+                layoutManager = LinearLayoutManager(requireContext())
+            }
+        }
+    }
+
+    private fun displayBottomSheetByType(type : String) {
         when (type) {
             "daily" -> {
                 binding.bottomSheetCheckItem.visibility = View.VISIBLE
@@ -144,5 +136,4 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
 
         return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
-
 }

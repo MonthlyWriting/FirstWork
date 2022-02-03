@@ -90,7 +90,7 @@ class DailyWritingAdd : Fragment() {
                     dailyWritingMonthNum.isEnabled = true
 
                     dailyWritingMonthNum.minValue = 1
-                    dailyWritingMonthNum.maxValue = 31
+                    dailyWritingMonthNum.maxValue = getCurrentEndDateOfMonth()
 
                     rbMonthInfo.setOnCheckedChangeListener { _, id ->
                         when(id){
@@ -139,6 +139,7 @@ class DailyWritingAdd : Fragment() {
                         name = viewModel.name.value!!,
                         weektimes = null,
                         monthtimes = null,
+                        done = mutableListOf(),
                         dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)
@@ -151,6 +152,7 @@ class DailyWritingAdd : Fragment() {
                         name = viewModel.name.value!!,
                         weektimes = viewModel.timesAWeek.value,
                         monthtimes = null,
+                        done = mutableListOf(),
                         dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)
@@ -167,6 +169,7 @@ class DailyWritingAdd : Fragment() {
                         name = viewModel.name.value!!,
                         weektimes = null,
                         monthtimes = monthTimes,
+                        done = mutableListOf(),
                         dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)
@@ -179,5 +182,15 @@ class DailyWritingAdd : Fragment() {
         } else{
             Toast.makeText(this.context, "이름을 입력해 주세요.", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun getCurrentEndDateOfMonth() : Int {
+        val cal = Calendar.getInstance()
+        val currentYear = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
+        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
+        val currentDay = SimpleDateFormat("dd", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
+        cal.set( currentYear, currentMonth - 1, currentDay )
+
+        return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
 }

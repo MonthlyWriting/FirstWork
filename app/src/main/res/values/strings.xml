@@ -47,11 +47,19 @@
     <string name="times_a_month">times a month</string>
     <string name="throughout_a_month">throughout a month</string>
 
-    <string name="save_writing">Save Writing</string>
-    <string name="name">name</string>
+    <string name="description_save_writing">Save Writing</string>
+    <string name="description_calcel_writing">Cancel Writing</string>
+    <string name="hint_name">name</string>
+    <string name="hint_content">Write your content here.</string>
     <string name="num_hint">0</string>
 
     <string name="close_bottom_sheet">Close Bottom Sheet</string>
+    <string name="add_daily_memo">Add Daily Memo</string>
+
+    <string name="title_content">Content</string>
+    <string name="title_photo">Photo</string>
+
+    <string name="title_add_memo">Add Your Daily Writing</string>
 
 
 

@@ -1,8 +1,7 @@
 package com.example.monthlywriting.room
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
+import com.example.monthlywriting.model.DailyMemo
 import com.example.monthlywriting.model.DailyWritingItem
 
 @Dao
@@ -16,9 +15,13 @@ interface DailyWritingItemDao {
     @Query("SELECT * FROM daily WHERE id = :id ")
     fun selectSingleItem(id: Int): DailyWritingItem
 
+    @Query("UPDATE daily SET dailymemo = :memo WHERE id = :id")
+    fun updateDailyMemo(id: Int, memo : MutableList<DailyMemo>)
+
     @Insert
-    fun insert(dailyItem: DailyWritingItem)
+    fun insert(dailyMemo: DailyWritingItem)
 
     @Query("DELETE FROM daily WHERE id = :id")
     fun delete(id: Int)
+
 }
