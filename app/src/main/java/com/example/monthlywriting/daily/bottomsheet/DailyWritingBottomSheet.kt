@@ -78,7 +78,7 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
 
                 }
                 "monthly" -> {
-                    displayBottomSheetByType("monthly")
+                    displayBottomSheetByType(   "monthly")
                     if (it.monthtimes == 0){
                         binding.bottomSheetMonthtimes.visibility = View.GONE
                     }

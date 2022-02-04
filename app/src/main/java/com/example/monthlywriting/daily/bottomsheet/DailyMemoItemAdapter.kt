@@ -30,7 +30,7 @@ class DailyMemoItemAdapter(
 
         fun setData(){
             list[adapterPosition].apply {
-                binding.dailyMemoDate.text = date
+                binding.dailyMemoDate.text = date.toString()
                 binding.dailyMemoContent.text = memo
                 if(photo != null) {
                     binding.dailyMemoIsPhoto.visibility = View.VISIBLE

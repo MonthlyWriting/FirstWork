@@ -21,7 +21,7 @@ data class DailyWritingItem(
 )
 
 data class DailyMemo(
-    var date : String,
+    var date : Int,
     var memo : String?,
     var photo : Bitmap?
 )

@@ -60,7 +60,7 @@
     <string name="title_photo">Photo</string>
 
     <string name="title_add_memo">Add Your Daily Writing</string>
-
+    <string name="description_add_memo_date">Set Date For Your Writing :</string>
 
 
 </resources>
