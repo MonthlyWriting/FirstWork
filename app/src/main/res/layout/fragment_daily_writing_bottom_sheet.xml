@@ -66,9 +66,9 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bottom_sheet_daily_memo"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:nestedScrollingEnabled="false"
+            android:layout_height="250dp"
             android:layout_marginVertical="10dp"
-            android:layout_marginHorizontal="20dp"/>
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/black_left_line"/>
     </LinearLayout>
 </FrameLayout>

@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/black_left_line.xml" value="0.28125" />
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/black_leftline.xml" value="0.28125" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/black_underline.xml" value="0.28125" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/bottom_sheet_frame.xml" value="0.28125" />
+        <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/daily_memo_bullet.xml" value="0.28125" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/daily_writing_item.xml" value="0.38974358974358975" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/daily_writing_item_frame.xml" value="0.14375" />
         <entry key="..\:/Users/DongHwa/AndroidStudioProjects/MW/MonthlyWriting/app/src/main/res/drawable/daily_writing_item_frame_without_padding.xml" value="0.38974358974358975" />
