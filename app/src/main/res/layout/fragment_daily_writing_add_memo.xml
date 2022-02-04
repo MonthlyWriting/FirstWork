@@ -132,9 +132,11 @@
                     android:layout_marginBottom="96dp"
                     android:layout_marginHorizontal="20dp"
                     android:src="@drawable/ic_baseline_photo_library_24"
+                    android:contentDescription="@string/description_add_memo_photo"
                     android:scaleType="center"
                     android:background="@drawable/white_underline"
-                    android:id="@+id/daily_memo_photo"/>
+                    android:id="@+id/daily_memo_photo"
+                    app:imgBitmap="@{viewModel.photo}"/>
 
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
