@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName
 data class DailyWritingItem(
     @PrimaryKey (autoGenerate = true)
     @ColumnInfo (name = "id") var id: Int,
-    @ColumnInfo (name = "month") var month : String,
+    @ColumnInfo (name = "month") var month : Int,
     @ColumnInfo (name = "type") var type : String,
     @ColumnInfo (name = "name") var name : String,
     @ColumnInfo (name = "weektimes") var weektimes : Int?,
@@ -23,6 +23,6 @@ data class DailyWritingItem(
 data class DailyMemo(
     var date : Int,
     var memo : String?,
-    var photo : Bitmap?
+    var imgpath : String?
 )
 

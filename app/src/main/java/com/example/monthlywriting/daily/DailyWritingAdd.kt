@@ -27,7 +27,6 @@ class DailyWritingAdd : Fragment() {
     private val viewModel : DailyWritingAddViewModel by viewModels()
 
     private val args : DailyWritingAddArgs by navArgs()
-    private lateinit var currentMonth : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,8 +44,6 @@ class DailyWritingAdd : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        setTitle()
 
         binding.dailyWritingSave.setOnClickListener {
             saveWriting(it)
@@ -111,30 +108,13 @@ class DailyWritingAdd : Fragment() {
         }
     }
 
-    private fun setTitle() {
-        when(SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis()))){
-            "01" -> {currentMonth = resources.getString(R.string.January)}
-            "02" -> {currentMonth = resources.getString(R.string.February)}
-            "03" -> {currentMonth = resources.getString(R.string.March)}
-            "04" -> {currentMonth = resources.getString(R.string.April)}
-            "05" -> {currentMonth = resources.getString(R.string.May)}
-            "06" -> {currentMonth = resources.getString(R.string.June)}
-            "07" -> {currentMonth = resources.getString(R.string.July)}
-            "08" -> {currentMonth = resources.getString(R.string.August)}
-            "09" -> {currentMonth = resources.getString(R.string.September)}
-            "10" -> {currentMonth = resources.getString(R.string.October)}
-            "11" -> {currentMonth = resources.getString(R.string.November)}
-            "12" -> {currentMonth = resources.getString(R.string.December)}
-        }
-    }
-
     private fun saveWriting(view: View) {
         if(viewModel.name.value != null && viewModel.name.value!!.isNotEmpty()){
             when(args.type){
                 "daily" -> {
                     val newItem = DailyWritingItem(
                         id = 0,
-                        month = currentMonth,
+                        month = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt(),
                         type = "daily",
                         name = viewModel.name.value!!,
                         weektimes = null,
@@ -147,7 +127,7 @@ class DailyWritingAdd : Fragment() {
                 "weekly" -> {
                     val newItem = DailyWritingItem(
                         id = 0,
-                        month = currentMonth,
+                        month = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt(),
                         type = "weekly",
                         name = viewModel.name.value!!,
                         weektimes = viewModel.timesAWeek.value,
@@ -164,7 +144,7 @@ class DailyWritingAdd : Fragment() {
 
                     val newItem = DailyWritingItem(
                         id = 0,
-                        month = currentMonth,
+                        month = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt(),
                         type = "monthly",
                         name = viewModel.name.value!!,
                         weektimes = null,

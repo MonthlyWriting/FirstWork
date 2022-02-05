@@ -13,5 +13,6 @@
     <dimen name="daily_check_memo_monthtimes">36sp</dimen>
 
     <dimen name="title_add_memo">24sp</dimen>
+    <dimen name="title_detail_memo">24sp</dimen>
 
 </resources>

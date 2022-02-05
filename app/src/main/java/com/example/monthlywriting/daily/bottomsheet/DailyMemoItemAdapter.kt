@@ -3,12 +3,15 @@ package com.example.monthlywriting.daily.bottomsheet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.monthlywriting.databinding.DailyMemoItemBinding
 import com.example.monthlywriting.model.DailyMemo
 
 class DailyMemoItemAdapter(
-    private val list : MutableList<DailyMemo>
+    private val list : MutableList<DailyMemo>,
+    private val fragment : DialogFragment
 ) : RecyclerView.Adapter<DailyMemoItemAdapter.DailyMemoItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyMemoItemViewHolder =
@@ -17,6 +20,11 @@ class DailyMemoItemAdapter(
 
     override fun onBindViewHolder(holder: DailyMemoItemViewHolder, position: Int) {
         holder.setData()
+
+        holder.itemView.setOnClickListener {
+            val action = DailyWritingBottomSheetDirections.openDetailMemo(holder.getDate())
+            NavHostFragment.findNavController(fragment).navigate(action)
+        }
     }
 
     override fun getItemCount(): Int = list.size
@@ -32,12 +40,14 @@ class DailyMemoItemAdapter(
             list[adapterPosition].apply {
                 binding.dailyMemoDate.text = date.toString()
                 binding.dailyMemoContent.text = memo
-                if(photo != null) {
+                if(imgpath != null) {
                     binding.dailyMemoIsPhoto.visibility = View.VISIBLE
                 } else {
                     binding.dailyMemoIsPhoto.visibility = View.GONE
                 }
             }
         }
+
+        fun getDate() : Int = list[adapterPosition].date
     }
 }

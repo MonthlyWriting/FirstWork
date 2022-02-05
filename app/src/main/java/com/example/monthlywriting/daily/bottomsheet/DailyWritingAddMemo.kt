@@ -3,10 +3,12 @@ package com.example.monthlywriting.daily.bottomsheet
 import android.app.Activity.RESULT_OK
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +27,9 @@ import com.example.monthlywriting.databinding.FragmentDailyWritingAddMemoBinding
 import com.example.monthlywriting.model.DailyMemo
 import com.example.monthlywriting.util.checkPermission
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.File
+import java.io.FileOutputStream
+import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -38,6 +43,7 @@ class DailyWritingAddMemo : DialogFragment() {
     private val args : DailyWritingBottomSheetArgs by navArgs()
 
     private lateinit var galleryLauncher : ActivityResultLauncher<Intent>
+    private var imgPath: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +54,16 @@ class DailyWritingAddMemo : DialogFragment() {
         binding.lifecycleOwner = this.viewLifecycleOwner
 
         setCurrentDate()
+
+        return binding.root
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return Dialog(requireContext(), R.style.fullscreen_dialog)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if (it.resultCode == RESULT_OK){
@@ -61,26 +77,15 @@ class DailyWritingAddMemo : DialogFragment() {
                     }
 
                     addMemoViewModel.photo.value = bitmap
+
                 } else {
                     Toast.makeText(requireContext(), "이미지를 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
         }
 
-        return binding.root
-    }
-
-    private fun setCurrentDate() {
-        binding.apply {
-            dailyMemoMonth.text = SimpleDateFormat("M", Locale.getDefault()).format(Date(System.currentTimeMillis()))
-
-            dailyMemoDate.minValue = 1
-            dailyMemoDate.maxValue = getCurrentEndDateOfMonth()
-        }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val currentItem = bottomSheetViewModel.currentItem.value
+        val currentMonth = currentItem?.month
 
         binding.apply {
 
@@ -89,20 +94,24 @@ class DailyWritingAddMemo : DialogFragment() {
             }
 
             dailyMemoSave.setOnClickListener {
+                val currentDate = addMemoViewModel.date.value
+
                 if(bottomSheetViewModel.currentItem.value?.dailymemo!!.any{
-                    it.date == addMemoViewModel.date.value!! }) {
+                        it.date == currentDate!! }) {
                     Toast.makeText(requireContext(), "다른 날짜를 선택해주세요.", Toast.LENGTH_SHORT).show()
                     Toast.makeText(requireContext(), "수정을 원하시면 해당 날짜의 기록을 클릭하세요.", Toast.LENGTH_SHORT).show()
                 } else {
-                    if (viewModel?.content?.value == null){
+                    if (viewModel?.content?.value == null || viewModel?.content?.value == ""){
                         Toast.makeText(requireContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
-                    }
-                    else {
+                    } else {
+                        saveBitmapInFile(addMemoViewModel.photo.value, "{$currentMonth}_${currentDate}")
+
                         val memo = DailyMemo(
                             date = addMemoViewModel.date.value!!,
                             memo = addMemoViewModel.content.value!!,
-                            photo = addMemoViewModel.photo.value
+                            imgpath = imgPath
                         )
+
                         bottomSheetViewModel.saveMemo(args.id, memo)
 
                         Toast.makeText(requireContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show()
@@ -117,14 +126,36 @@ class DailyWritingAddMemo : DialogFragment() {
         }
     }
 
+    private fun setCurrentDate() {
+        binding.apply {
+            dailyMemoMonth.text = SimpleDateFormat("M", Locale.getDefault()).format(Date(System.currentTimeMillis()))
+
+            dailyMemoDate.minValue = 1
+            dailyMemoDate.maxValue = getCurrentEndDateOfMonth()
+        }
+    }
+
+    private fun saveBitmapInFile(bitmap: Bitmap?, filename: String) {
+        if (bitmap != null){
+            val file = File(this@DailyWritingAddMemo.context?.filesDir, filename)
+            var outputStream : OutputStream? = null
+
+            try {
+                file.createNewFile()
+                outputStream = FileOutputStream(file)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 80, outputStream)
+            } finally {
+                outputStream?.close()
+            }
+
+            imgPath = file.absolutePath
+        }
+    }
+
     private fun launchGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         intent.type = "image/*"
         galleryLauncher.launch(intent)
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return Dialog(requireContext(), R.style.fullscreen_dialog)
     }
 
     private fun getCurrentEndDateOfMonth() : Int {

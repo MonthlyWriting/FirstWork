@@ -28,17 +28,4 @@ class RoomConverters {
     fun jsonToDoneList(json : String) : MutableList<Boolean> {
         return Gson().fromJson(json, Array<Boolean>::class.java).toMutableList()
     }
-
-    @TypeConverter
-    fun bitmapToByteArray(bitmap: Bitmap) : ByteArray {
-        ByteArrayOutputStream().apply {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, this)
-            return toByteArray()
-        }
-    }
-
-    @TypeConverter
-    fun byteArrayToBitmap(byteArray: ByteArray) : Bitmap {
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
-    }
 }

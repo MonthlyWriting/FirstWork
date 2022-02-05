@@ -78,7 +78,7 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
 
                 }
                 "monthly" -> {
-                    displayBottomSheetByType(   "monthly")
+                    displayBottomSheetByType("monthly")
                     if (it.monthtimes == 0){
                         binding.bottomSheetMonthtimes.visibility = View.GONE
                     }
@@ -86,7 +86,7 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
             }
 
             binding.bottomSheetDailyMemo.apply {
-                this.adapter = DailyMemoItemAdapter(it.dailymemo)
+                this.adapter = DailyMemoItemAdapter(it.dailymemo, this@DailyWritingBottomSheet)
                 layoutManager = LinearLayoutManager(requireContext())
             }
         }

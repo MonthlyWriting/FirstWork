@@ -65,5 +65,10 @@
     <string name="description_add_memo_bullet">Daily Memo Item Bullet</string>
     <string name="description_add_memo_is_photo">Daily Memo IsPhoto</string>
 
+    <string name="title_detail_memo">Your Daily Writing</string>
+    <string name="description_detail_memo_date">Date For Your Writing :</string>
+
+    <string name="detail_memo_date">%1$d %2$d</string>
+
 
 </resources>

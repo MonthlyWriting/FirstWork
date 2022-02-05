@@ -58,14 +58,29 @@
         <action
             android:id="@+id/open_add_memo"
             app:destination="@id/dailyWritingAddMemo"/>
+        <action
+            android:id="@+id/open_detail_memo"
+            app:destination="@id/dailyWritingDetailMemo" />
     </dialog>
 
     <dialog
         android:id="@+id/dailyWritingAddMemo"
         android:name="com.example.monthlywriting.daily.bottomsheet.DailyWritingAddMemo"
-        android:label="DailyWritingAddMemo">
+        android:label="fragment_daily_writing_add_memo"
+        tools:layout="@layout/fragment_daily_writing_add">
         <argument
             android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/dailyWritingDetailMemo"
+        android:name="com.example.monthlywriting.daily.bottomsheet.DailyWritingDetailMemo"
+        android:label="fragment_daily_writing_detail_memo"
+        tools:layout="@layout/fragment_daily_writing_detail_memo" >
+        <argument
+            android:name="date"
             app:argType="integer"
             android:defaultValue="0" />
     </dialog>
