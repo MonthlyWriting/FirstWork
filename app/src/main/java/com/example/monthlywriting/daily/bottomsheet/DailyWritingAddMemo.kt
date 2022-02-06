@@ -8,7 +8,6 @@ import android.graphics.ImageDecoder
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -104,7 +103,7 @@ class DailyWritingAddMemo : DialogFragment() {
                     if (viewModel?.content?.value == null || viewModel?.content?.value == ""){
                         Toast.makeText(requireContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
                     } else {
-                        saveBitmapInFile(addMemoViewModel.photo.value, "{$currentMonth}_${currentDate}")
+                        saveBitmapInFile(addMemoViewModel.photo.value, "${currentMonth}_${currentDate}")
 
                         val memo = DailyMemo(
                             date = addMemoViewModel.date.value!!,
@@ -112,7 +111,7 @@ class DailyWritingAddMemo : DialogFragment() {
                             imgpath = imgPath
                         )
 
-                        bottomSheetViewModel.saveMemo(args.id, memo)
+                        bottomSheetViewModel.saveNewMemo(args.id, memo)
 
                         Toast.makeText(requireContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show()
                         dismiss()

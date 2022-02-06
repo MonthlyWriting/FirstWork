@@ -9,6 +9,7 @@ import com.example.monthlywriting.model.DailyMemo
 import com.example.monthlywriting.model.DailyWritingItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.function.Predicate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,10 +26,27 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
         }
     }
 
-    fun saveMemo(id: Int, memo : DailyMemo) {
+    fun saveNewMemo(id: Int, memo : DailyMemo) {
         viewModelScope.launch {
             val item = _currentItem.value!!
             item.dailymemo.add(memo)
+            item.dailymemo.sortBy { it.date }
+
+            repository.updateDailyMemo(id, item.dailymemo)
+            updateItem(item)
+        }
+    }
+
+    fun updateMemo(id: Int, memo : DailyMemo){
+        viewModelScope.launch {
+            val item = _currentItem.value!!
+            item.dailymemo.forEachIndexed { index, it ->
+                if (it.date == memo.date){
+                    item.dailymemo.removeAt(index)
+                }
+            }
+            item.dailymemo.add(memo)
+            item.dailymemo.sortBy { it.date }
 
             repository.updateDailyMemo(id, item.dailymemo)
             updateItem(item)

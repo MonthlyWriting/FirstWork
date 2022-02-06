@@ -1,11 +1,8 @@
 package com.example.monthlywriting.model
 
-import android.graphics.Bitmap
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import androidx.room.Update
-import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "daily")
 data class DailyWritingItem(
@@ -22,7 +19,7 @@ data class DailyWritingItem(
 
 data class DailyMemo(
     var date : Int,
-    var memo : String?,
+    var memo : String,
     var imgpath : String?
 )
 

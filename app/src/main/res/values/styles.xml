@@ -47,4 +47,8 @@
         <item name="android:backgroundDimEnabled">false</item>
     </style>
 
+    <style name="black_edittext">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
 </resources>

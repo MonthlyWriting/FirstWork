@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 
 class DailyWritingDetailMemoViewModel : ViewModel(){
 
-    var date = MutableLiveData<String>()
     var content = MutableLiveData<String>()
     var photo = MutableLiveData<Bitmap>()
+
 }

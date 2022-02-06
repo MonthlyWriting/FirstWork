@@ -39,5 +39,8 @@
         android:layout_weight="1"
         android:textSize="@dimen/daily_check_memo_text"
         android:id="@+id/daily_memo_content"
-        android:layout_marginStart="24dp"/>
+        android:layout_marginStart="24dp"
+        android:lines="1"
+        android:ellipsize="end"
+        android:layout_marginEnd="30dp"/>
 </LinearLayout>

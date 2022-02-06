@@ -48,7 +48,8 @@
     <string name="throughout_a_month">throughout a month</string>
 
     <string name="description_save_writing">Save Writing</string>
-    <string name="description_calcel_writing">Cancel Writing</string>
+    <string name="description_edit_writing">Edit Writing</string>
+    <string name="description_cancel_writing">Cancel Writing</string>
     <string name="hint_name">name</string>
     <string name="hint_content">Write your content here.</string>
     <string name="num_hint">0</string>
@@ -67,8 +68,9 @@
 
     <string name="title_detail_memo">Your Daily Writing</string>
     <string name="description_detail_memo_date">Date For Your Writing :</string>
+    <string name="description_detail_memo_photo">Detail Memo Photo</string>
 
-    <string name="detail_memo_date">%1$d %2$d</string>
+    <string name="detail_memo_date">%1$d / %2$d</string>
 
 
 </resources>
