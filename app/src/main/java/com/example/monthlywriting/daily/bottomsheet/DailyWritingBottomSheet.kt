@@ -2,6 +2,7 @@ package com.example.monthlywriting.daily.bottomsheet
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.monthlywriting.R
 import com.example.monthlywriting.daily.viewmodel.DailyWritingBottomSheetViewModel
 import com.example.monthlywriting.databinding.FragmentDailyWritingBottomSheetBinding
-import com.example.monthlywriting.model.DailyCheckItem
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
@@ -59,23 +58,23 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
         viewModel.currentItem.observe(viewLifecycleOwner){
 
             binding.bottomSheetTitle.text = it.name
+            val list = it.done
+            Log.d("test", it.done.toString())
 
             when(it.type) {
                 "daily" -> {
                     displayBottomSheetByType("daily")
                     binding.bottomSheetCheckItem.apply {
-                        this.adapter = DailyCheckItemAdapter(dailyCheckList())
+                        this.adapter = DailyCheckItemAdapter(list ,requireContext()) { date, boolean -> setItemDone(date, boolean) }
                         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     }
                 }
                 "weekly" -> {
                     displayBottomSheetByType("weekly")
                     binding.bottomSheetCheckItem.apply {
-                        this.adapter = DailyCheckItemAdapter(dailyCheckList())
+                        this.adapter = DailyCheckItemAdapter(list,requireContext()) { date, boolean -> setItemDone(date, boolean) }
                         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     }
-
-
                 }
                 "monthly" -> {
                     displayBottomSheetByType("monthly")
@@ -109,31 +108,14 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+    private fun setItemDone(date: Int, boolean: Boolean) {
+        viewModel.setItemDone(date, boolean)
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = BottomSheetDialog (requireContext(), R.style.transparent_dialog)
         dialog.setCanceledOnTouchOutside(true)
         dialog.behavior.isDraggable = false
         return dialog
-    }
-
-    private fun dailyCheckList() : List<DailyCheckItem> {
-        val list = mutableListOf<DailyCheckItem>()
-        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-
-        for (i in 1..getCurrentEndDateOfMonth()){
-            list.add(DailyCheckItem("$currentMonth/$i", false))
-        }
-
-        return list
-    }
-
-    private fun getCurrentEndDateOfMonth() : Int {
-        val cal = Calendar.getInstance()
-        val currentYear = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        val currentDay = SimpleDateFormat("dd", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        cal.set( currentYear, currentMonth - 1, currentDay )
-
-        return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
 }

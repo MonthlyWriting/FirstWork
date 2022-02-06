@@ -33,15 +33,15 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
             item.dailymemo.sortBy { it.date }
 
             repository.updateDailyMemo(id, item.dailymemo)
-            updateItem(item)
+            _currentItem.value = item
         }
     }
 
-    fun updateMemo(id: Int, memo : DailyMemo){
+    fun updateMemo(id: Int, memo : DailyMemo) {
         viewModelScope.launch {
             val item = _currentItem.value!!
             item.dailymemo.forEachIndexed { index, it ->
-                if (it.date == memo.date){
+                if (it.date == memo.date) {
                     item.dailymemo.removeAt(index)
                 }
             }
@@ -49,11 +49,17 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
             item.dailymemo.sortBy { it.date }
 
             repository.updateDailyMemo(id, item.dailymemo)
-            updateItem(item)
+            _currentItem.value = item
         }
     }
 
-    private fun updateItem(newItem : DailyWritingItem){
-        _currentItem.value = newItem
+    fun setItemDone(date : Int, boolean: Boolean){
+        viewModelScope.launch {
+            val doneList = _currentItem.value?.done!!
+            doneList[date] = boolean
+
+            repository.updateDone(currentItem.value?.id!!, doneList)
+            _currentItem.value?.done = doneList
+        }
     }
 }

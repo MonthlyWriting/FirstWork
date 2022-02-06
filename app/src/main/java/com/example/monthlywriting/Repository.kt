@@ -24,6 +24,10 @@ class Repository(private val dailyWritingItemDao: DailyWritingItemDao) {
         return@withContext dailyWritingItemDao.updateDailyMemo(id, memo)
     }
 
+    suspend fun updateDone(id: Int, doneList : MutableList<Boolean>) = withContext(Dispatchers.IO) {
+        return@withContext dailyWritingItemDao.updateDone(id, doneList)
+    }
+
     suspend fun insert(newItem : DailyWritingItem) = withContext(Dispatchers.IO) {
         dailyWritingItemDao.insert(newItem)
     }

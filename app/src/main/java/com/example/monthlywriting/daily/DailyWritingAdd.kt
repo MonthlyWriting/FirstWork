@@ -110,6 +110,7 @@ class DailyWritingAdd : Fragment() {
 
     private fun saveWriting(view: View) {
         if(viewModel.name.value != null && viewModel.name.value!!.isNotEmpty()){
+            val doneList = MutableList(getCurrentEndDateOfMonth()) { false }
             when(args.type){
                 "daily" -> {
                     val newItem = DailyWritingItem(
@@ -119,7 +120,7 @@ class DailyWritingAdd : Fragment() {
                         name = viewModel.name.value!!,
                         weektimes = null,
                         monthtimes = null,
-                        done = mutableListOf(),
+                        done = doneList,
                         dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)
@@ -132,7 +133,7 @@ class DailyWritingAdd : Fragment() {
                         name = viewModel.name.value!!,
                         weektimes = viewModel.timesAWeek.value,
                         monthtimes = null,
-                        done = mutableListOf(),
+                        done = doneList,
                         dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)
@@ -149,7 +150,7 @@ class DailyWritingAdd : Fragment() {
                         name = viewModel.name.value!!,
                         weektimes = null,
                         monthtimes = monthTimes,
-                        done = mutableListOf(),
+                        done = doneList,
                         dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)

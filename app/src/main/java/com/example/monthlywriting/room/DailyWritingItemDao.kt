@@ -18,6 +18,9 @@ interface DailyWritingItemDao {
     @Query("UPDATE daily SET dailymemo = :memo WHERE id = :id")
     fun updateDailyMemo(id: Int, memo : MutableList<DailyMemo>)
 
+    @Query("UPDATE daily SET done = :doneList WHERE id = :id")
+    fun updateDone(id: Int, doneList: MutableList<Boolean>)
+
     @Insert
     fun insert(dailyMemo: DailyWritingItem)
 
