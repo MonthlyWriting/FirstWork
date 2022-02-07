@@ -121,6 +121,7 @@ class DailyWritingAdd : Fragment() {
                         weektimes = null,
                         monthtimes = null,
                         done = doneList,
+                        monthtimesdone = mutableListOf(),
                         dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)
@@ -134,6 +135,7 @@ class DailyWritingAdd : Fragment() {
                         weektimes = viewModel.timesAWeek.value,
                         monthtimes = null,
                         done = doneList,
+                        monthtimesdone = mutableListOf(),
                         dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)
@@ -150,7 +152,8 @@ class DailyWritingAdd : Fragment() {
                         name = viewModel.name.value!!,
                         weektimes = null,
                         monthtimes = monthTimes,
-                        done = doneList,
+                        done = mutableListOf(),
+                        monthtimesdone = mutableListOf(),
                         dailymemo = mutableListOf()
                     )
                     viewModel.insertNewItem(newItem)

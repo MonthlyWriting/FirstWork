@@ -28,4 +28,14 @@ class RoomConverters {
     fun jsonToDoneList(json : String) : MutableList<Boolean> {
         return Gson().fromJson(json, Array<Boolean>::class.java).toMutableList()
     }
+
+    @TypeConverter
+    fun monthTimesDoneListToJson(list: MutableList<Int>) : String? {
+        return Gson().toJson(list)
+    }
+
+    @TypeConverter
+    fun jsonToMonthTimesDoneList(json : String) : MutableList<Int> {
+        return Gson().fromJson(json, Array<Int>::class.java).toMutableList()
+    }
 }

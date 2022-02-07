@@ -9,7 +9,6 @@ import com.example.monthlywriting.model.DailyMemo
 import com.example.monthlywriting.model.DailyWritingItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.util.function.Predicate
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,7 +27,7 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
 
     fun saveNewMemo(id: Int, memo : DailyMemo) {
         viewModelScope.launch {
-            val item = _currentItem.value!!
+            val item = currentItem.value!!
             item.dailymemo.add(memo)
             item.dailymemo.sortBy { it.date }
 
@@ -39,7 +38,7 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
 
     fun updateMemo(id: Int, memo : DailyMemo) {
         viewModelScope.launch {
-            val item = _currentItem.value!!
+            val item = currentItem.value!!
             item.dailymemo.forEachIndexed { index, it ->
                 if (it.date == memo.date) {
                     item.dailymemo.removeAt(index)
@@ -55,11 +54,27 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
 
     fun setItemDone(date : Int, boolean: Boolean){
         viewModelScope.launch {
-            val doneList = _currentItem.value?.done!!
+            val item = currentItem.value!!
+            val doneList = item.done
             doneList[date] = boolean
 
+            item.done = doneList
+
             repository.updateDone(currentItem.value?.id!!, doneList)
-            _currentItem.value?.done = doneList
+            _currentItem.value = item
+        }
+    }
+
+    fun setMonthTimesDone(date : Int) {
+        viewModelScope.launch {
+            val item = currentItem.value!!
+            val list = item.monthtimesdone
+            list.add(date)
+
+            item.monthtimesdone = list
+
+            repository.updateMonthTimesDone(currentItem.value?.id!!, list)
+            _currentItem.value = item
         }
     }
 }
