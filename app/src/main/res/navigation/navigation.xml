@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_daily_writing"
-        android:name="com.example.monthlywriting.daily.DailyWritingMainFragment"
+        android:name="com.example.monthlywriting.daily.main.DailyWritingMainFragment"
         android:label="fragment_daily_writing"
         tools:layout="@layout/fragment_daily_writing_main" >
         <action
@@ -26,7 +26,7 @@
 
     <fragment
         android:id="@+id/nav_daily_writing_add"
-        android:name="com.example.monthlywriting.daily.DailyWritingAdd"
+        android:name="com.example.monthlywriting.daily.main.DailyWritingAdd"
         android:label="fragment_daily_writing_add"
         tools:layout="@layout/fragment_daily_writing_add" >
         <action

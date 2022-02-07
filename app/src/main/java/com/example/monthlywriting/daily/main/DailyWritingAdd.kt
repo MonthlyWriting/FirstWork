@@ -1,4 +1,4 @@
-package com.example.monthlywriting.daily
+package com.example.monthlywriting.daily.main
 
 import android.graphics.Color
 import android.os.Bundle

@@ -1,10 +1,8 @@
-package com.example.monthlywriting.daily
+package com.example.monthlywriting.daily.main
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.ScrollView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -37,18 +35,18 @@ class DailyWritingMainFragment : Fragment() {
         return binding.root
     }
 
-    private fun getCurrentMonth() {
-        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        viewModel.getWritingList(currentMonth)
-
-        //추후 current month 를 app 차원에서 제공하는 방법 생각할 것
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setOnClicks()
         setObservers()
+    }
+
+    private fun getCurrentMonth() {
+        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
+        viewModel.getWritingList(currentMonth)
+
+        //추후 current month 를 app 차원에서 제공하는 방법 생각할 것
     }
 
     private fun scrollToTop() {

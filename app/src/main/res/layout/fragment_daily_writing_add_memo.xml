@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".daily.DailyWritingAdd"
+        tools:context=".daily.main.DailyWritingAdd"
         android:background="@drawable/daily_background"
         android:paddingTop="56dp"
         android:paddingHorizontal="30dp"
