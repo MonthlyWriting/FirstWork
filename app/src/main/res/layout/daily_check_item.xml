@@ -16,7 +16,8 @@
         android:scaleX="1.5"
         android:scaleY="1.5"
         android:minHeight="0dp"
-        android:minWidth="0dp" />
+        android:minWidth="0dp"
+        android:longClickable="true" />
 
     <TextView
         android:layout_width="wrap_content"

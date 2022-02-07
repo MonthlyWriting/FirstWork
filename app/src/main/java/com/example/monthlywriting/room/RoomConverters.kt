@@ -30,15 +30,12 @@ class RoomConverters {
     }
 
     @TypeConverter
-    fun bitmapToByteArray(bitmap: Bitmap) : ByteArray {
-        ByteArrayOutputStream().apply {
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, this)
-            return toByteArray()
-        }
+    fun monthTimesDoneListToJson(list: MutableList<Int>) : String? {
+        return Gson().toJson(list)
     }
 
     @TypeConverter
-    fun byteArrayToBitmap(byteArray: ByteArray) : Bitmap {
-        return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+    fun jsonToMonthTimesDoneList(json : String) : MutableList<Int> {
+        return Gson().fromJson(json, Array<Int>::class.java).toMutableList()
     }
 }

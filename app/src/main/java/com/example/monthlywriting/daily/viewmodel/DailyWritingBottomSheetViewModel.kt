@@ -25,17 +25,56 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
         }
     }
 
-    fun saveMemo(id: Int, memo : DailyMemo) {
+    fun saveNewMemo(id: Int, memo : DailyMemo) {
         viewModelScope.launch {
-            val item = _currentItem.value!!
+            val item = currentItem.value!!
             item.dailymemo.add(memo)
+            item.dailymemo.sortBy { it.date }
 
             repository.updateDailyMemo(id, item.dailymemo)
-            updateItem(item)
+            _currentItem.value = item
         }
     }
 
-    private fun updateItem(newItem : DailyWritingItem){
-        _currentItem.value = newItem
+    fun updateMemo(id: Int, memo : DailyMemo) {
+        viewModelScope.launch {
+            val item = currentItem.value!!
+            item.dailymemo.forEachIndexed { index, it ->
+                if (it.date == memo.date) {
+                    item.dailymemo.removeAt(index)
+                }
+            }
+            item.dailymemo.add(memo)
+            item.dailymemo.sortBy { it.date }
+
+            repository.updateDailyMemo(id, item.dailymemo)
+            _currentItem.value = item
+        }
+    }
+
+    fun setItemDone(date : Int, boolean: Boolean){
+        viewModelScope.launch {
+            val item = currentItem.value!!
+            val doneList = item.done
+            doneList[date] = boolean
+
+            item.done = doneList
+
+            repository.updateDone(currentItem.value?.id!!, doneList)
+            _currentItem.value = item
+        }
+    }
+
+    fun setMonthTimesDone(date : Int) {
+        viewModelScope.launch {
+            val item = currentItem.value!!
+            val list = item.monthtimesdone
+            list.add(date)
+
+            item.monthtimesdone = list
+
+            repository.updateMonthTimesDone(currentItem.value?.id!!, list)
+            _currentItem.value = item
+        }
     }
 }

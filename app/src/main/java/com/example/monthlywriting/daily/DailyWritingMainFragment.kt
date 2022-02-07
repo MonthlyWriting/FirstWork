@@ -38,27 +38,8 @@ class DailyWritingMainFragment : Fragment() {
     }
 
     private fun getCurrentMonth() {
-        val currentMonth = when(SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis()))){
-            "01" -> resources.getString(R.string.January)
-            "02" -> resources.getString(R.string.February)
-            "03" -> resources.getString(R.string.March)
-            "04" -> resources.getString(R.string.April)
-            "05" -> resources.getString(R.string.May)
-            "06" -> resources.getString(R.string.June)
-            "07" -> resources.getString(R.string.July)
-            "08" -> resources.getString(R.string.August)
-            "09" -> resources.getString(R.string.September)
-            "10" -> resources.getString(R.string.October)
-            "11" -> resources.getString(R.string.November)
-            "12" -> resources.getString(R.string.December)
-            else -> null
-        }
-
-        if (currentMonth == null){
-            Toast.makeText(requireContext(), "현재 날짜를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
-        } else {
-            viewModel.getWritingList(currentMonth)
-        }
+        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
+        viewModel.getWritingList(currentMonth)
 
         //추후 current month 를 app 차원에서 제공하는 방법 생각할 것
     }
@@ -127,8 +108,8 @@ class DailyWritingMainFragment : Fragment() {
 
                 val mutableList = it.toMutableList()
                 mutableList.add(0,(DailyWritingItem
-                    (-1, "title", "daily", resources.getString(R.string.daily), null, null,
-                    mutableListOf() ,mutableListOf())))
+                    (-1, 0, "daily", resources.getString(R.string.daily), null, null,
+                    mutableListOf() ,mutableListOf(), mutableListOf())))
 
                 val adapter = DailyWritingItemAdapter(mutableList, "daily")
                 binding.dailyWritingItemDaily.apply{
@@ -148,8 +129,8 @@ class DailyWritingMainFragment : Fragment() {
 
                 val mutableList = it.toMutableList()
                 mutableList.add(0,(DailyWritingItem
-                    (-1, "title", "weekly", resources.getString(R.string.weekly), null, null,
-                    mutableListOf(), mutableListOf())))
+                    (-1, 0, "weekly", resources.getString(R.string.weekly), null, null,
+                    mutableListOf(), mutableListOf(), mutableListOf())))
 
                 val adapter = DailyWritingItemAdapter(mutableList, "weekly")
                 binding.dailyWritingItemWeekly.apply{
@@ -169,8 +150,8 @@ class DailyWritingMainFragment : Fragment() {
 
                 val mutableList = it.toMutableList()
                 mutableList.add(0,(DailyWritingItem
-                    (-1, "title", "daily", resources.getString(R.string.monthly), null, null, mutableListOf(),
-                    mutableListOf())))
+                    (-1, 0, "daily", resources.getString(R.string.monthly), null, null,
+                    mutableListOf(), mutableListOf(), mutableListOf())))
 
                 val adapter = DailyWritingItemAdapter(mutableList, "monthly")
                 binding.dailyWritingItemMonthly.apply{

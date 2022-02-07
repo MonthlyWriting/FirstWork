@@ -1,7 +1,9 @@
 package com.example.monthlywriting.daily.bottomsheet
 
+import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.monthlywriting.R
 import com.example.monthlywriting.daily.viewmodel.DailyWritingBottomSheetViewModel
 import com.example.monthlywriting.databinding.FragmentDailyWritingBottomSheetBinding
-import com.example.monthlywriting.model.DailyCheckItem
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,41 +53,50 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
                 val action = DailyWritingBottomSheetDirections.openAddMemo(args.id)
                 NavHostFragment.findNavController(this@DailyWritingBottomSheet).navigate(action)
             }
+
+            bottomSheetMonthtimes.setOnLongClickListener {
+                chooseDate()
+                true
+            }
         }
     }
 
     private fun setObservers() {
         viewModel.currentItem.observe(viewLifecycleOwner){
 
+            Log.d("test", it.toString())
             binding.bottomSheetTitle.text = it.name
+            val doneList = it.done
+            val monthTimesDoneList = it.monthtimesdone
 
             when(it.type) {
                 "daily" -> {
                     displayBottomSheetByType("daily")
                     binding.bottomSheetCheckItem.apply {
-                        this.adapter = DailyCheckItemAdapter(dailyCheckList())
+                        this.adapter = DailyCheckItemAdapter(doneList ,requireContext()) { date, boolean -> setItemDone(date, boolean) }
                         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     }
                 }
                 "weekly" -> {
                     displayBottomSheetByType("weekly")
                     binding.bottomSheetCheckItem.apply {
-                        this.adapter = DailyCheckItemAdapter(dailyCheckList())
+                        this.adapter = DailyCheckItemAdapter(doneList,requireContext()) { date, boolean -> setItemDone(date, boolean) }
                         layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     }
-
-
                 }
                 "monthly" -> {
                     displayBottomSheetByType("monthly")
                     if (it.monthtimes == 0){
                         binding.bottomSheetMonthtimes.visibility = View.GONE
+                    } else {
+                        val doneNumbers = monthTimesDoneList.size
+                        binding.bottomSheetMonthtimes.text = getString(R.string.bottom_sheet_month_times, doneNumbers, it.monthtimes)
                     }
                 }
             }
 
             binding.bottomSheetDailyMemo.apply {
-                this.adapter = DailyMemoItemAdapter(it.dailymemo)
+                this.adapter = DailyMemoItemAdapter(it.dailymemo, this@DailyWritingBottomSheet)
                 layoutManager = LinearLayoutManager(requireContext())
             }
         }
@@ -109,31 +119,27 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+    private fun setItemDone(date: Int, boolean: Boolean) {
+        viewModel.setItemDone(date, boolean)
+    }
+
+    private fun chooseDate() {
+        val currentYear = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
+        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
+        val currentDay = SimpleDateFormat("dd", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
+
+        val datePickerDialog = DatePickerDialog(requireContext(), {
+                _, _, _, day ->
+            viewModel.setMonthTimesDone(day)
+        }, currentYear, currentMonth , currentDay)
+
+        datePickerDialog.show()
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = BottomSheetDialog (requireContext(), R.style.transparent_dialog)
         dialog.setCanceledOnTouchOutside(true)
         dialog.behavior.isDraggable = false
         return dialog
-    }
-
-    private fun dailyCheckList() : List<DailyCheckItem> {
-        val list = mutableListOf<DailyCheckItem>()
-        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-
-        for (i in 1..getCurrentEndDateOfMonth()){
-            list.add(DailyCheckItem("$currentMonth/$i", false))
-        }
-
-        return list
-    }
-
-    private fun getCurrentEndDateOfMonth() : Int {
-        val cal = Calendar.getInstance()
-        val currentYear = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        val currentDay = SimpleDateFormat("dd", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        cal.set( currentYear, currentMonth - 1, currentDay )
-
-        return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
     }
 }
