@@ -24,8 +24,8 @@
         <TextView
             android:id="@+id/daily_writing_text_daily"
             style="@style/daily_writing_text"
-            android:text="@string/what_is_your_daily"
-            android:visibility="gone"/>
+            android:text="@string/daily_writing_item_text_daily"
+            android:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/daily_writing_item_weekly"
@@ -34,7 +34,7 @@
         <TextView
             android:id="@+id/daily_writing_text_weekly"
             style="@style/daily_writing_text"
-            android:text="@string/what_is_your_weekly"
+            android:text="@string/daily_writing_item_text_weekly"
             android:visibility="gone"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -44,9 +44,8 @@
         <TextView
             android:id="@+id/daily_writing_text_monthly"
             style="@style/daily_writing_text"
-            android:text="@string/what_is_your_monthly"
+            android:text="@string/daily_writing_item_text_monthly"
             android:visibility="gone"/>
-
     </LinearLayout>
 </ScrollView>
 

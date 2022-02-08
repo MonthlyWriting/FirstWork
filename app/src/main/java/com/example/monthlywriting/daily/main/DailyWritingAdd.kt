@@ -16,51 +16,54 @@ import com.example.monthlywriting.R
 import com.example.monthlywriting.daily.viewmodel.DailyWritingAddViewModel
 import com.example.monthlywriting.databinding.FragmentDailyWritingAddBinding
 import com.example.monthlywriting.model.DailyWritingItem
+import com.example.monthlywriting.util.CurrentInfo
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class DailyWritingAdd : Fragment() {
 
-    private lateinit var binding : FragmentDailyWritingAddBinding
-    private val viewModel : DailyWritingAddViewModel by viewModels()
+    private lateinit var binding: FragmentDailyWritingAddBinding
+    private val viewModel: DailyWritingAddViewModel by viewModels()
 
-    private val args : DailyWritingAddArgs by navArgs()
+    private val args: DailyWritingAddArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_daily_writing_add, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_daily_writing_add, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this.viewLifecycleOwner
 
         (activity as MainActivity).setDailyWritingTitle()
+        disableRadioButtons()
         setDisplayByType()
+        setObserver()
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
         binding.dailyWritingSave.setOnClickListener {
             saveWriting(it)
         }
     }
 
-    private fun setDisplayByType() {
+    private fun disableRadioButtons() {
         listOf(
             binding.rbTypeDaily,
             binding.rbTypeWeekly,
-            binding.rbTypeMonthly)
-            .forEach {
-                it.isEnabled = false
-            }
+            binding.rbTypeMonthly
+        ).forEach {
+            it.isEnabled = false
+        }
+    }
 
+    private fun setDisplayByType() {
         binding.apply {
-            when(args.type){
+            dailyWritingSave.visibility = View.INVISIBLE
+            when (args.type) {
                 "daily" -> {
                     rbTypeDaily.isChecked = true
 
@@ -87,10 +90,10 @@ class DailyWritingAdd : Fragment() {
                     dailyWritingMonthNum.isEnabled = true
 
                     dailyWritingMonthNum.minValue = 1
-                    dailyWritingMonthNum.maxValue = getCurrentEndDateOfMonth()
+                    dailyWritingMonthNum.maxValue = CurrentInfo.getCurrentEndDateOfMonth()
 
                     rbMonthInfo.setOnCheckedChangeListener { _, id ->
-                        when(id){
+                        when (id) {
                             R.id.rb_month_times -> {
                                 dailyWritingMonthTimesText.setTextColor(Color.WHITE)
                                 dailyWritingMonthThroughoutText.setTextColor(Color.GRAY)
@@ -108,73 +111,67 @@ class DailyWritingAdd : Fragment() {
         }
     }
 
-    private fun saveWriting(view: View) {
-        if(viewModel.name.value != null && viewModel.name.value!!.isNotEmpty()){
-            val doneList = MutableList(getCurrentEndDateOfMonth()) { false }
-            when(args.type){
-                "daily" -> {
-                    val newItem = DailyWritingItem(
-                        id = 0,
-                        month = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt(),
-                        type = "daily",
-                        name = viewModel.name.value!!,
-                        weektimes = null,
-                        monthtimes = null,
-                        done = doneList,
-                        monthtimesdone = mutableListOf(),
-                        dailymemo = mutableListOf()
-                    )
-                    viewModel.insertNewItem(newItem)
-                }
-                "weekly" -> {
-                    val newItem = DailyWritingItem(
-                        id = 0,
-                        month = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt(),
-                        type = "weekly",
-                        name = viewModel.name.value!!,
-                        weektimes = viewModel.timesAWeek.value,
-                        monthtimes = null,
-                        done = doneList,
-                        monthtimesdone = mutableListOf(),
-                        dailymemo = mutableListOf()
-                    )
-                    viewModel.insertNewItem(newItem)
-                }
-                "monthly" -> {
-                    val monthTimes =
-                        if (binding.rbMonthTimes.isChecked) viewModel.timesAMonth.value
-                        else 0
-
-                    val newItem = DailyWritingItem(
-                        id = 0,
-                        month = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt(),
-                        type = "monthly",
-                        name = viewModel.name.value!!,
-                        weektimes = null,
-                        monthtimes = monthTimes,
-                        done = mutableListOf(),
-                        monthtimesdone = mutableListOf(),
-                        dailymemo = mutableListOf()
-                    )
-                    viewModel.insertNewItem(newItem)
-                }
+    private fun setObserver() {
+        viewModel.name.observe(viewLifecycleOwner) {
+            if (it != null && it.isNotEmpty()) {
+                binding.dailyWritingSave.visibility = View.VISIBLE
+            } else {
+                binding.dailyWritingSave.visibility = View.INVISIBLE
             }
-
-            Toast.makeText(this.context, "저장되었습니다.", Toast.LENGTH_SHORT).show()
-            view.findNavController().navigate(DailyWritingAddDirections.closeAdd())
-
-        } else{
-            Toast.makeText(this.context, "이름을 입력해 주세요.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun getCurrentEndDateOfMonth() : Int {
-        val cal = Calendar.getInstance()
-        val currentYear = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        val currentDay = SimpleDateFormat("dd", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        cal.set( currentYear, currentMonth - 1, currentDay )
+    private fun saveWriting(view: View) {
+        val doneList = MutableList(CurrentInfo.getCurrentEndDateOfMonth()) { false }
+        when (args.type) {
+            "daily" -> {
+                val newItem = DailyWritingItem(
+                    id = 0,
+                    month = CurrentInfo.currentMonth,
+                    type = "daily",
+                    name = viewModel.name.value!!,
+                    weektimes = null,
+                    monthtimes = null,
+                    done = doneList,
+                    monthtimesdone = mutableListOf(),
+                    dailymemo = mutableListOf()
+                )
+                viewModel.insertNewItem(newItem)
+            }
+            "weekly" -> {
+                val newItem = DailyWritingItem(
+                    id = 0,
+                    month = CurrentInfo.currentMonth,
+                    type = "weekly",
+                    name = viewModel.name.value!!,
+                    weektimes = viewModel.timesAWeek.value,
+                    monthtimes = null,
+                    done = doneList,
+                    monthtimesdone = mutableListOf(),
+                    dailymemo = mutableListOf()
+                )
+                viewModel.insertNewItem(newItem)
+            }
+            "monthly" -> {
+                val monthTimes =
+                    if (binding.rbMonthTimes.isChecked) viewModel.timesAMonth.value
+                    else 0
 
-        return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
+                val newItem = DailyWritingItem(
+                    id = 0,
+                    month = CurrentInfo.currentMonth,
+                    type = "monthly",
+                    name = viewModel.name.value!!,
+                    weektimes = null,
+                    monthtimes = monthTimes,
+                    done = mutableListOf(),
+                    monthtimesdone = mutableListOf(),
+                    dailymemo = mutableListOf()
+                )
+                viewModel.insertNewItem(newItem)
+            }
+        }
+        Toast.makeText(this.context, getString(R.string.toast_save_done), Toast.LENGTH_SHORT).show()
+        view.findNavController().navigate(DailyWritingAddDirections.closeAdd())
     }
 }
