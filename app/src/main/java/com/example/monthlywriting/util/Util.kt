@@ -12,6 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.monthlywriting.R
+import java.text.DateFormatSymbols
+import java.time.LocalDate
 
 @BindingAdapter("imgBitmap")
 fun loadImage(imageView: ImageView, bitmap: Bitmap?){
@@ -31,5 +33,18 @@ fun checkPermission(context: Context, execute : () -> Unit) {
                 10)
     } else {
         execute()
+    }
+}
+
+class CurrentInfo {
+    companion object{
+        val date : LocalDate = LocalDate.now()
+
+        val currentMonth : Int = date.monthValue
+        val currentDate : Int = date.dayOfMonth
+
+        val currentMonthName : String = date.month.toString()
+        val currentMonthShortName: String = DateFormatSymbols().shortMonths[currentMonth-1]
+
     }
 }
