@@ -16,7 +16,6 @@ import com.example.monthlywriting.databinding.FragmentDailyWritingMainBinding
 import com.example.monthlywriting.model.DailyWritingItem
 import com.example.monthlywriting.util.CurrentInfo
 import dagger.hilt.android.AndroidEntryPoint
-import java.util.*
 
 @AndroidEntryPoint
 class DailyWritingMainFragment : Fragment() {
@@ -111,7 +110,7 @@ class DailyWritingMainFragment : Fragment() {
                 val adapter = DailyWritingItemAdapter(mutableList, "daily")
                 binding.dailyWritingItemDaily.apply {
                     this.adapter = adapter
-                    layoutManager = LinearLayoutManager(this@DailyWritingMainFragment.context)
+                    layoutManager = LinearLayoutManager(requireContext())
                 }
             }
         }
@@ -130,7 +129,7 @@ class DailyWritingMainFragment : Fragment() {
                 val adapter = DailyWritingItemAdapter(mutableList, "weekly")
                 binding.dailyWritingItemWeekly.apply {
                     this.adapter = adapter
-                    layoutManager = LinearLayoutManager(this@DailyWritingMainFragment.context)
+                    layoutManager = LinearLayoutManager(requireContext())
                 }
             }
         }
@@ -149,7 +148,7 @@ class DailyWritingMainFragment : Fragment() {
                 val adapter = DailyWritingItemAdapter(mutableList, "monthly")
                 binding.dailyWritingItemMonthly.apply {
                     this.adapter = adapter
-                    layoutManager = LinearLayoutManager(this@DailyWritingMainFragment.context)
+                    layoutManager = LinearLayoutManager(requireContext())
                 }
             }
         }

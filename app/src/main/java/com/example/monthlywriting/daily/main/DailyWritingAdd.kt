@@ -172,6 +172,6 @@ class DailyWritingAdd : Fragment() {
             }
         }
         Toast.makeText(this.context, getString(R.string.toast_save_done), Toast.LENGTH_SHORT).show()
-        view.findNavController().navigate(DailyWritingAddDirections.closeAdd())
+        view.findNavController().navigateUp()
     }
 }
