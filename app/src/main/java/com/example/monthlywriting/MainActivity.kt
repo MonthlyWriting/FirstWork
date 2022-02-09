@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setDailyWritingTitle() {
-        binding.contentMain.toolbarTitle.text = CurrentInfo.currentMonthShortName
+        binding.contentMain.collapsingToolbar.title = CurrentInfo.currentMonthName
     }
 
     fun setMonthlyWritingTitle() {

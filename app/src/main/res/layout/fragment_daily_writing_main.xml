@@ -1,52 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".daily.main.DailyWritingMainFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/daily_background"
-    android:id="@+id/daily_fragment_scrollview">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/daily_writing_layout_padding"
-        android:paddingEnd="@dimen/daily_writing_layout_padding"
-        android:paddingBottom="@dimen/daily_writing_layout_padding"
-        android:paddingTop="@dimen/toolbar_size"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:id="@+id/daily_writing_item"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/daily_writing_item_daily"
-            style="@style/daily_writing_item"/>
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:paddingStart="@dimen/daily_writing_layout_padding"-->
+<!--        android:paddingEnd="@dimen/daily_writing_layout_padding"-->
+<!--        android:paddingBottom="@dimen/daily_writing_layout_padding"-->
+<!--        android:paddingTop="@dimen/toolbar_size"-->
+<!--        android:orientation="vertical">-->
 
-        <TextView
-            android:id="@+id/daily_writing_text_daily"
-            style="@style/daily_writing_text"
-            android:text="@string/daily_writing_item_text_daily"
-            android:visibility="gone" />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/daily_writing_item_daily"-->
+<!--            style="@style/daily_writing_item"/>-->
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/daily_writing_item_weekly"
-            style="@style/daily_writing_item" />
+<!--        <TextView-->
+<!--            android:id="@+id/daily_writing_text_daily"-->
+<!--            style="@style/daily_writing_text"-->
+<!--            android:text="@string/daily_writing_item_text_daily"-->
+<!--            android:visibility="gone" />-->
 
-        <TextView
-            android:id="@+id/daily_writing_text_weekly"
-            style="@style/daily_writing_text"
-            android:text="@string/daily_writing_item_text_weekly"
-            android:visibility="gone"/>
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/daily_writing_item_weekly"-->
+<!--            style="@style/daily_writing_item" />-->
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/daily_writing_item_monthly"
-            style="@style/daily_writing_item" />
+<!--        <TextView-->
+<!--            android:id="@+id/daily_writing_text_weekly"-->
+<!--            style="@style/daily_writing_text"-->
+<!--            android:text="@string/daily_writing_item_text_weekly"-->
+<!--            android:visibility="gone"/>-->
 
-        <TextView
-            android:id="@+id/daily_writing_text_monthly"
-            style="@style/daily_writing_text"
-            android:text="@string/daily_writing_item_text_monthly"
-            android:visibility="gone"/>
-    </LinearLayout>
-</ScrollView>
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/daily_writing_item_monthly"-->
+<!--            style="@style/daily_writing_item" />-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/daily_writing_text_monthly"-->
+<!--            style="@style/daily_writing_text"-->
+<!--            android:text="@string/daily_writing_item_text_monthly"-->
+<!--            android:visibility="gone"/>-->
+<!--    </LinearLayout>-->
+</LinearLayout>
 
 

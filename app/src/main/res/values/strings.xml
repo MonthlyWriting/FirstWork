@@ -35,7 +35,6 @@
     <string name="throughout_a_month">throughout a month</string>
 
 
-
     <string name="close_bottom_sheet">Close Bottom Sheet</string>
     <string name="add_daily_memo">Add Daily Memo</string>
 
@@ -55,10 +54,12 @@
     <string name="detail_memo_date">%1$d / %2$d</string>
 
     <string name="bottom_sheet_month_times">%1$d / %2$d</string>
-    
+
     <!--Toast Messages-->
     <string name="toast_save_done">Saved Successfully!</string>
     <string name="toast_no_name">Write Your Name For Plan.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>

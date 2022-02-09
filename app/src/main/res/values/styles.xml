@@ -55,10 +55,9 @@
     <style name="black_edittext">
         <item name="android:textColor">@color/black</item>
     </style>
-    
+
     <style name="BottomSheetAnimation">
         <item name="android:windowEnterAnimation">@anim/from_bottom</item>
         <item name="android:windowExitAnimation">@anim/to_bottom</item>
     </style>
-
 </resources>
