@@ -1,27 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="daily_writing_item">
-        <item name="android:layout_width">match_parent</item>
+    <style name="daily_writing_add_radio_button">
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">200dp</item>
-        <item name="android:layout_marginStart">30dp</item>
-        <item name="android:layout_marginEnd">30dp</item>
-        <item name="android:layout_marginTop">20dp</item>
-        <item name="android:background">@drawable/daily_writing_item_frame</item>
-    </style>
-
-    <style name="daily_writing_text">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">200dp</item>
-        <item name="android:layout_marginStart">30dp</item>
-        <item name="android:layout_marginEnd">30dp</item>
-        <item name="android:layout_marginTop">20dp</item>
-        <item name="android:background">@drawable/daily_writing_item_frame</item>
-        <item name="android:textSize">25sp</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textAlignment">center</item>
-        <item name="android:gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:buttonTint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="daily_writing_add">
@@ -51,4 +37,8 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="BottomSheetAnimation">
+        <item name="android:windowEnterAnimation">@anim/from_bottom</item>
+        <item name="android:windowExitAnimation">@anim/to_bottom</item>
+    </style>
 </resources>

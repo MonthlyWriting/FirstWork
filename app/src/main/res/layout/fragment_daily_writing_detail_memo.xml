@@ -22,7 +22,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/daily_writing_item_frame_without_padding"
+            android:background="@drawable/daily_writing_item_frame"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
                 app:layout_constraintHorizontal_bias="1"
                 android:layout_margin="32dp"
                 android:contentDescription="@string/description_save_writing"
-                android:src="@drawable/ic_baseline_done_32"
+                android:src="@drawable/save_button_white"
                 android:id="@+id/daily_detail_memo_save"
                 android:visibility="gone"/>
 

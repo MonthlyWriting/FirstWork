@@ -140,6 +140,7 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
         val dialog = BottomSheetDialog (requireContext(), R.style.transparent_dialog)
         dialog.setCanceledOnTouchOutside(true)
         dialog.behavior.isDraggable = false
+        dialog.window?.attributes?.windowAnimations = R.style.BottomSheetAnimation
         return dialog
     }
 }
