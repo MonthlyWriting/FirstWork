@@ -198,7 +198,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="32dp"
-                    android:layout_marginTop="100dp"
+                    android:layout_marginTop="70dp"
                     android:contentDescription="@string/description_save_writing"
                     android:src="@drawable/save_button_white"
                     android:id="@+id/daily_writing_save"

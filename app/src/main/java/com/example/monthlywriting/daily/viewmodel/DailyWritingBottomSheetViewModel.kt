@@ -65,7 +65,7 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
         }
     }
 
-    fun setMonthTimesDone(date : Int) {
+    fun addMonthTimesDone(date : Int) {
         viewModelScope.launch {
             val item = currentItem.value!!
             val list = item.monthtimesdone

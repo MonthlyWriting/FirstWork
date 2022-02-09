@@ -49,7 +49,7 @@ class DailyWritingAdd : Fragment() {
         }
 
         binding.rgType.setOnCheckedChangeListener { _, id ->
-            when(id) {
+            when (id) {
                 R.id.rb_type_daily -> {
                     setDisplayByType("daily")
                 }
@@ -63,9 +63,38 @@ class DailyWritingAdd : Fragment() {
         }
     }
 
-    private fun setDisplayByType(type : String) {
+    private fun setupRadioButton() {
         binding.apply {
-            when(type) {
+            when (args.type) {
+                "daily" -> {
+                    rbTypeDaily.isChecked = true
+                    setDisplayByType("daily")
+                }
+                "weekly" -> {
+                    rbTypeWeekly.isChecked = true
+                    setDisplayByType("weekly")
+                }
+                "monthly" -> {
+                    rbTypeMonthly.isChecked = true
+                    setDisplayByType("monthly")
+                }
+            }
+        }
+    }
+
+    private fun setObserver() {
+        viewModel.name.observe(viewLifecycleOwner) {
+            if (it != null && it.isNotEmpty()) {
+                binding.dailyWritingSave.visibility = View.VISIBLE
+            } else {
+                binding.dailyWritingSave.visibility = View.INVISIBLE
+            }
+        }
+    }
+
+    private fun setDisplayByType(type: String) {
+        binding.apply {
+            when (type) {
                 "daily" -> {
                     addWeeklyInfo.visibility = View.GONE
                     addMonthlyInfo.visibility = View.GONE
@@ -103,35 +132,6 @@ class DailyWritingAdd : Fragment() {
                         }
                     }
                 }
-            }
-        }
-    }
-
-    private fun setupRadioButton() {
-        binding.apply {
-            when (args.type) {
-                "daily" -> {
-                    rbTypeDaily.isChecked = true
-                    setDisplayByType("daily")
-                }
-                "weekly" -> {
-                    rbTypeWeekly.isChecked = true
-                    setDisplayByType("weekly")
-                }
-                "monthly" -> {
-                    rbTypeMonthly.isChecked = true
-                    setDisplayByType("monthly")
-                }
-            }
-        }
-    }
-
-    private fun setObserver() {
-        viewModel.name.observe(viewLifecycleOwner) {
-            if (it != null && it.isNotEmpty()) {
-                binding.dailyWritingSave.visibility = View.VISIBLE
-            } else {
-                binding.dailyWritingSave.visibility = View.INVISIBLE
             }
         }
     }

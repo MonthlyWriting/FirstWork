@@ -4,8 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".daily.bottomsheet.DailyWritingBottomSheet"
-    android:background="@android:color/transparent">
+    tools:context=".daily.bottomsheet.DailyWritingBottomSheet">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,10 +23,10 @@
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:background="@drawable/black_underline"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="@dimen/daily_writing_bottom_sheet_title"
+                android:textSize="24sp"
+                android:background="@drawable/black_underline"
                 android:id="@+id/bottom_sheet_title"/>
 
             <ImageButton
@@ -38,7 +37,7 @@
                 android:layout_centerVertical="true"
                 android:background="@null"
                 android:contentDescription="@string/close_bottom_sheet"
-                android:src="@drawable/ic_baseline_expand_more_32" />
+                android:src="@drawable/expand_bottom_button_black" />
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -56,7 +55,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_playlist_add_24"
+            android:src="@drawable/add_note_button_black"
             android:contentDescription="@string/add_daily_memo"
             android:layout_marginHorizontal="20dp"
             android:layout_gravity="end"

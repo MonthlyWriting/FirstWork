@@ -3,15 +3,13 @@ package com.example.monthlywriting.daily.bottomsheet
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.monthlywriting.databinding.DailyMemoItemBinding
 import com.example.monthlywriting.model.DailyMemo
 
 class DailyMemoItemAdapter(
     private val list : MutableList<DailyMemo>,
-    private val fragment : DialogFragment
+    private val openDetailMemo : (Int) -> Unit
 ) : RecyclerView.Adapter<DailyMemoItemAdapter.DailyMemoItemViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyMemoItemViewHolder =
@@ -22,8 +20,7 @@ class DailyMemoItemAdapter(
         holder.setData()
 
         holder.itemView.setOnClickListener {
-            val action = DailyWritingBottomSheetDirections.openDetailMemo(holder.getDate())
-            NavHostFragment.findNavController(fragment).navigate(action)
+            openDetailMemo(holder.date)
         }
     }
 
@@ -35,6 +32,7 @@ class DailyMemoItemAdapter(
 
     inner class DailyMemoItemViewHolder (private val binding : DailyMemoItemBinding)
         : RecyclerView.ViewHolder(binding.root) {
+        val date = list[adapterPosition].date
 
         fun setData(){
             list[adapterPosition].apply {
@@ -47,7 +45,5 @@ class DailyMemoItemAdapter(
                 }
             }
         }
-
-        fun getDate() : Int = list[adapterPosition].date
     }
 }

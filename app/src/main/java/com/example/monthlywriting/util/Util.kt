@@ -13,7 +13,6 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.example.monthlywriting.R
 import java.text.DateFormatSymbols
-import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.util.*
 
@@ -21,8 +20,8 @@ import java.util.*
 fun loadImage(imageView: ImageView, bitmap: Bitmap?){
     Glide.with(imageView.context)
         .load(bitmap)
-        .error(R.drawable.ic_baseline_photo_library_24)
-        .placeholder(R.drawable.ic_baseline_photo_library_24)
+        .error(R.drawable.photo_black)
+        .placeholder(R.drawable.photo_black)
         .into(imageView)
 }
 

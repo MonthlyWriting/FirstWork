@@ -16,7 +16,7 @@
             android:layout_gravity="center"
             android:contentDescription="@string/description_add_memo_bullet"
             android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_baseline_subject_24"/>
+            android:src="@drawable/note_black"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -27,7 +27,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_baseline_photo_library_24"
+            android:src="@drawable/photo_black"
             android:contentDescription="@string/description_add_memo_is_photo"
             android:layout_marginHorizontal="5dp"
             android:id="@+id/daily_memo_is_photo"/>
