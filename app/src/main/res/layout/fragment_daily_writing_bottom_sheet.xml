@@ -36,9 +36,9 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
+                android:background="@null"
                 android:contentDescription="@string/close_bottom_sheet"
-                android:src="@drawable/ic_baseline_expand_more_32"
-                android:background="@null"/>
+                android:src="@drawable/ic_baseline_expand_more_32" />
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView
