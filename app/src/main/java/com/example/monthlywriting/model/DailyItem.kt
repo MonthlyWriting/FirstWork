@@ -16,20 +16,7 @@ data class DailyWritingItem(
     @ColumnInfo(name = "monthtimesdone") var monthtimesdone: MutableList<Int>,
     @ColumnInfo(name = "done") var done: MutableList<Boolean>,
     @ColumnInfo(name = "dailymemo") var dailymemo: MutableList<DailyMemo>
-) {
-    constructor(month: Int, type: String, name: String)
-            : this(
-        0,
-        month,
-        type,
-        name,
-        null,
-        null,
-        mutableListOf(),
-        mutableListOf(),
-        mutableListOf()
-    )
-}
+)
 
 data class DailyMemo(
     var date: Int,

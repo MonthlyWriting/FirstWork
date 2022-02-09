@@ -6,14 +6,27 @@
     <string name="daily_writing">일말결산</string>
     <string name="monthly_writing">월말결산</string>
 
+    <string-array name="type">
+        <item>daily</item>
+        <item>weekly</item>
+        <item>monthly</item>
+    </string-array>
+
+    <string-array name="type_cap">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
+    
     <string name="daily">Daily</string>
     <string name="weekly">Weekly</string>
     <string name="monthly">Monthly</string>
 
-    <!--ImageView Description-->
+    <!--Description-->
     <string name="description_save_writing">Save Writing</string>
     <string name="description_edit_writing">Edit Writing</string>
     <string name="description_cancel_writing">Cancel Writing</string>
+    <string name="description_fab_add">Floating Action Button : Open Add Page</string>
 
     <!--EditText Hint-->
     <string name="hint_name">name</string>
@@ -21,10 +34,6 @@
     <string name="num_hint">0</string>
 
     <!--Daily Writing Main-->
-    <string name="daily_writing_item_text_daily">What is Your Daily?</string>
-    <string name="daily_writing_item_text_weekly">What is Your Weekly?</string>
-    <string name="daily_writing_item_text_monthly">What is Your Monthly?</string>
-
     <string name="name_for_your_writing">Name For Your Writing</string>
     <string name="how_many_times_per_week">How Many Times Per Week?</string>
     <string name="how_many_times_in_a_month">How Many Times In A Month?</string>

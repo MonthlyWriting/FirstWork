@@ -2,12 +2,14 @@ package com.example.monthlywriting
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.monthlywriting.daily.main.DailyWritingMainFragmentDirections
 import com.example.monthlywriting.databinding.ActivityMainBinding
 import com.example.monthlywriting.util.CurrentInfo
 import dagger.hilt.android.AndroidEntryPoint
@@ -44,10 +46,6 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.fragment_container_view)
         return navController.navigateUp(appBarConfiguration) || super.onNavigateUp()
-    }
-
-    fun setDailyWritingTitle() {
-        binding.contentMain.collapsingToolbar.title = CurrentInfo.currentMonthName
     }
 
     fun setMonthlyWritingTitle() {

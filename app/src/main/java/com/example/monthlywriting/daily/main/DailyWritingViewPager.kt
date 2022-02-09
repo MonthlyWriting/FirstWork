@@ -7,9 +7,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 class DailyWritingViewPager(fragment : FragmentActivity) :FragmentStateAdapter(fragment) {
 
     private val fragments = mutableListOf(
-        DailyWritingItem("daily"),
-        DailyWritingItem("weekly"),
-        DailyWritingItem("monthly")
+        DailyWritingItemFragment("daily"),
+        DailyWritingItemFragment("weekly"),
+        DailyWritingItemFragment("monthly")
     )
 
     override fun getItemCount(): Int = fragments.size

@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.monthlywriting.MainActivity
 import com.example.monthlywriting.R
 import com.example.monthlywriting.daily.viewmodel.DailyWritingAddViewModel
 import com.example.monthlywriting.databinding.FragmentDailyWritingAddBinding
@@ -36,9 +35,9 @@ class DailyWritingAdd : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this.viewLifecycleOwner
 
-        (activity as MainActivity).setDailyWritingTitle()
-        disableRadioButtons()
-        setDisplayByType()
+        binding.dailyWritingSave.visibility = View.INVISIBLE
+
+        setupRadioButton()
         setObserver()
 
         return binding.root
@@ -48,31 +47,30 @@ class DailyWritingAdd : Fragment() {
         binding.dailyWritingSave.setOnClickListener {
             saveWriting(it)
         }
-    }
 
-    private fun disableRadioButtons() {
-        listOf(
-            binding.rbTypeDaily,
-            binding.rbTypeWeekly,
-            binding.rbTypeMonthly
-        ).forEach {
-            it.isEnabled = false
+        binding.rgType.setOnCheckedChangeListener { _, id ->
+            when(id) {
+                R.id.rb_type_daily -> {
+                    setDisplayByType("daily")
+                }
+                R.id.rb_type_weekly -> {
+                    setDisplayByType("weekly")
+                }
+                R.id.rb_type_monthly -> {
+                    setDisplayByType("monthly")
+                }
+            }
         }
     }
 
-    private fun setDisplayByType() {
+    private fun setDisplayByType(type : String) {
         binding.apply {
-            dailyWritingSave.visibility = View.INVISIBLE
-            when (args.type) {
+            when(type) {
                 "daily" -> {
-                    rbTypeDaily.isChecked = true
-
                     addWeeklyInfo.visibility = View.GONE
                     addMonthlyInfo.visibility = View.GONE
                 }
                 "weekly" -> {
-                    rbTypeWeekly.isChecked = true
-
                     addWeeklyInfo.visibility = View.VISIBLE
                     addMonthlyInfo.visibility = View.GONE
 
@@ -80,8 +78,6 @@ class DailyWritingAdd : Fragment() {
                     dailyWritingWeekNum.maxValue = 6
                 }
                 "monthly" -> {
-                    rbTypeMonthly.isChecked = true
-
                     addWeeklyInfo.visibility = View.GONE
                     addMonthlyInfo.visibility = View.VISIBLE
 
@@ -111,6 +107,25 @@ class DailyWritingAdd : Fragment() {
         }
     }
 
+    private fun setupRadioButton() {
+        binding.apply {
+            when (args.type) {
+                "daily" -> {
+                    rbTypeDaily.isChecked = true
+                    setDisplayByType("daily")
+                }
+                "weekly" -> {
+                    rbTypeWeekly.isChecked = true
+                    setDisplayByType("weekly")
+                }
+                "monthly" -> {
+                    rbTypeMonthly.isChecked = true
+                    setDisplayByType("monthly")
+                }
+            }
+        }
+    }
+
     private fun setObserver() {
         viewModel.name.observe(viewLifecycleOwner) {
             if (it != null && it.isNotEmpty()) {
@@ -123,8 +138,8 @@ class DailyWritingAdd : Fragment() {
 
     private fun saveWriting(view: View) {
         val doneList = MutableList(CurrentInfo.getCurrentEndDateOfMonth()) { false }
-        when (args.type) {
-            "daily" -> {
+        when (true) {
+            binding.rbTypeDaily.isChecked -> {
                 val newItem = DailyWritingItem(
                     id = 0,
                     month = CurrentInfo.currentMonth,
@@ -138,7 +153,7 @@ class DailyWritingAdd : Fragment() {
                 )
                 viewModel.insertNewItem(newItem)
             }
-            "weekly" -> {
+            binding.rbTypeWeekly.isChecked -> {
                 val newItem = DailyWritingItem(
                     id = 0,
                     month = CurrentInfo.currentMonth,
@@ -152,7 +167,7 @@ class DailyWritingAdd : Fragment() {
                 )
                 viewModel.insertNewItem(newItem)
             }
-            "monthly" -> {
+            binding.rbTypeMonthly.isChecked -> {
                 val monthTimes =
                     if (binding.rbMonthTimes.isChecked) viewModel.timesAMonth.value
                     else 0

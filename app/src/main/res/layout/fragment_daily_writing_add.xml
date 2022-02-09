@@ -14,8 +14,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".daily.main.DailyWritingAdd"
-        android:background="@drawable/daily_background"
-        android:paddingTop="@dimen/toolbar_size"
         android:paddingHorizontal="30dp"
         android:paddingBottom="50dp">
 
@@ -36,7 +34,8 @@
                 <RadioGroup
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:id="@+id/rg_type">
 
                     <RadioButton
                         style="@style/daily_writing_add_radio_button"
