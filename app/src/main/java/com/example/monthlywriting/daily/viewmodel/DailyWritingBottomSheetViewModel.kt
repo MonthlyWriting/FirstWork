@@ -77,4 +77,19 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
             _currentItem.value = item
         }
     }
+
+    fun deleteMemo(date: Int){
+        viewModelScope.launch {
+            val item = currentItem.value!!
+            val newDailyMemo = item.dailymemo.filter {
+                it.date != date
+            }.toMutableList()
+            newDailyMemo.sortBy { it.date }
+            item.dailymemo.clear()
+            item.dailymemo = newDailyMemo
+
+            repository.updateDailyMemo(currentItem.value?.id!!, item.dailymemo)
+            _currentItem.value = item
+        }
+    }
 }

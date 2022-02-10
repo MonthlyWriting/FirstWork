@@ -28,6 +28,16 @@
     <string name="description_cancel_writing">Cancel Writing</string>
     <string name="description_fab_add">Floating Action Button : Open Add Page</string>
 
+    <string name="description_close_bottom_sheet">Close Bottom Sheet</string>
+    <string name="description_add_daily_memo">Add Daily Memo</string>
+
+    <string name="description_add_memo_date">Set Date For Your Writing :</string>
+    <string name="description_add_memo_photo">Daily Memo Photo</string>
+    <string name="description_memo_bullet">Daily Memo Item Bullet</string>
+    <string name="description_memo_is_photo">Daily Memo IsPhoto</string>
+    <string name="description_memo_delete">Daily Memo Delete</string>
+
+
     <!--EditText Hint-->
     <string name="hint_name">name</string>
     <string name="hint_content">Write your content here.</string>
@@ -44,23 +54,18 @@
     <string name="throughout_a_month">throughout a month</string>
 
 
-    <string name="close_bottom_sheet">Close Bottom Sheet</string>
-    <string name="add_daily_memo">Add Daily Memo</string>
-
     <string name="title_content">Content</string>
     <string name="title_photo">Photo</string>
 
     <string name="title_add_memo">Add Your Daily Writing</string>
-    <string name="description_add_memo_date">Set Date For Your Writing :</string>
-    <string name="description_add_memo_photo">Daily Memo Photo</string>
-    <string name="description_add_memo_bullet">Daily Memo Item Bullet</string>
-    <string name="description_add_memo_is_photo">Daily Memo IsPhoto</string>
+
 
     <string name="title_detail_memo">Your Daily Writing</string>
     <string name="description_detail_memo_date">Date For Your Writing :</string>
     <string name="description_detail_memo_photo">Detail Memo Photo</string>
 
     <string name="detail_memo_date">%1$d / %2$d</string>
+    <string name="date">%1$d/%2$d</string>
 
     <string name="bottom_sheet_month_times">%1$d / %2$d</string>
 

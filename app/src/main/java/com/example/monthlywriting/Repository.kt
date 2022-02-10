@@ -12,7 +12,7 @@ class Repository(private val dailyWritingItemDao: DailyWritingItemDao) {
         return@withContext dailyWritingItemDao.selectAll()
     }
 
-    suspend fun getDailyList(month: Int, type : String) : List<DailyWritingItem> = withContext(Dispatchers.IO) {
+    suspend fun getDailyList(month: Int, type: String) : List<DailyWritingItem> = withContext(Dispatchers.IO) {
         return@withContext dailyWritingItemDao.selectDailyList(month, type)
     }
 
@@ -20,11 +20,11 @@ class Repository(private val dailyWritingItemDao: DailyWritingItemDao) {
         return@withContext dailyWritingItemDao.selectSingleItem(id)
     }
 
-    suspend fun updateDailyMemo(id: Int, memo : MutableList<DailyMemo>) = withContext(Dispatchers.IO) {
+    suspend fun updateDailyMemo(id: Int, memo: MutableList<DailyMemo>) = withContext(Dispatchers.IO) {
         return@withContext dailyWritingItemDao.updateDailyMemo(id, memo)
     }
 
-    suspend fun updateDone(id: Int, doneList : MutableList<Boolean>) = withContext(Dispatchers.IO) {
+    suspend fun updateDone(id: Int, doneList: MutableList<Boolean>) = withContext(Dispatchers.IO) {
         return@withContext dailyWritingItemDao.updateDone(id, doneList)
     }
 
@@ -36,4 +36,7 @@ class Repository(private val dailyWritingItemDao: DailyWritingItemDao) {
         dailyWritingItemDao.insert(newItem)
     }
 
+    suspend fun delete(id: Int) = withContext(Dispatchers.IO) {
+        return@withContext dailyWritingItemDao.delete(id)
+    }
 }

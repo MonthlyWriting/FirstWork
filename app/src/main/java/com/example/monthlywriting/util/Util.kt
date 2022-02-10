@@ -51,11 +51,8 @@ class CurrentInfo {
 
         fun getCurrentEndDateOfMonth() : Int {
             val cal = Calendar.getInstance()
-            cal.set(Companion.currentYear, Companion.currentMonth - 1, currentDate)
+            cal.set(currentYear, currentMonth - 1, currentDate)
             return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
         }
-
     }
-
-
 }

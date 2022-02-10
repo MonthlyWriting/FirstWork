@@ -108,7 +108,12 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
             }
 
             binding.bottomSheetDailyMemo.apply {
-                this.adapter = DailyMemoItemAdapter(it.dailymemo) { date -> openDetailMemo(date) }
+                this.adapter = DailyMemoItemAdapter(
+                    it.dailymemo,
+                    {date -> openDetailMemo(date)},
+                    {date -> deleteMemo(date)}
+                    )
+
                 layoutManager = LinearLayoutManager(requireContext())
             }
         }
@@ -146,6 +151,10 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
     private fun openDetailMemo(date: Int) {
         val action = DailyWritingBottomSheetDirections.openDetailMemo(date)
         NavHostFragment.findNavController(this@DailyWritingBottomSheet).navigate(action)
+    }
+
+    private fun deleteMemo(date: Int) {
+        viewModel.deleteMemo(date)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

@@ -31,4 +31,10 @@ class DailyWritingItemViewModel @Inject constructor(
             _monthlyList.value = repository.getDailyList(month, "monthly")
         }
     }
+
+    fun deleteItem(id: Int) {
+        viewModelScope.launch {
+            repository.delete(id)
+        }
+    }
 }

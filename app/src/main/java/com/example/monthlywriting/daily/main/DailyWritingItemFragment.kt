@@ -1,5 +1,6 @@
 package com.example.monthlywriting.daily.main
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -46,7 +47,7 @@ class DailyWritingItemFragment(private val type: String) : Fragment() {
             "daily" -> {
                 binding.dailyWritingType.text = resources.getString(R.string.daily)
                 viewModel.dailyList.observe(viewLifecycleOwner) {
-                    val adapter = DailyWritingItemAdapter(it)
+                    val adapter = DailyWritingItemAdapter(it) {Int -> deleteItem(Int)}
                     binding.dailyWritingItem.apply {
                         this.adapter = adapter
                         layoutManager = LinearLayoutManager(requireContext())
@@ -56,7 +57,7 @@ class DailyWritingItemFragment(private val type: String) : Fragment() {
             "weekly" -> {
                 binding.dailyWritingType.text = getString(R.string.weekly)
                 viewModel.weeklyList.observe(viewLifecycleOwner) {
-                    val adapter = DailyWritingItemAdapter(it)
+                    val adapter = DailyWritingItemAdapter(it) {Int -> deleteItem(Int)}
                     binding.dailyWritingItem.apply {
                         this.adapter = adapter
                         layoutManager = LinearLayoutManager(requireContext())
@@ -66,7 +67,7 @@ class DailyWritingItemFragment(private val type: String) : Fragment() {
             "monthly" -> {
                 binding.dailyWritingType.text = getString(R.string.monthly)
                 viewModel.monthlyList.observe(viewLifecycleOwner) {
-                    val adapter = DailyWritingItemAdapter(it)
+                    val adapter = DailyWritingItemAdapter(it) {Int -> deleteItem(Int)}
                     binding.dailyWritingItem.apply {
                         this.adapter = adapter
                         layoutManager = LinearLayoutManager(requireContext())
@@ -74,5 +75,10 @@ class DailyWritingItemFragment(private val type: String) : Fragment() {
                 }
             }
         }
+    }
+
+    private fun deleteItem(id: Int) {
+        viewModel.deleteItem(id)
+        getWritingList()
     }
 }

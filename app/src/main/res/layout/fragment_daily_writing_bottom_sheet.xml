@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
     tools:context=".daily.bottomsheet.DailyWritingBottomSheet">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bottom_sheet_frame"
         android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bottom_sheet_frame"
         android:orientation="vertical">
 
         <RelativeLayout
@@ -20,14 +20,13 @@
             android:layout_marginVertical="10dp">
 
             <TextView
+                android:id="@+id/bottom_sheet_title"
                 android:layout_width="250dp"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:textSize="24sp"
-                android:background="@drawable/black_underline"
-                android:id="@+id/bottom_sheet_title"/>
+                android:textSize="24sp" />
 
             <ImageButton
                 android:id="@+id/bottom_sheet_close_button"
@@ -36,7 +35,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:background="@null"
-                android:contentDescription="@string/close_bottom_sheet"
+                android:contentDescription="@string/description_close_bottom_sheet"
                 android:src="@drawable/expand_bottom_button_black" />
         </RelativeLayout>
 
@@ -46,27 +45,26 @@
             android:layout_height="wrap_content" />
 
         <TextView
+            android:id="@+id/bottom_sheet_monthtimes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/daily_check_memo_monthtimes"
             android:layout_gravity="center"
-            android:id="@+id/bottom_sheet_monthtimes"/>
+            android:textSize="36sp" />
 
         <ImageView
+            android:id="@+id/add_daily_memo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/add_note_button_black"
-            android:contentDescription="@string/add_daily_memo"
-            android:layout_marginHorizontal="20dp"
             android:layout_gravity="end"
-            android:id="@+id/add_daily_memo"/>
+            android:layout_marginHorizontal="20dp"
+            android:contentDescription="@string/description_add_daily_memo"
+            android:src="@drawable/add_note_button_black" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bottom_sheet_daily_memo"
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:layout_marginVertical="10dp"
             android:layout_marginHorizontal="20dp"
-            android:background="@drawable/black_left_line"/>
+            android:layout_marginVertical="10dp" />
     </LinearLayout>
 </FrameLayout>
