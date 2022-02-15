@@ -17,7 +17,8 @@
         android:scaleY="1.5"
         android:minHeight="0dp"
         android:minWidth="0dp"
-        android:longClickable="true" />
+        android:longClickable="true"
+        android:buttonTint="@color/black"/>
 
     <TextView
         android:layout_width="wrap_content"

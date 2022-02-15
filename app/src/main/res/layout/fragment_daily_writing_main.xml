@@ -16,10 +16,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:textSize="60sp"
+            android:textSize="70sp"
             android:gravity="center_vertical|start"
             android:textColor="@color/transparent_white"
-            android:id="@+id/daily_writing_title"/>
+            android:fontFamily="@font/emberly_regular"
+            android:id="@+id/daily_writing_title" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:layout_width="match_parent"
