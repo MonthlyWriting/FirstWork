@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/nav_monthly_writing"
-        android:name="com.example.monthlywriting.monthly.MonthlyWritingFragment"
+        android:name="com.example.monthlywriting.monthly.MonthlyWritingMainFragment"
         android:label="fragment_monthly_writing"
         tools:layout="@layout/fragment_monthly_writing" />
 

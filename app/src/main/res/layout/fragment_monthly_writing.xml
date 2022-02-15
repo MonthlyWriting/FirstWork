@@ -3,13 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".monthly.MonthlyWritingFragment"
-    android:background="#A1FFFF">
+    tools:context=".monthly.MonthlyWritingMainFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.viewpager2.widget.ViewPager2
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/monthly_writing" />
-
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:id="@+id/monthly_card"
+        android:padding="20dp"
+        android:layout_margin="20dp"/>
 </FrameLayout>
