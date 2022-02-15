@@ -22,7 +22,11 @@
         android:id="@+id/nav_monthly_writing"
         android:name="com.example.monthlywriting.monthly.MonthlyWritingMainFragment"
         android:label="fragment_monthly_writing"
-        tools:layout="@layout/fragment_monthly_writing" />
+        tools:layout="@layout/fragment_monthly_writing" >
+        <action
+            android:id="@+id/open_card"
+            app:destination="@id/monthlyCardDetail" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_daily_writing_add"
@@ -79,5 +83,16 @@
             app:argType="integer"
             android:defaultValue="0" />
     </dialog>
+
+    <fragment
+        android:id="@+id/monthlyCardDetail"
+        android:name="com.example.monthlywriting.monthly.MonthlyCardDetail"
+        android:label="fragment_monthly_card_detail"
+        tools:layout="@layout/fragment_monthly_card_detail">
+        <argument
+            android:name="month"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
 
 </navigation>

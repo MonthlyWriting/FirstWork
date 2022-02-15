@@ -50,6 +50,8 @@ class CurrentInfo {
         val currentMonthName: String = date.month.toString()
         val currentMonthShortName: String = DateFormatSymbols().shortMonths[currentMonth - 1]
 
+        val monthShortNames: Array<String> = DateFormatSymbols().shortMonths
+
         fun getCurrentEndDateOfMonth(): Int {
             val cal = Calendar.getInstance()
             cal.set(currentYear, currentMonth - 1, currentDate)

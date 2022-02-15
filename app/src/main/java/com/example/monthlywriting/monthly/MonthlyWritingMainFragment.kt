@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.monthlywriting.R
@@ -42,20 +44,27 @@ class MonthlyWritingMainFragment : Fragment() {
             R.drawable.photo_dec,
         )
 
-        val adapter = MonthlyCardAdapter(backgroundList)
-        binding.monthlyCard.adapter = adapter
-        binding.monthlyCard.offscreenPageLimit = 3
-        binding.monthlyCard.getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
-
-        val transform = CompositePageTransformer()
-        transform.addTransformer(MarginPageTransformer(8))
-
-        transform.addTransformer { view: View, fl: Float ->
-            val v = 1 - abs(fl)
-            view.scaleY = 0.8f + v * 0.2f
+        val transform = CompositePageTransformer().apply {
+            addTransformer(MarginPageTransformer(8))
+            addTransformer { view: View, fl: Float ->
+                val v = 1 - abs(fl)
+                view.scaleY = 0.8f + v * 0.2f
+            }
         }
 
-        binding.monthlyCard.setPageTransformer(transform)
+        binding.monthlyCard.apply {
+            val adapter = MonthlyCardAdapter(backgroundList) { month, view -> openCard(month, view) }
+            this.adapter = adapter
+            offscreenPageLimit = 3
+            getChildAt(0).overScrollMode = View.OVER_SCROLL_NEVER
+            setPageTransformer(transform)
+        }
     }
 
+    private fun openCard(month: Int, view: View) {
+        val extras = FragmentNavigatorExtras(view to getString(R.string.transition_open_card))
+        val action = MonthlyWritingMainFragmentDirections.openCard(month)
+
+        NavHostFragment.findNavController(this@MonthlyWritingMainFragment).navigate(action, extras)
+    }
 }
