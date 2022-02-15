@@ -19,10 +19,9 @@ class DailyWritingAddViewModel @Inject constructor(
     var timesAWeek = MutableLiveData(1)
     var timesAMonth = MutableLiveData(1)
 
-    fun insertNewItem(dailyWritingItem: DailyWritingItem){
+    fun insertNewItem(dailyWritingItem: DailyWritingItem) {
         viewModelScope.launch {
             repository.insert(dailyWritingItem)
         }
     }
-
 }

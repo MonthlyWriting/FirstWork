@@ -16,7 +16,7 @@ interface DailyWritingItemDao {
     fun selectSingleItem(id: Int): DailyWritingItem
 
     @Query("UPDATE daily SET dailymemo = :memo WHERE id = :id")
-    fun updateDailyMemo(id: Int, memo : MutableList<DailyMemo>)
+    fun updateDailyMemo(id: Int, memo: MutableList<DailyMemo>)
 
     @Query("UPDATE daily SET done = :doneList WHERE id = :id")
     fun updateDone(id: Int, doneList: MutableList<Boolean>)
@@ -29,5 +29,4 @@ interface DailyWritingItemDao {
 
     @Query("DELETE FROM daily WHERE id = :id")
     fun delete(id: Int)
-
 }

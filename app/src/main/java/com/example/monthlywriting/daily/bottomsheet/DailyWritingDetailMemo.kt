@@ -22,12 +22,13 @@ import android.graphics.BitmapFactory
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.monthlywriting.model.DailyMemo
+import com.example.monthlywriting.util.CurrentInfo.Companion.currentMonth
 import com.example.monthlywriting.util.checkPermission
+import com.example.monthlywriting.util.resizeBitmap
+import com.example.monthlywriting.util.toast
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
@@ -67,6 +68,10 @@ class DailyWritingDetailMemo : DialogFragment() {
         return binding.root
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        return Dialog(requireContext(), R.style.fullscreen_dialog)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
@@ -77,13 +82,14 @@ class DailyWritingDetailMemo : DialogFragment() {
 
             dailyDetailMemoEdit.setOnClickListener {
                 setupDisplay("edit")
-                Toast.makeText(requireContext(), "클릭해서 수정하세요.", Toast.LENGTH_SHORT).show()
+                getString(R.string.daily_memo_detail_edit).toast(requireContext())
             }
 
             dailyDetailMemoSave.setOnClickListener {
                 val builder = AlertDialog.Builder(requireContext())
-                builder.setMessage("저장하시겠습니까?")
-                    .setPositiveButton("저장"
+                builder.setMessage(getString(R.string.alert_save))
+                    .setPositiveButton(
+                        getString(R.string.save)
                     ) { _, _ ->
                         setupDisplay("normal")
                         content = viewModel?.content?.value!!
@@ -91,7 +97,7 @@ class DailyWritingDetailMemo : DialogFragment() {
 
                         saveEditedMemo()
                     }
-                    .setNegativeButton("취소", null)
+                    .setNegativeButton(getString(R.string.cancel), null)
                     .show()
             }
 
@@ -122,18 +128,16 @@ class DailyWritingDetailMemo : DialogFragment() {
                             MediaStore.Images.Media.getBitmap(requireContext().contentResolver, uri)
                         }
 
-                        detailMemoViewModel.photo.value = bitmap
+                        detailMemoViewModel.photo.value = resizeBitmap(bitmap, 1000)
 
                     } else {
-                        Toast.makeText(requireContext(), "이미지를 가져오지 못했습니다.", Toast.LENGTH_SHORT)
-                            .show()
+                        getString(R.string.toast_image_load_failed).toast(requireContext())
                     }
                 }
             }
     }
 
     private fun initMemo() {
-        val currentMonth = bottomSheetViewModel.currentItem.value!!.month
         val list = bottomSheetViewModel.currentItem.value!!.dailymemo.filter {
             it.date == args.date
         }
@@ -166,7 +170,6 @@ class DailyWritingDetailMemo : DialogFragment() {
                     dailyDetailMemoCancelEdit.visibility = View.VISIBLE
 
                     dailyDetailMemoPhoto.isEnabled = true
-
                     dailyDetailMemoContent.isEnabled = true
                 }
 
@@ -177,7 +180,6 @@ class DailyWritingDetailMemo : DialogFragment() {
                     dailyDetailMemoCancelEdit.visibility = View.GONE
 
                     dailyDetailMemoPhoto.isEnabled = false
-
                     dailyDetailMemoContent.isEnabled = false
                 }
             }
@@ -185,11 +187,10 @@ class DailyWritingDetailMemo : DialogFragment() {
     }
 
     private fun saveEditedMemo() {
-        val currentMonth = bottomSheetViewModel.currentItem.value!!.month
         val currentContent = detailMemoViewModel.content.value
 
         if (currentContent == null || currentContent == "") {
-            Toast.makeText(requireContext(), "내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            getString(R.string.toast_no_content).toast(requireContext())
         } else {
             saveBitmapInFile(detailMemoViewModel.photo.value, "${currentMonth}_${args.date}")
 
@@ -201,7 +202,7 @@ class DailyWritingDetailMemo : DialogFragment() {
 
             bottomSheetViewModel.updateMemo(bottomSheetViewModel.currentItem.value?.id!!, memo)
 
-            Toast.makeText(requireContext(), "저장되었습니다.", Toast.LENGTH_SHORT).show()
+            getString(R.string.toast_save_done).toast(requireContext())
             dismiss()
         }
     }
@@ -228,9 +229,4 @@ class DailyWritingDetailMemo : DialogFragment() {
         intent.type = "image/*"
         galleryLauncher.launch(intent)
     }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return Dialog(requireContext(), R.style.fullscreen_dialog)
-    }
-
 }

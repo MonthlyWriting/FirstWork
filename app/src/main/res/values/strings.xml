@@ -1,78 +1,100 @@
 <resources>
+
+    <!--Global-->
     <string name="app_name">MonthlyWriting</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="daily_writing">일말결산</string>
     <string name="monthly_writing">월말결산</string>
 
+    <string-array name="type">
+        <item>daily</item>
+        <item>weekly</item>
+        <item>monthly</item>
+    </string-array>
+
+    <string-array name="type_cap">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
+    
     <string name="daily">Daily</string>
     <string name="weekly">Weekly</string>
     <string name="monthly">Monthly</string>
+    
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
 
-    <string name="what_is_your_daily">What is Your Daily?</string>
-    <string name="what_is_your_weekly">What is Your Weekly?</string>
-    <string name="what_is_your_monthly">What is Your Monthly?</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 
-    <string name="January_short">Jan</string>
-    <string name="February_short">Feb</string>
-    <string name="March_short">Mar</string>
-    <string name="April_short">Apr</string>
-    <string name="May_short">May</string>
-    <string name="June_short">Jun</string>
-    <string name="July_short">Jul</string>
-    <string name="August_short">Aug</string>
-    <string name="September_short">Sep</string>
-    <string name="October_short">Oct</string>
-    <string name="November_short">Nov</string>
-    <string name="December_short">Dec</string>
-
-    <string name="January">January</string>
-    <string name="February">February</string>
-    <string name="March">March</string>
-    <string name="April">April</string>
-    <string name="May">May</string>
-    <string name="June">June</string>
-    <string name="July">July</string>
-    <string name="August">August</string>
-    <string name="September">September</string>
-    <string name="October">October</string>
-    <string name="November">November</string>
-    <string name="December">December</string>
-
-    <string name="name_for_your_writing">Name For Your Writing</string>
-    <string name="how_many_times_per_week">How Many Times Per Week?</string>
-    <string name="how_many_times_in_a_month">How Many Times In A Month?</string>
-    <string name="times_a_week">times a week</string>
-    <string name="times_a_month">times a month</string>
-    <string name="throughout_a_month">throughout a month</string>
-
+    <!--Description-->
     <string name="description_save_writing">Save Writing</string>
     <string name="description_edit_writing">Edit Writing</string>
     <string name="description_cancel_writing">Cancel Writing</string>
+    <string name="description_fab_add">Floating Action Button : Open Add Page</string>
+
+    <string name="description_close_bottom_sheet">Close Bottom Sheet</string>
+    <string name="description_add_daily_memo">Add Daily Memo</string>
+
+    <string name="description_add_memo_date">Set Date For Your Writing :</string>
+    <string name="description_add_memo_photo">Daily Memo Photo</string>
+    <string name="description_memo_bullet">Daily Memo Item Bullet</string>
+    <string name="description_memo_is_photo">Daily Memo IsPhoto</string>
+    <string name="description_memo_delete">Daily Memo Delete</string>
+
+    <!--Alert Dialog-->
+    <string name="alert_save">Do you want to save?</string>
+    
+    <!--EditText Hint-->
     <string name="hint_name">name</string>
     <string name="hint_content">Write your content here.</string>
     <string name="num_hint">0</string>
 
-    <string name="close_bottom_sheet">Close Bottom Sheet</string>
-    <string name="add_daily_memo">Add Daily Memo</string>
+    <!--Daily Writing Main-->
+    <string name="name_for_your_writing">Name For Your Writing</string>
+    <string name="how_many_times_per_week">How Many Times Per Week?</string>
+    <string name="how_many_times_in_a_month">How Many Times In A Month?</string>
+
+    <!--Daily Writing Add-->
+    <string name="times_a_week">times a week</string>
+    <string name="times_a_month">times a month</string>
+    <string name="throughout_a_month">throughout a month</string>
+
+    <!--Daily Check Item-->
+    <string name="daily_check_today">Today</string>
+    <string name="daily_check_alert">Did you achieve your goal?</string>
+
+    <!--Daily Memo Item-->
+    <string name="daily_memo_alert">Delete %1$s memo?</string>
+
+    <!--Daily Writing Detail Memo-->
+    <string name="daily_memo_detail_edit">Click to edit.</string>
+
+    <!--Transition Name-->
+    <string name="transition_add_item">add_item</string>
+
 
     <string name="title_content">Content</string>
     <string name="title_photo">Photo</string>
 
     <string name="title_add_memo">Add Your Daily Writing</string>
-    <string name="description_add_memo_date">Set Date For Your Writing :</string>
-    <string name="description_add_memo_photo">Daily Memo Photo</string>
-    <string name="description_add_memo_bullet">Daily Memo Item Bullet</string>
-    <string name="description_add_memo_is_photo">Daily Memo IsPhoto</string>
+
 
     <string name="title_detail_memo">Your Daily Writing</string>
     <string name="description_detail_memo_date">Date For Your Writing :</string>
     <string name="description_detail_memo_photo">Detail Memo Photo</string>
 
     <string name="detail_memo_date">%1$d / %2$d</string>
+    <string name="date">%1$d/%2$d</string>
 
     <string name="bottom_sheet_month_times">%1$d / %2$d</string>
 
+    <!--Toast Messages-->
+    <string name="toast_save_done">Saved Successfully!</string>
+    <string name="toast_no_name">Write Your Name For Plan.</string>
+    <string name="toast_date_duplicated">Choose Another Date.</string>
+    <string name="toast_no_content">Enter Your Content.</string>
+    <string name="toast_image_load_failed">Image Load Failed</string>
 
 </resources>

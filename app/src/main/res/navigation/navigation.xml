@@ -7,10 +7,10 @@
 
     <fragment
         android:id="@+id/nav_daily_writing"
-        android:name="com.example.monthlywriting.daily.DailyWritingMainFragment"
+        android:name="com.example.monthlywriting.daily.main.DailyWritingMainFragment"
         android:label="fragment_daily_writing"
         tools:layout="@layout/fragment_daily_writing_main" >
-        <action
+            <action
             android:id="@+id/open_add"
             app:destination="@id/nav_daily_writing_add" />
         <action
@@ -26,14 +26,9 @@
 
     <fragment
         android:id="@+id/nav_daily_writing_add"
-        android:name="com.example.monthlywriting.daily.DailyWritingAdd"
+        android:name="com.example.monthlywriting.daily.main.DailyWritingAdd"
         android:label="fragment_daily_writing_add"
         tools:layout="@layout/fragment_daily_writing_add" >
-        <action
-            android:id="@+id/close_add"
-            app:destination="@id/nav_daily_writing"
-            app:popUpTo="@id/navigation"
-            app:popUpToInclusive="true"/>
         <argument
             android:name="type"
             app:argType="string"

@@ -14,10 +14,10 @@ import javax.inject.Inject
 @HiltViewModel
 class DailyWritingBottomSheetViewModel @Inject constructor(
     private val repository: Repository
-) : ViewModel(){
+) : ViewModel() {
 
     private val _currentItem = MutableLiveData<DailyWritingItem>()
-    val currentItem : LiveData<DailyWritingItem> get() = _currentItem
+    val currentItem: LiveData<DailyWritingItem> get() = _currentItem
 
     fun getCurrentItem(id: Int) {
         viewModelScope.launch {
@@ -25,7 +25,7 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
         }
     }
 
-    fun saveNewMemo(id: Int, memo : DailyMemo) {
+    fun saveNewMemo(id: Int, memo: DailyMemo) {
         viewModelScope.launch {
             val item = currentItem.value!!
             item.dailymemo.add(memo)
@@ -36,7 +36,7 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
         }
     }
 
-    fun updateMemo(id: Int, memo : DailyMemo) {
+    fun updateMemo(id: Int, memo: DailyMemo) {
         viewModelScope.launch {
             val item = currentItem.value!!
             item.dailymemo.forEachIndexed { index, it ->
@@ -52,7 +52,7 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
         }
     }
 
-    fun setItemDone(date : Int, boolean: Boolean){
+    fun setItemDone(date: Int, boolean: Boolean) {
         viewModelScope.launch {
             val item = currentItem.value!!
             val doneList = item.done
@@ -65,7 +65,7 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
         }
     }
 
-    fun setMonthTimesDone(date : Int) {
+    fun addMonthTimesDone(date: Int) {
         viewModelScope.launch {
             val item = currentItem.value!!
             val list = item.monthtimesdone
@@ -74,6 +74,21 @@ class DailyWritingBottomSheetViewModel @Inject constructor(
             item.monthtimesdone = list
 
             repository.updateMonthTimesDone(currentItem.value?.id!!, list)
+            _currentItem.value = item
+        }
+    }
+
+    fun deleteMemo(date: Int) {
+        viewModelScope.launch {
+            val item = currentItem.value!!
+            val newDailyMemo = item.dailymemo.filter {
+                it.date != date
+            }.toMutableList()
+            newDailyMemo.sortBy { it.date }
+            item.dailymemo.clear()
+            item.dailymemo = newDailyMemo
+
+            repository.updateDailyMemo(currentItem.value?.id!!, item.dailymemo)
             _currentItem.value = item
         }
     }
