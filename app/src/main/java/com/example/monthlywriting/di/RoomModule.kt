@@ -18,19 +18,19 @@ class RoomModule {
 
     @Provides
     @Singleton
-    fun provideAppDataBase(@ApplicationContext context: Context) : AppDataBase {
+    fun provideAppDataBase(@ApplicationContext context: Context): AppDataBase {
         return Room.databaseBuilder(context, AppDataBase::class.java, "daily").build()
     }
 
     @Provides
     @Singleton
-    fun provideDailyDao(appDataBase: AppDataBase) : DailyWritingItemDao{
+    fun provideDailyDao(appDataBase: AppDataBase): DailyWritingItemDao {
         return appDataBase.dailyWritingItemDao()
     }
 
     @Provides
     @Singleton
-    fun provideRepository(dailyWritingItemDao: DailyWritingItemDao) : Repository {
+    fun provideRepository(dailyWritingItemDao: DailyWritingItemDao): Repository {
         return Repository(dailyWritingItemDao)
     }
 }

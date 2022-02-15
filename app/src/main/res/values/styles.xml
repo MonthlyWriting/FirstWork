@@ -22,13 +22,13 @@
         <item name="android:windowIsFloating">true</item>
         <item name="android:windowContentOverlay">@null</item>
         <item name="android:windowTitleStyle">@null</item>
-        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
         <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="fullscreen_dialog" parent="Theme.AppCompat.Light.Dialog">
         <item name="android:windowIsFloating">false</item>
+        <item name="android:windowContentTransitions">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:backgroundDimEnabled">false</item>
     </style>
@@ -37,8 +37,13 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
-    <style name="BottomSheetAnimation">
+    <style name="animation_slide_up">
         <item name="android:windowEnterAnimation">@anim/from_bottom</item>
         <item name="android:windowExitAnimation">@anim/to_bottom</item>
+    </style>
+
+    <style name="animation_slide_right">
+        <item name="android:windowEnterAnimation">@anim/from_right</item>
+        <item name="android:windowExitAnimation">@anim/to_right</item>
     </style>
 </resources>

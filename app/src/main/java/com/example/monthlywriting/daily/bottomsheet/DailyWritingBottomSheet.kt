@@ -3,7 +3,6 @@ package com.example.monthlywriting.daily.bottomsheet
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,19 +13,21 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.monthlywriting.R
 import com.example.monthlywriting.daily.viewmodel.DailyWritingBottomSheetViewModel
 import com.example.monthlywriting.databinding.FragmentDailyWritingBottomSheetBinding
+import com.example.monthlywriting.util.CurrentInfo.Companion.currentDate
+import com.example.monthlywriting.util.CurrentInfo.Companion.currentMonth
+import com.example.monthlywriting.util.CurrentInfo.Companion.currentYear
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
 class DailyWritingBottomSheet : BottomSheetDialogFragment() {
 
-    private lateinit var binding : FragmentDailyWritingBottomSheetBinding
-    private val viewModel : DailyWritingBottomSheetViewModel by activityViewModels()
+    private lateinit var binding: FragmentDailyWritingBottomSheetBinding
+    private val viewModel: DailyWritingBottomSheetViewModel by activityViewModels()
 
-    private val args : DailyWritingBottomSheetArgs by navArgs()
+    private val args: DailyWritingBottomSheetArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +43,6 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.apply {
 
             bottomSheetCloseButton.setOnClickListener {
@@ -61,48 +61,91 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = BottomSheetDialog(requireContext(), R.style.transparent_dialog)
+        dialog.apply {
+            setCanceledOnTouchOutside(true)
+            behavior.isDraggable = false
+            window?.attributes?.windowAnimations = R.style.animation_slide_up
+        }
+        return dialog
+    }
+
     private fun setObservers() {
-        viewModel.currentItem.observe(viewLifecycleOwner){
-
-            Log.d("test", it.toString())
+        viewModel.currentItem.observe(viewLifecycleOwner) {
             binding.bottomSheetTitle.text = it.name
-            val doneList = it.done
-            val monthTimesDoneList = it.monthtimesdone
 
-            when(it.type) {
+            when (it.type) {
                 "daily" -> {
                     displayBottomSheetByType("daily")
+
                     binding.bottomSheetCheckItem.apply {
-                        this.adapter = DailyCheckItemAdapter(doneList ,requireContext()) { date, boolean -> setItemDone(date, boolean) }
-                        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                        this.adapter = DailyCheckItemAdapter(
+                            it.done
+                        ) { date, boolean -> setItemDone(date, boolean) }
+
+                        val centerOfScreen = this.width / 2
+
+                        layoutManager = LinearLayoutManager(
+                            requireContext(),
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                        ).also { lm ->
+                            lm.scrollToPositionWithOffset(
+                                currentDate - 1,
+                                centerOfScreen
+                            )
+                        }
                     }
                 }
                 "weekly" -> {
                     displayBottomSheetByType("weekly")
+
                     binding.bottomSheetCheckItem.apply {
-                        this.adapter = DailyCheckItemAdapter(doneList,requireContext()) { date, boolean -> setItemDone(date, boolean) }
-                        layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                        this.adapter = DailyCheckItemAdapter(
+                            it.done
+                        ) { date, boolean -> setItemDone(date, boolean) }
+
+                        val centerOfScreen = this.width / 2
+
+                        layoutManager = LinearLayoutManager(
+                            requireContext(),
+                            LinearLayoutManager.HORIZONTAL,
+                            false
+                        ).also { lm ->
+                            lm.scrollToPositionWithOffset(
+                                currentDate - 1,
+                                centerOfScreen
+                            )
+                        }
                     }
                 }
                 "monthly" -> {
                     displayBottomSheetByType("monthly")
-                    if (it.monthtimes == 0){
+
+                    if (it.monthtimes == 0) {
                         binding.bottomSheetMonthtimes.visibility = View.GONE
                     } else {
-                        val doneNumbers = monthTimesDoneList.size
-                        binding.bottomSheetMonthtimes.text = getString(R.string.bottom_sheet_month_times, doneNumbers, it.monthtimes)
+                        val doneNumbers = it.monthtimesdone.size
+                        binding.bottomSheetMonthtimes.text =
+                            getString(R.string.bottom_sheet_month_times, doneNumbers, it.monthtimes)
                     }
                 }
             }
 
             binding.bottomSheetDailyMemo.apply {
-                this.adapter = DailyMemoItemAdapter(it.dailymemo, this@DailyWritingBottomSheet)
+                this.adapter = DailyMemoItemAdapter(
+                    it.dailymemo,
+                    { date -> openDetailMemo(date) },
+                    { date -> deleteMemo(date) }
+                )
+
                 layoutManager = LinearLayoutManager(requireContext())
             }
         }
     }
 
-    private fun displayBottomSheetByType(type : String) {
+    private fun displayBottomSheetByType(type: String) {
         when (type) {
             "daily" -> {
                 binding.bottomSheetCheckItem.visibility = View.VISIBLE
@@ -119,28 +162,24 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
-    private fun setItemDone(date: Int, boolean: Boolean) {
-        viewModel.setItemDone(date, boolean)
-    }
-
     private fun chooseDate() {
-        val currentYear = SimpleDateFormat("yyyy", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        val currentMonth = SimpleDateFormat("MM", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-        val currentDay = SimpleDateFormat("dd", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
-
-        val datePickerDialog = DatePickerDialog(requireContext(), {
-                _, _, _, day ->
-            viewModel.setMonthTimesDone(day)
-        }, currentYear, currentMonth , currentDay)
+        val datePickerDialog = DatePickerDialog(requireContext(), { _, _, _, date ->
+            viewModel.addMonthTimesDone(date)
+        }, currentYear, currentMonth, currentDate)
 
         datePickerDialog.show()
     }
 
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = BottomSheetDialog (requireContext(), R.style.transparent_dialog)
-        dialog.setCanceledOnTouchOutside(true)
-        dialog.behavior.isDraggable = false
-        dialog.window?.attributes?.windowAnimations = R.style.BottomSheetAnimation
-        return dialog
+    private fun setItemDone(date: Int, boolean: Boolean) {
+        viewModel.setItemDone(date, boolean)
+    }
+
+    private fun openDetailMemo(date: Int) {
+        val action = DailyWritingBottomSheetDirections.openDetailMemo(date)
+        NavHostFragment.findNavController(this@DailyWritingBottomSheet).navigate(action)
+    }
+
+    private fun deleteMemo(date: Int) {
+        viewModel.deleteMemo(date)
     }
 }

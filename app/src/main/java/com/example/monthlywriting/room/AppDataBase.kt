@@ -8,8 +8,9 @@ import com.example.monthlywriting.model.DailyWritingItem
 @Database(
     entities = [DailyWritingItem::class],
     version = 1,
-    exportSchema = false)
+    exportSchema = false
+)
 @TypeConverters(RoomConverters::class)
-abstract class AppDataBase  : RoomDatabase() {
-    abstract fun dailyWritingItemDao() : DailyWritingItemDao
+abstract class AppDataBase : RoomDatabase() {
+    abstract fun dailyWritingItemDao(): DailyWritingItemDao
 }

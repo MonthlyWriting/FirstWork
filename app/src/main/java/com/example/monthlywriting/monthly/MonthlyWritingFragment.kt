@@ -10,7 +10,7 @@ import com.example.monthlywriting.databinding.FragmentMonthlyWritingBinding
 
 class MonthlyWritingFragment : Fragment() {
 
-    private lateinit var binding : FragmentMonthlyWritingBinding
+    private lateinit var binding: FragmentMonthlyWritingBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

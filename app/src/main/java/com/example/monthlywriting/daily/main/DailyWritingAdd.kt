@@ -2,6 +2,7 @@ package com.example.monthlywriting.daily.main
 
 import android.graphics.Color
 import android.os.Bundle
+import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +36,9 @@ class DailyWritingAdd : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this.viewLifecycleOwner
 
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(R.transition.change_bounds)
+
         binding.dailyWritingSave.visibility = View.INVISIBLE
 
         setupRadioButton()
@@ -49,7 +53,7 @@ class DailyWritingAdd : Fragment() {
         }
 
         binding.rgType.setOnCheckedChangeListener { _, id ->
-            when(id) {
+            when (id) {
                 R.id.rb_type_daily -> {
                     setDisplayByType("daily")
                 }
@@ -63,9 +67,38 @@ class DailyWritingAdd : Fragment() {
         }
     }
 
-    private fun setDisplayByType(type : String) {
+    private fun setupRadioButton() {
         binding.apply {
-            when(type) {
+            when (args.type) {
+                "daily" -> {
+                    rbTypeDaily.isChecked = true
+                    setDisplayByType("daily")
+                }
+                "weekly" -> {
+                    rbTypeWeekly.isChecked = true
+                    setDisplayByType("weekly")
+                }
+                "monthly" -> {
+                    rbTypeMonthly.isChecked = true
+                    setDisplayByType("monthly")
+                }
+            }
+        }
+    }
+
+    private fun setObserver() {
+        viewModel.name.observe(viewLifecycleOwner) {
+            if (it != null && it.isNotEmpty()) {
+                binding.dailyWritingSave.visibility = View.VISIBLE
+            } else {
+                binding.dailyWritingSave.visibility = View.INVISIBLE
+            }
+        }
+    }
+
+    private fun setDisplayByType(type: String) {
+        binding.apply {
+            when (type) {
                 "daily" -> {
                     addWeeklyInfo.visibility = View.GONE
                     addMonthlyInfo.visibility = View.GONE
@@ -103,35 +136,6 @@ class DailyWritingAdd : Fragment() {
                         }
                     }
                 }
-            }
-        }
-    }
-
-    private fun setupRadioButton() {
-        binding.apply {
-            when (args.type) {
-                "daily" -> {
-                    rbTypeDaily.isChecked = true
-                    setDisplayByType("daily")
-                }
-                "weekly" -> {
-                    rbTypeWeekly.isChecked = true
-                    setDisplayByType("weekly")
-                }
-                "monthly" -> {
-                    rbTypeMonthly.isChecked = true
-                    setDisplayByType("monthly")
-                }
-            }
-        }
-    }
-
-    private fun setObserver() {
-        viewModel.name.observe(viewLifecycleOwner) {
-            if (it != null && it.isNotEmpty()) {
-                binding.dailyWritingSave.visibility = View.VISIBLE
-            } else {
-                binding.dailyWritingSave.visibility = View.INVISIBLE
             }
         }
     }
