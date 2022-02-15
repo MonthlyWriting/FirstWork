@@ -2,6 +2,7 @@ package com.example.monthlywriting.daily.main
 
 import android.graphics.Color
 import android.os.Bundle
+import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +35,9 @@ class DailyWritingAdd : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_daily_writing_add, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this.viewLifecycleOwner
+
+        sharedElementEnterTransition =
+            TransitionInflater.from(context).inflateTransition(R.transition.change_bounds)
 
         binding.dailyWritingSave.visibility = View.INVISIBLE
 

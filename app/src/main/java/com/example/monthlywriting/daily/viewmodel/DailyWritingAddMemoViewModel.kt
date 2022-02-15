@@ -12,5 +12,5 @@ class DailyWritingAddMemoViewModel : ViewModel() {
         SimpleDateFormat("dd", Locale.getDefault()).format(Date(System.currentTimeMillis())).toInt()
     )
     var content = MutableLiveData<String>()
-    var photo = MutableLiveData<Bitmap>()
+    var photo = MutableLiveData<Bitmap>(null)
 }

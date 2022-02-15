@@ -7,6 +7,7 @@ import android.content.ContextWrapper
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
@@ -17,21 +18,21 @@ import java.time.LocalDate
 import java.util.*
 
 @BindingAdapter("imgBitmap")
-fun loadImage(imageView: ImageView, bitmap: Bitmap?){
+fun loadImage(imageView: ImageView, bitmap: Bitmap?) {
     Glide.with(imageView.context)
         .load(bitmap)
-        .error(R.drawable.photo_black)
-        .placeholder(R.drawable.photo_black)
         .into(imageView)
 }
 
-fun checkPermission(context: Context, execute : () -> Unit) {
+fun checkPermission(context: Context, execute: () -> Unit) {
     if (ContextCompat.checkSelfPermission(context, Manifest.permission.READ_EXTERNAL_STORAGE)
-        == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(
-                (context as ContextWrapper).baseContext as Activity,
-                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
-                10)
+        == PackageManager.PERMISSION_DENIED
+    ) {
+        ActivityCompat.requestPermissions(
+            (context as ContextWrapper).baseContext as Activity,
+            arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+            10
+        )
     } else {
         execute()
     }
@@ -39,20 +40,51 @@ fun checkPermission(context: Context, execute : () -> Unit) {
 
 class CurrentInfo {
 
-    companion object{
-        val date : LocalDate = LocalDate.now()
+    companion object {
+        val date: LocalDate = LocalDate.now()
 
-        val currentYear : Int = date.year
-        val currentMonth : Int = date.monthValue
-        val currentDate : Int = date.dayOfMonth
+        val currentYear: Int = date.year
+        val currentMonth: Int = date.monthValue
+        val currentDate: Int = date.dayOfMonth
 
-        val currentMonthName : String = date.month.toString()
-        val currentMonthShortName : String = DateFormatSymbols().shortMonths[currentMonth-1]
+        val currentMonthName: String = date.month.toString()
+        val currentMonthShortName: String = DateFormatSymbols().shortMonths[currentMonth - 1]
 
-        fun getCurrentEndDateOfMonth() : Int {
+        fun getCurrentEndDateOfMonth(): Int {
             val cal = Calendar.getInstance()
             cal.set(currentYear, currentMonth - 1, currentDate)
             return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
         }
     }
+}
+
+fun resizeBitmap(source: Bitmap, maxLength: Int): Bitmap {
+    try {
+        if (source.height >= source.width) {
+            if (source.height <= maxLength) { // if image height already smaller than the required height
+                return source
+            }
+
+            val aspectRatio = source.width.toDouble() / source.height.toDouble()
+            val targetWidth = (maxLength * aspectRatio).toInt()
+            val result = Bitmap.createScaledBitmap(source, targetWidth, maxLength, false)
+            return result
+        } else {
+            if (source.width <= maxLength) { // if image width already smaller than the required width
+                return source
+            }
+
+            val aspectRatio = source.height.toDouble() / source.width.toDouble()
+            val targetHeight = (maxLength * aspectRatio).toInt()
+
+            val result = Bitmap.createScaledBitmap(source, maxLength, targetHeight, false)
+            return result
+        }
+    } catch (e: Exception) {
+        return source
+    }
+}
+
+fun Any.toast(context: Context): Toast {
+    return Toast.makeText(context, this.toString(), Toast.LENGTH_SHORT).apply { show() }
 }

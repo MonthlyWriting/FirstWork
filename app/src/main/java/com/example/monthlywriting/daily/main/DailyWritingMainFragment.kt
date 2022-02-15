@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import com.example.monthlywriting.R
 import com.example.monthlywriting.databinding.FragmentDailyWritingMainBinding
 import com.example.monthlywriting.util.CurrentInfo
@@ -27,7 +28,7 @@ class DailyWritingMainFragment : Fragment() {
     }
 
     private fun setViewPager() {
-        val adapter = DailyWritingViewPager(requireActivity())
+        val adapter = DailyWritingViewPager(childFragmentManager, lifecycle)
         binding.dailyWritingItem.adapter = adapter
     }
 
@@ -35,10 +36,12 @@ class DailyWritingMainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.dailyWritingFabAdd.setOnClickListener {
+            val extras =
+                FragmentNavigatorExtras(binding.dailyWritingFabAdd to getString(R.string.transition_add_item))
             val action = DailyWritingMainFragmentDirections.openAdd(
                 resources.getStringArray(R.array.type)[binding.dailyWritingItem.currentItem]
             )
-            it.findNavController().navigate(action)
+            it.findNavController().navigate(action, extras)
         }
     }
 

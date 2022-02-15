@@ -10,13 +10,9 @@
         android:name="com.example.monthlywriting.daily.main.DailyWritingMainFragment"
         android:label="fragment_daily_writing"
         tools:layout="@layout/fragment_daily_writing_main" >
-        <action
+            <action
             android:id="@+id/open_add"
-            app:destination="@id/nav_daily_writing_add"
-            app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right"
-            app:popEnterAnim="@anim/from_right"
-            app:popExitAnim="@anim/to_left" />
+            app:destination="@id/nav_daily_writing_add" />
         <action
             android:id="@+id/open_bottom_sheet"
             app:destination="@id/dailyWritingBottomSheet" />

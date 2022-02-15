@@ -1,6 +1,5 @@
 package com.example.monthlywriting.daily.main
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.monthlywriting.R
@@ -20,7 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class DailyWritingItemFragment(private val type: String) : Fragment() {
 
     private lateinit var binding: FragmentDailyWritingItemBinding
-    private val viewModel: DailyWritingItemViewModel by viewModels()
+    private val viewModel: DailyWritingItemViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,7 +47,7 @@ class DailyWritingItemFragment(private val type: String) : Fragment() {
             "daily" -> {
                 binding.dailyWritingType.text = resources.getString(R.string.daily)
                 viewModel.dailyList.observe(viewLifecycleOwner) {
-                    val adapter = DailyWritingItemAdapter(it) {Int -> deleteItem(Int)}
+                    val adapter = DailyWritingItemAdapter(it) { Int -> deleteItem(Int) }
                     binding.dailyWritingItem.apply {
                         this.adapter = adapter
                         layoutManager = LinearLayoutManager(requireContext())
@@ -57,7 +57,7 @@ class DailyWritingItemFragment(private val type: String) : Fragment() {
             "weekly" -> {
                 binding.dailyWritingType.text = getString(R.string.weekly)
                 viewModel.weeklyList.observe(viewLifecycleOwner) {
-                    val adapter = DailyWritingItemAdapter(it) {Int -> deleteItem(Int)}
+                    val adapter = DailyWritingItemAdapter(it) { Int -> deleteItem(Int) }
                     binding.dailyWritingItem.apply {
                         this.adapter = adapter
                         layoutManager = LinearLayoutManager(requireContext())
@@ -67,7 +67,7 @@ class DailyWritingItemFragment(private val type: String) : Fragment() {
             "monthly" -> {
                 binding.dailyWritingType.text = getString(R.string.monthly)
                 viewModel.monthlyList.observe(viewLifecycleOwner) {
-                    val adapter = DailyWritingItemAdapter(it) {Int -> deleteItem(Int)}
+                    val adapter = DailyWritingItemAdapter(it) { Int -> deleteItem(Int) }
                     binding.dailyWritingItem.apply {
                         this.adapter = adapter
                         layoutManager = LinearLayoutManager(requireContext())

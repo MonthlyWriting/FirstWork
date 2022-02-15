@@ -11,14 +11,20 @@ import com.example.monthlywriting.model.DailyWritingItem
 
 class DailyWritingItemAdapter(
     private val list: List<DailyWritingItem>,
-    private val deleteItem : (Int) -> Unit
+    private val deleteItem: (Int) -> Unit
 ) : RecyclerView.Adapter<DailyWritingItemAdapter.DailyWritingItemViewHolder>() {
 
     private lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyWritingItemViewHolder {
         context = parent.context
-        return DailyWritingItemViewHolder(DailyWritingItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return DailyWritingItemViewHolder(
+            DailyWritingItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
 
@@ -35,7 +41,8 @@ class DailyWritingItemAdapter(
             binding.dailyWritingItems.text = list[adapterPosition].name
 
             binding.dailyWritingItems.setOnClickListener {
-                val action = DailyWritingMainFragmentDirections.openBottomSheet(list[adapterPosition].id)
+                val action =
+                    DailyWritingMainFragmentDirections.openBottomSheet(list[adapterPosition].id)
                 it.findNavController().navigate(action)
             }
 

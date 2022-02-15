@@ -31,7 +31,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.contentMain.toolbar)
         binding.contentMain.appbar.outlineProvider = null
 
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(
             setOf(

@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.monthlywriting.R
 import com.example.monthlywriting.daily.viewmodel.DailyWritingBottomSheetViewModel
 import com.example.monthlywriting.databinding.FragmentDailyWritingBottomSheetBinding
-import com.example.monthlywriting.util.CurrentInfo
+import com.example.monthlywriting.util.CurrentInfo.Companion.currentDate
+import com.example.monthlywriting.util.CurrentInfo.Companion.currentMonth
+import com.example.monthlywriting.util.CurrentInfo.Companion.currentYear
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,6 +61,16 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
         }
     }
 
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = BottomSheetDialog(requireContext(), R.style.transparent_dialog)
+        dialog.apply {
+            setCanceledOnTouchOutside(true)
+            behavior.isDraggable = false
+            window?.attributes?.windowAnimations = R.style.animation_slide_up
+        }
+        return dialog
+    }
+
     private fun setObservers() {
         viewModel.currentItem.observe(viewLifecycleOwner) {
             binding.bottomSheetTitle.text = it.name
@@ -69,14 +81,21 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
 
                     binding.bottomSheetCheckItem.apply {
                         this.adapter = DailyCheckItemAdapter(
-                            it.done,
-                            requireContext()
+                            it.done
                         ) { date, boolean -> setItemDone(date, boolean) }
+
+                        val centerOfScreen = this.width / 2
+
                         layoutManager = LinearLayoutManager(
                             requireContext(),
                             LinearLayoutManager.HORIZONTAL,
                             false
-                        )
+                        ).also { lm ->
+                            lm.scrollToPositionWithOffset(
+                                currentDate - 1,
+                                centerOfScreen
+                            )
+                        }
                     }
                 }
                 "weekly" -> {
@@ -84,14 +103,21 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
 
                     binding.bottomSheetCheckItem.apply {
                         this.adapter = DailyCheckItemAdapter(
-                            it.done,
-                            requireContext()
+                            it.done
                         ) { date, boolean -> setItemDone(date, boolean) }
+
+                        val centerOfScreen = this.width / 2
+
                         layoutManager = LinearLayoutManager(
                             requireContext(),
                             LinearLayoutManager.HORIZONTAL,
                             false
-                        )
+                        ).also { lm ->
+                            lm.scrollToPositionWithOffset(
+                                currentDate - 1,
+                                centerOfScreen
+                            )
+                        }
                     }
                 }
                 "monthly" -> {
@@ -110,9 +136,9 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
             binding.bottomSheetDailyMemo.apply {
                 this.adapter = DailyMemoItemAdapter(
                     it.dailymemo,
-                    {date -> openDetailMemo(date)},
-                    {date -> deleteMemo(date)}
-                    )
+                    { date -> openDetailMemo(date) },
+                    { date -> deleteMemo(date) }
+                )
 
                 layoutManager = LinearLayoutManager(requireContext())
             }
@@ -139,7 +165,7 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
     private fun chooseDate() {
         val datePickerDialog = DatePickerDialog(requireContext(), { _, _, _, date ->
             viewModel.addMonthTimesDone(date)
-        }, CurrentInfo.currentYear, CurrentInfo.currentMonth, CurrentInfo.currentDate)
+        }, currentYear, currentMonth, currentDate)
 
         datePickerDialog.show()
     }
@@ -155,15 +181,5 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
 
     private fun deleteMemo(date: Int) {
         viewModel.deleteMemo(date)
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = BottomSheetDialog(requireContext(), R.style.transparent_dialog)
-        dialog.apply {
-            setCanceledOnTouchOutside(true)
-            behavior.isDraggable = false
-            window?.attributes?.windowAnimations = R.style.BottomSheetAnimation
-        }
-        return dialog
     }
 }

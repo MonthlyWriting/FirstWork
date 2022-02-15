@@ -16,17 +16,17 @@ class DailyWritingItemViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _dailyList = MutableLiveData<List<DailyWritingItem>>()
-    val dailyList : LiveData<List<DailyWritingItem>> get() = _dailyList
+    val dailyList: LiveData<List<DailyWritingItem>> get() = _dailyList
 
     private val _weeklyList = MutableLiveData<List<DailyWritingItem>>()
-    val weeklyList : LiveData<List<DailyWritingItem>> get() = _weeklyList
+    val weeklyList: LiveData<List<DailyWritingItem>> get() = _weeklyList
 
     private val _monthlyList = MutableLiveData<List<DailyWritingItem>>()
-    val monthlyList : LiveData<List<DailyWritingItem>> get() = _monthlyList
+    val monthlyList: LiveData<List<DailyWritingItem>> get() = _monthlyList
 
-    fun getWritingList(month : Int){
+    fun getWritingList(month: Int) {
         viewModelScope.launch {
-            _dailyList.value = repository.getDailyList(month,"daily")
+            _dailyList.value = repository.getDailyList(month, "daily")
             _weeklyList.value = repository.getDailyList(month, "weekly")
             _monthlyList.value = repository.getDailyList(month, "monthly")
         }

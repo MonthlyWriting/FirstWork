@@ -10,32 +10,32 @@ import java.io.ByteArrayOutputStream
 class RoomConverters {
 
     @TypeConverter
-    fun dailyMemoListToJson(list: MutableList<DailyMemo>) : String? {
+    fun dailyMemoListToJson(list: MutableList<DailyMemo>): String? {
         return Gson().toJson(list)
     }
 
     @TypeConverter
-    fun jsonToDailyMemoList(json : String) : MutableList<DailyMemo> {
+    fun jsonToDailyMemoList(json: String): MutableList<DailyMemo> {
         return Gson().fromJson(json, Array<DailyMemo>::class.java).toMutableList()
     }
 
     @TypeConverter
-    fun doneListToJson(list: MutableList<Boolean>) : String? {
+    fun doneListToJson(list: MutableList<Boolean>): String? {
         return Gson().toJson(list)
     }
 
     @TypeConverter
-    fun jsonToDoneList(json : String) : MutableList<Boolean> {
+    fun jsonToDoneList(json: String): MutableList<Boolean> {
         return Gson().fromJson(json, Array<Boolean>::class.java).toMutableList()
     }
 
     @TypeConverter
-    fun monthTimesDoneListToJson(list: MutableList<Int>) : String? {
+    fun monthTimesDoneListToJson(list: MutableList<Int>): String? {
         return Gson().toJson(list)
     }
 
     @TypeConverter
-    fun jsonToMonthTimesDoneList(json : String) : MutableList<Int> {
+    fun jsonToMonthTimesDoneList(json: String): MutableList<Int> {
         return Gson().fromJson(json, Array<Int>::class.java).toMutableList()
     }
 }
