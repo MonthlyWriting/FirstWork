@@ -57,6 +57,21 @@ class CurrentInfo {
             cal.set(currentYear, currentMonth - 1, currentDate)
             return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
         }
+
+        val backgroundList = mutableListOf(
+            R.drawable.photo_jan,
+            R.drawable.photo_feb,
+            R.drawable.photo_mar,
+            R.drawable.photo_apr,
+            R.drawable.photo_may,
+            R.drawable.photo_jun,
+            R.drawable.photo_jul,
+            R.drawable.photo_aug,
+            R.drawable.photo_sep,
+            R.drawable.photo_oct,
+            R.drawable.photo_nov,
+            R.drawable.photo_dec,
+        )
     }
 }
 

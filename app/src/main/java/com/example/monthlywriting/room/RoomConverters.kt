@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import androidx.room.TypeConverter
 import com.example.monthlywriting.model.DailyMemo
+import com.example.monthlywriting.model.MonthlyMemo
 import com.google.gson.Gson
 import java.io.ByteArrayOutputStream
 
@@ -20,22 +21,42 @@ class RoomConverters {
     }
 
     @TypeConverter
-    fun doneListToJson(list: MutableList<Boolean>): String? {
+    fun booleanMutableListToJson(list: MutableList<Boolean>): String? {
         return Gson().toJson(list)
     }
 
     @TypeConverter
-    fun jsonToDoneList(json: String): MutableList<Boolean> {
+    fun jsonToBooleanMutableList(json: String): MutableList<Boolean> {
         return Gson().fromJson(json, Array<Boolean>::class.java).toMutableList()
     }
 
     @TypeConverter
-    fun monthTimesDoneListToJson(list: MutableList<Int>): String? {
+    fun intMutableListToJson(list: MutableList<Int>): String? {
         return Gson().toJson(list)
     }
 
     @TypeConverter
-    fun jsonToMonthTimesDoneList(json: String): MutableList<Int> {
+    fun jsonToIntMutableList(json: String): MutableList<Int> {
         return Gson().fromJson(json, Array<Int>::class.java).toMutableList()
+    }
+
+    @TypeConverter
+    fun stringMutableListToJson(list: MutableList<String>): String? {
+        return Gson().toJson(list)
+    }
+
+    @TypeConverter
+    fun jsonToStringMutableList(json: String): MutableList<String> {
+        return Gson().fromJson(json, Array<String>::class.java).toMutableList()
+    }
+
+    @TypeConverter
+    fun monthlyMemoListToJson(list: MutableList<MonthlyMemo>): String? {
+        return Gson().toJson(list)
+    }
+
+    @TypeConverter
+    fun jsonToMonthlyMemoList(json: String): MutableList<MonthlyMemo> {
+        return Gson().fromJson(json, Array<MonthlyMemo>::class.java).toMutableList()
     }
 }
