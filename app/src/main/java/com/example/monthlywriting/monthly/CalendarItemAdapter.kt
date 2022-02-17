@@ -1,7 +1,6 @@
 package com.example.monthlywriting.monthly
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -46,19 +45,29 @@ class CalendarItemAdapter(
                     val date = adapterPosition - startIndex + 1
                     binding.calendarDate.text = date.toString()
 
-                    if(dailyWritingItem.done[date - 1]) {
-                        binding.calendarDate.setTextColor(Color.BLUE)
-                    }
-
                     if(dailyWritingItem.dailymemo.any { it.date == date }){
                         binding.calendarIsMemo.visibility = View.VISIBLE
                         binding.root.setOnClickListener {
                             //open memo
-                            val action = MonthlyCardDetailDirections.openDetailMemo(dailyWritingItem.id)
+                            val action = MonthlyCardDetailDirections.openDetailMemo(id = dailyWritingItem.id, date = date)
                             it.findNavController().navigate(action)
                         }
                     }
 
+                    when(dailyWritingItem.type){
+                        "daily", "weekly" -> {
+                            if(dailyWritingItem.done[date - 1]) {
+                                binding.calendarDate.setTextColor(Color.BLUE)
+                            }
+                        }
+                        "monthly" -> {
+                            for (i in dailyWritingItem.monthtimesdone){
+                                if (i == adapterPosition){
+                                    binding.calendarDate.setTextColor(Color.BLUE)
+                                }
+                            }
+                        }
+                    }
                 }
                 else -> {
                     binding.calendarDate.text = ""

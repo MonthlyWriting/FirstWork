@@ -18,6 +18,8 @@
         <item>Monthly</item>
     </string-array>
 
+    <string name="weekly_times">%1$d times a week</string>
+
     <string name="daily">Daily</string>
     <string name="weekly">Weekly</string>
     <string name="monthly">Monthly</string>
@@ -89,7 +91,7 @@
     <string name="detail_memo_date">%1$d / %2$d</string>
     <string name="date">%1$d/%2$d</string>
 
-    <string name="bottom_sheet_month_times">%1$d / %2$d</string>
+    <string name="month_times">%1$d / %2$d</string>
 
     <!--Toast Messages-->
     <string name="toast_save_done">Saved Successfully!</string>

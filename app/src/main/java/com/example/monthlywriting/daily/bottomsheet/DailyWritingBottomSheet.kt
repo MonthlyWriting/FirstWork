@@ -128,7 +128,7 @@ class DailyWritingBottomSheet : BottomSheetDialogFragment() {
                     } else {
                         val doneNumbers = it.monthtimesdone.size
                         binding.bottomSheetMonthtimes.text =
-                            getString(R.string.bottom_sheet_month_times, doneNumbers, it.monthtimes)
+                            getString(R.string.month_times, doneNumbers, it.monthtimes)
                     }
                 }
             }

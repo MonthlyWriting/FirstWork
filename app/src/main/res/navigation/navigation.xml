@@ -95,8 +95,22 @@
             android:defaultValue="0" />
         <action
             android:id="@+id/open_detail_memo"
-            app:destination="@id/dailyWritingDetailMemo" />
-
+            app:destination="@id/monthlyWritingDetailMemo" />
     </fragment>
+
+    <dialog
+        android:id="@+id/monthlyWritingDetailMemo"
+        android:name="com.example.monthlywriting.monthly.MonthlyWritingDetailMemo"
+        android:label="fragment_monthly_writing_detail_memo"
+        tools:layout="@layout/fragment_monthly_writing_detail_memo" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <argument
+            android:name="date"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </dialog>
 
 </navigation>
