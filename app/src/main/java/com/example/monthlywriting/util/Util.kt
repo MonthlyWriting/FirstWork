@@ -41,13 +41,13 @@ fun checkPermission(context: Context, execute: () -> Unit) {
 class CurrentInfo {
 
     companion object {
-        val date: LocalDate = LocalDate.now()
+        private val currentTime: LocalDate = LocalDate.now()
 
-        val currentYear: Int = date.year
-        val currentMonth: Int = date.monthValue
-        val currentDate: Int = date.dayOfMonth
+        val currentYear: Int = currentTime.year
+        val currentMonth: Int = currentTime.monthValue
+        val currentDate: Int = currentTime.dayOfMonth
 
-        val currentMonthName: String = date.month.toString()
+        val currentMonthName: String = currentTime.month.toString()
         val currentMonthShortName: String = DateFormatSymbols().shortMonths[currentMonth - 1]
 
         val monthShortNames: Array<String> = DateFormatSymbols().shortMonths

@@ -39,7 +39,7 @@ class MonthlyCardDetail : Fragment() {
 
     private fun setObserver() {
         viewModel.dailyList.observe(viewLifecycleOwner){
-            val adapter = MonthlyWritingItemAdapter(it)
+            val adapter = MonthlyWritingItemAdapter(it, args.month)
             binding.monthlyWritingItems.apply {
                 this.adapter = adapter
                 layoutManager = LinearLayoutManager(requireContext())

@@ -93,6 +93,10 @@
             android:name="month"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/open_detail_memo"
+            app:destination="@id/dailyWritingDetailMemo" />
+
     </fragment>
 
 </navigation>

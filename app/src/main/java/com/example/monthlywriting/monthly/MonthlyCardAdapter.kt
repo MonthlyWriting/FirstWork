@@ -52,6 +52,7 @@ class MonthlyCardAdapter(
                 root.setOnClickListener {
                     openCard(adapterPosition + 1, binding.monthlyCardItem)
                 }
+
             }
         }
     }
