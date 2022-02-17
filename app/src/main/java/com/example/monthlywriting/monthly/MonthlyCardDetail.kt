@@ -32,21 +32,21 @@ class MonthlyCardDetail : Fragment() {
         sharedElementEnterTransition = TransitionInflater.from(context).inflateTransition(R.transition.change_bounds)
 
         setupDisplay()
-        setObserver()
+        setupAdapter()
 
         return binding.root
     }
 
-    private fun setObserver() {
-        viewModel.dailyList.observe(viewLifecycleOwner){
-            val adapter = MonthlyWritingItemAdapter(it, args.month)
-            binding.monthlyWritingItems.apply {
-                this.adapter = adapter
-                layoutManager = LinearLayoutManager(requireContext())
-            }
+    private fun setupAdapter() {
+        val adapter = MonthlyWritingItemAdapter(args.month)
+        binding.monthlyWritingItems.apply {
+            this.adapter = adapter
+            layoutManager = LinearLayoutManager(requireContext())
         }
 
-
+        viewModel.dailyList.observe(viewLifecycleOwner){
+            (binding.monthlyWritingItems.adapter as MonthlyWritingItemAdapter).differ.submitList(it)
+        }
     }
 
     private fun setupDisplay() {
