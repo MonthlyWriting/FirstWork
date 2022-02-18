@@ -20,9 +20,13 @@
 
     <fragment
         android:id="@+id/nav_monthly_writing"
-        android:name="com.example.monthlywriting.monthly.MonthlyWritingFragment"
+        android:name="com.example.monthlywriting.monthly.MonthlyWritingMainFragment"
         android:label="fragment_monthly_writing"
-        tools:layout="@layout/fragment_monthly_writing" />
+        tools:layout="@layout/fragment_monthly_writing" >
+        <action
+            android:id="@+id/open_card"
+            app:destination="@id/monthlyCardDetail" />
+    </fragment>
 
     <fragment
         android:id="@+id/nav_daily_writing_add"
@@ -74,6 +78,35 @@
         android:name="com.example.monthlywriting.daily.bottomsheet.DailyWritingDetailMemo"
         android:label="fragment_daily_writing_detail_memo"
         tools:layout="@layout/fragment_daily_writing_detail_memo" >
+        <argument
+            android:name="date"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </dialog>
+
+    <fragment
+        android:id="@+id/monthlyCardDetail"
+        android:name="com.example.monthlywriting.monthly.MonthlyCardDetail"
+        android:label="fragment_monthly_card_detail"
+        tools:layout="@layout/fragment_monthly_card_detail">
+        <argument
+            android:name="month"
+            app:argType="integer"
+            android:defaultValue="0" />
+        <action
+            android:id="@+id/open_detail_memo"
+            app:destination="@id/monthlyWritingDetailMemo" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/monthlyWritingDetailMemo"
+        android:name="com.example.monthlywriting.monthly.MonthlyWritingDetailMemo"
+        android:label="fragment_monthly_writing_detail_memo"
+        tools:layout="@layout/fragment_monthly_writing_detail_memo" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
         <argument
             android:name="date"
             app:argType="integer"

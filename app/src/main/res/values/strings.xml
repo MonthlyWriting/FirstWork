@@ -17,11 +17,13 @@
         <item>Weekly</item>
         <item>Monthly</item>
     </string-array>
-    
+
+    <string name="weekly_times">%1$d times a week</string>
+
     <string name="daily">Daily</string>
     <string name="weekly">Weekly</string>
     <string name="monthly">Monthly</string>
-    
+
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
@@ -45,7 +47,7 @@
 
     <!--Alert Dialog-->
     <string name="alert_save">Do you want to save?</string>
-    
+
     <!--EditText Hint-->
     <string name="hint_name">name</string>
     <string name="hint_content">Write your content here.</string>
@@ -73,6 +75,7 @@
 
     <!--Transition Name-->
     <string name="transition_add_item">add_item</string>
+    <string name="transition_open_card">open_card_%1$d</string>
 
 
     <string name="title_content">Content</string>
@@ -88,7 +91,7 @@
     <string name="detail_memo_date">%1$d / %2$d</string>
     <string name="date">%1$d/%2$d</string>
 
-    <string name="bottom_sheet_month_times">%1$d / %2$d</string>
+    <string name="month_times">%1$d / %2$d</string>
 
     <!--Toast Messages-->
     <string name="toast_save_done">Saved Successfully!</string>
@@ -96,5 +99,7 @@
     <string name="toast_date_duplicated">Choose Another Date.</string>
     <string name="toast_no_content">Enter Your Content.</string>
     <string name="toast_image_load_failed">Image Load Failed</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -12,6 +12,9 @@ interface DailyWritingItemDao {
     @Query("SELECT * FROM daily WHERE month = :month AND type = :type ")
     fun selectDailyList(month: Int, type: String): List<DailyWritingItem>
 
+    @Query("SELECT * FROM daily WHERE month = :month ORDER BY id ASC")
+    fun selectMonthlyList(month: Int): List<DailyWritingItem>
+
     @Query("SELECT * FROM daily WHERE id = :id ")
     fun selectSingleItem(id: Int): DailyWritingItem
 
@@ -25,7 +28,7 @@ interface DailyWritingItemDao {
     fun updateMonthTimesDone(id: Int, doneList: MutableList<Int>)
 
     @Insert
-    fun insert(dailyMemo: DailyWritingItem)
+    fun insert(dailyWritingItem: DailyWritingItem)
 
     @Query("DELETE FROM daily WHERE id = :id")
     fun delete(id: Int)

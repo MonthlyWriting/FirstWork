@@ -41,20 +41,37 @@ fun checkPermission(context: Context, execute: () -> Unit) {
 class CurrentInfo {
 
     companion object {
-        val date: LocalDate = LocalDate.now()
+        private val currentTime: LocalDate = LocalDate.now()
 
-        val currentYear: Int = date.year
-        val currentMonth: Int = date.monthValue
-        val currentDate: Int = date.dayOfMonth
+        val currentYear: Int = currentTime.year
+        val currentMonth: Int = currentTime.monthValue
+        val currentDate: Int = currentTime.dayOfMonth
 
-        val currentMonthName: String = date.month.toString()
+        val currentMonthName: String = currentTime.month.toString()
         val currentMonthShortName: String = DateFormatSymbols().shortMonths[currentMonth - 1]
+
+        val monthShortNames: Array<String> = DateFormatSymbols().shortMonths
 
         fun getCurrentEndDateOfMonth(): Int {
             val cal = Calendar.getInstance()
             cal.set(currentYear, currentMonth - 1, currentDate)
             return cal.getActualMaximum(Calendar.DAY_OF_MONTH)
         }
+
+        val backgroundList = mutableListOf(
+            R.drawable.photo_jan,
+            R.drawable.photo_feb,
+            R.drawable.photo_mar,
+            R.drawable.photo_apr,
+            R.drawable.photo_may,
+            R.drawable.photo_jun,
+            R.drawable.photo_jul,
+            R.drawable.photo_aug,
+            R.drawable.photo_sep,
+            R.drawable.photo_oct,
+            R.drawable.photo_nov,
+            R.drawable.photo_dec,
+        )
     }
 }
 

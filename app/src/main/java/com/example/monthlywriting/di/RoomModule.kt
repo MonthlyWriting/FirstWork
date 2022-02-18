@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.monthlywriting.Repository
 import com.example.monthlywriting.room.AppDataBase
 import com.example.monthlywriting.room.DailyWritingItemDao
+import com.example.monthlywriting.room.MonthlyWritingItemDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,7 +31,16 @@ class RoomModule {
 
     @Provides
     @Singleton
-    fun provideRepository(dailyWritingItemDao: DailyWritingItemDao): Repository {
-        return Repository(dailyWritingItemDao)
+    fun provideMonthlyDao(appDataBase: AppDataBase): MonthlyWritingItemDao {
+        return appDataBase.monthlyWritingItemDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepository(
+        dailyWritingItemDao: DailyWritingItemDao,
+        monthlyWritingItemDao: MonthlyWritingItemDao
+    ): Repository {
+        return Repository(dailyWritingItemDao, monthlyWritingItemDao)
     }
 }

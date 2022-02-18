@@ -12,6 +12,6 @@
         android:textAlignment="center"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/daily_writing_item_text_size"
+        android:textSize="12sp"
         android:background="@drawable/white_underline"/>
 </LinearLayout>
