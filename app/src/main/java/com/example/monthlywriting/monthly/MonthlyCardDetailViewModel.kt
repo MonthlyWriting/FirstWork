@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MonthlyCardDetailViewModel @Inject constructor(
     private val repository: Repository
-): ViewModel() {
+) : ViewModel() {
 
     private val _dailyList = MutableLiveData<List<DailyWritingItem>>()
     val dailyList: LiveData<List<DailyWritingItem>> get() = _dailyList
@@ -22,9 +22,13 @@ class MonthlyCardDetailViewModel @Inject constructor(
     private val _monthlyList = MutableLiveData<List<MonthlyWritingItem>>()
     val monthlyList: LiveData<List<MonthlyWritingItem>> get() = _monthlyList
 
-    fun getAllItems(month: Int){
+    fun getAllItems(month: Int) {
         viewModelScope.launch {
-            _dailyList.value = repository.getAllDailyList(month)
+            _dailyList.value = repository.getAllDailyList(month).sortedWith(
+                compareBy({ it.type == "monthly" },
+                    { it.type == "weekly" },
+                    { it.type == "daily" })
+            )
             _monthlyList.value = repository.getAllMonthlyList(month)
         }
     }
