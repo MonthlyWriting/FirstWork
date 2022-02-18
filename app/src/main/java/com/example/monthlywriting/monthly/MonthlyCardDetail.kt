@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.monthlywriting.R
 import com.example.monthlywriting.databinding.FragmentMonthlyCardDetailBinding
+import com.example.monthlywriting.monthly.adapter.MonthlyWritingItemAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

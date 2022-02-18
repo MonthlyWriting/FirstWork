@@ -1,4 +1,4 @@
-package com.example.monthlywriting.monthly
+package com.example.monthlywriting.monthly.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

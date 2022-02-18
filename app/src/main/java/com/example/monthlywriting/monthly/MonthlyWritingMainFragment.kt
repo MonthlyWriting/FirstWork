@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.example.monthlywriting.R
 import com.example.monthlywriting.databinding.FragmentMonthlyWritingBinding
+import com.example.monthlywriting.monthly.adapter.MonthlyCardAdapter
 import com.example.monthlywriting.util.CurrentInfo.Companion.backgroundList
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs

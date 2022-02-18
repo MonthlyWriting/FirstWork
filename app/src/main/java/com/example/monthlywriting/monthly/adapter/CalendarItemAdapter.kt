@@ -1,4 +1,4 @@
-package com.example.monthlywriting.monthly
+package com.example.monthlywriting.monthly.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.monthlywriting.databinding.MonthlyWritingCalendarItemBinding
 import com.example.monthlywriting.model.DailyWritingItem
+import com.example.monthlywriting.monthly.MonthlyCardDetailDirections
 import java.util.*
 
 class CalendarItemAdapter(
